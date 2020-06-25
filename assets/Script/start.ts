@@ -19,7 +19,7 @@ export default class Start extends cc.Component {
 
         this.node.on('mousedown', function(event){
             if(event.getButton() == 0){
-                cc.director.loadScene("Menu");
+                cc.director.loadScene("Member");
             }
         }, this);
     }
