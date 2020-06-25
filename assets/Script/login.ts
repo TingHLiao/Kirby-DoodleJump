@@ -4,17 +4,17 @@ const {ccclass, property} = cc._decorator;
 export class Login extends cc.Component {
     
     @property(cc.EditBox)
-    editbox1: cc.EditBox = null;
+    username: cc.EditBox = null;
 
     @property(cc.EditBox)
-    editbox2: cc.EditBox = null;
+    password: cc.EditBox = null;
 
     start(){
     }
 
     login(){
         //@ts-ignore
-        firebase.auth().signInWithEmailAndPassword(this.editbox1.string, this.editbox2.string).then( ()=>{
+        firebase.auth().signInWithEmailAndPassword(this.username.string, this.password.string).then( ()=>{
             //@ts-ignore
             var user = firebase.auth().currentUser; 
             if(user){

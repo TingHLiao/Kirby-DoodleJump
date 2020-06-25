@@ -30,7 +30,13 @@ export default class Menu extends cc.Component {
                 return;
             this.node.x += 200;
             this.pos += 1;
-        } 
+        } else if(event.keyCode == cc.macro.KEY.enter){
+            if(this.pos == 0){
+                cc.director.loadScene("Login");
+            } else if(this.pos == 2){
+                cc.director.loadScene("SignUp");
+            }
+        }
     }
 
     onBeginContact(contact, self, other){
