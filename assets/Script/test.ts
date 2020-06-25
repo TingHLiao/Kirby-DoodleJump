@@ -24,7 +24,7 @@ export default class NewClass extends cc.Component {
     // onLoad () {}
 
     start () {
-
+        let st = "2";
     }
 
     // update (dt) {}
