@@ -15,6 +15,13 @@ export default class platform extends cc.Component {
 
     @property(cc.Prefab)
     rocketPrefab: cc.Prefab = null;
+    // Trampoline
+    @property(cc.Prefab)
+    trampoline: cc.Prefab = null;
+
+    // Shield
+    @property(cc.Prefab)
+    shield: cc.Prefab = null;
 
     private anim: cc.Animation = null;
 
@@ -36,9 +43,14 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
+            if(Math.random()>0.95){
+                var newnode = cc.instantiate(this.trampoline);
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
+            }
         }
         else if(this.node.name == "move_basic"){
-            let dir = (Math.random() > 0.5) ? "v" : "h"; // choose move vertical or horizontal
+            let dir = (Math.random() > 0.5) ? "v" : "h"; // choose to move vertical or horizontal
             if(dir == 'v') this.platformmove_v();
             else this.platformmove_h();
             let withrocket = (Math.random()< 0.01) ? true : false;
@@ -55,27 +67,52 @@ export default class platform extends cc.Component {
         else if(this.node.name == "break_basic"){
             
         }
+        if(Math.random()>0.99){
+            var newnode = cc.instantiate(this.shield);
+            this.node.addChild(newnode);
+            newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
+        }
     }
 
-    private platformmove_v(){
-        let easeRate: number = Math.random() * 3;
-        let movespeed = Math.random() * 50;
-        let moveright = cc.moveBy(2, movespeed, 0);
-        let moveleft = cc.moveBy(2, -movespeed, 0);
-        moveright.easing(cc.easeInOut(easeRate));
-        moveleft.easing(cc.easeInOut(easeRate));
-        this.node.runAction(cc.repeatForever(cc.sequence(moveright, moveleft)));
+    private platformmove_h(){
+        let t1 = (423-this.node.position.x)/141;
+        let t2 = (this.node.position.x+423)/141;
+        let moveright1 = cc.moveTo(t1, 423, this.node.position.y);
+        let moveleft1 = cc.moveTo(t2, -423, this.node.position.y);
+        let moveright = cc.moveTo(6, 423, this.node.position.y);
+        let moveleft = cc.moveTo(6, -423, this.node.position.y);
+        
+        if(Math.random() > 0.5){
+            this.node.runAction(moveleft1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(moveright, moveleft)));
+            }, t2);
+            
+        }
+        else{
+            this.node.runAction(moveright1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(moveleft, moveright)));
+            }, t1);
+            
+        }
     }
     
-    private platformmove_h(){
-        let easeRate: number = Math.random() * 3;
-        let movespeed = Math.random() * 50;
-        let moveup = cc.moveBy(2, 0, movespeed);
-        let movedown = cc.moveBy(2, 0, -movespeed);
-        moveup.easing(cc.easeInOut(easeRate));
-        movedown.easing(cc.easeInOut(easeRate));
-        this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
+    private platformmove_v(){
+        //let easeRate = 2;
+        let moveup = cc.moveBy(2.5, 0, 175);
+        let movedown = cc.moveBy(2.5, 0, -175);
+        // moveup.easing(cc.easeInOut(easeRate));
+        // movedown.easing(cc.easeInOut(easeRate));
+
+        if(Math.random() > 0.5){
+            this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
+        }
+        else{
+            this.node.runAction(cc.repeatForever(cc.sequence(movedown, moveup)));
+        }
     }
+    
     update (dt) {}
 
     onBeginContact(contact, self, other){

@@ -33,10 +33,14 @@ export default class GameMgr extends cc.Component {
     camera: cc.Node = null;
 
     @property(cc.Node)
+    background: cc.Node = null;
+
+    @property(cc.Node)
     player : cc.Node = null;
 
     @property(cc.Node)
     score : cc.Node = null;
+    private backgroundSize = 256;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -95,6 +99,8 @@ export default class GameMgr extends cc.Component {
             this.score.getComponent(cc.Label).string = height + '';
             this.camera.y = this.player.y - 100;
         }
+        if(this.camera.y - this.background.y >= this.backgroundSize)
+            this.background.y += this.backgroundSize;
     
         if(this.camera.y-200 > this.player.y)
         {
