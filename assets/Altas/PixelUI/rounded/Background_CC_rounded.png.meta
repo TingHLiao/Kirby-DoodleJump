@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "0e182323-3a00-40c3-8563-9dbfb71398e0",
+  "uuid": "c2c27ff2-9979-4841-98f6-4baf56ec09b8",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "Background_CC_rounded": {
       "ver": "1.0.4",
-      "uuid": "20472382-b5ee-43a9-ae38-a878d64ed05f",
-      "rawTextureUuid": "0e182323-3a00-40c3-8563-9dbfb71398e0",
+      "uuid": "d4ddeac0-ace4-4c66-83a1-42947f78ad3d",
+      "rawTextureUuid": "c2c27ff2-9979-4841-98f6-4baf56ec09b8",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

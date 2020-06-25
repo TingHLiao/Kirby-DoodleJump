@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "a432b792-5213-4b0e-90d4-db5d98eaf279",
+  "uuid": "0f739fed-869d-48ef-8841-2e5820755745",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "InputField_CC": {
       "ver": "1.0.4",
-      "uuid": "95143bae-10a8-4bf7-b3d3-49c9aeeac683",
-      "rawTextureUuid": "a432b792-5213-4b0e-90d4-db5d98eaf279",
+      "uuid": "b1aa0010-fc27-4f9c-a4d1-78408f1d8a49",
+      "rawTextureUuid": "0f739fed-869d-48ef-8841-2e5820755745",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

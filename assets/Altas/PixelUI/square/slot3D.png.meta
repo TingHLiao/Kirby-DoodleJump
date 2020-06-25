@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "0285605d-e4be-43f1-8dc3-37a05dadf434",
+  "uuid": "1d175975-8ce4-4078-af7b-432412e276f3",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "slot3D": {
       "ver": "1.0.4",
-      "uuid": "1bf818da-c3d6-4570-90cb-ebaf02ee2d31",
-      "rawTextureUuid": "0285605d-e4be-43f1-8dc3-37a05dadf434",
+      "uuid": "b9280c7a-b1fe-4604-936f-cb8c326ffd31",
+      "rawTextureUuid": "1d175975-8ce4-4078-af7b-432412e276f3",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
