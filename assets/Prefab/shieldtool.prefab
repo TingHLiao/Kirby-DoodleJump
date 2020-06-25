@@ -171,6 +171,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "soundEffect": {
+      "__uuid__": "346e48af-91f7-4b6f-91eb-f4e4c53d5272"
+    },
     "shield": {
       "__uuid__": "512acee5-f123-4a69-93f7-d0659ee4d21d"
     },
