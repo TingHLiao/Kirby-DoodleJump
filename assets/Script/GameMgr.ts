@@ -112,7 +112,7 @@ export default class GameMgr extends cc.Component {
         }
         if(height >= this.count + 750){
             //this.needmoreplatform = true;
-            this.generatePlatforms(50, 100);
+            this.generatePlatforms(50, 60);
         }
     }
 }

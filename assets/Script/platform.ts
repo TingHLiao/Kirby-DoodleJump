@@ -13,8 +13,11 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class platform extends cc.Component {
 
+    // Rocket
     @property(cc.Prefab)
     rocketPrefab: cc.Prefab = null;
+
+
     // Trampoline
     @property(cc.Prefab)
     trampoline: cc.Prefab = null;
@@ -43,7 +46,8 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
-            if(Math.random()>0.95){
+
+            if(Math.random()>0.95 && !withrocket){
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
@@ -53,13 +57,6 @@ export default class platform extends cc.Component {
             let dir = (Math.random() > 0.5) ? "v" : "h"; // choose to move vertical or horizontal
             if(dir == 'v') this.platformmove_v();
             else this.platformmove_h();
-            let withrocket = (Math.random()< 0.01) ? true : false;
-            if(withrocket){
-                let newnode = cc.instantiate(this.rocketPrefab);
-                this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
-                newnode.scale = 0.6;
-            }
         }
         else if(this.node.name == "time_basic"){
 

@@ -128,7 +128,8 @@
     },
     "_enabled": true,
     "rocketPrefab": {
-      "__uuid__": "cf9d5e37-5eb8-4d6c-a615-92890eb4d372"
+      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
+    },
     "trampoline": {
       "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
     },
@@ -211,9 +212,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "a6d03b41-ee59-4ae7-8cc8-cda781dbd8c2"
     },
-    "fileId": "1bN46QTEJGqLTlwgNOIyI7",
+    "fileId": "09uZvRP4RI8qyt+FlH50Sf",
     "sync": false
   }
 ]
