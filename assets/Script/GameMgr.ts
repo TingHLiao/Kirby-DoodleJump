@@ -15,6 +15,12 @@ export default class GameMgr extends cc.Component {
 
     private physicManager: cc.PhysicsManager = null;
 
+    private needmoreplatform : Boolean = false;
+
+    private floor = 0;
+
+    private count = 0;
+
     // Get the node of platform
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -29,28 +35,40 @@ export default class GameMgr extends cc.Component {
     @property(cc.Node)
     player : cc.Node = null;
 
+    @property(cc.Node)
+    score : cc.Node = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         this.physicManager = cc.director.getPhysicsManager();
         this.physicManager.enabled = true;
+        this.floor = 0;
+        this.count = -1000;
     }
 
     start () {
-        this.generatePlatforms(500);
+        //this.needmoreplatform = true;
+        this.generatePlatforms(50, 40);
     }
 
-    generatePlatforms(num: Number)
+    generatePlatforms(num, stepsize)
     {
-        this.platforms.removeAllChildren();
-        for(let i = 0; i < num; i++)
-        {
-            let randIdx = this.randomChoosePlatform();
-            let platform = cc.instantiate(this.platformPrefabs[randIdx]);
-            platform.parent = this.platforms;
-            platform.position = cc.v2((Math.random()>0.5)? Math.random()*400: Math.random()*-400, 40*i-280);
+        //if(this.needmoreplatform){
+            //this.platforms.removeAllChildren();
+            cc.log(this.floor);
+            for(let i = this.floor; i < this.floor+num; i++)
+            {
+                let randIdx = this.randomChoosePlatform();
+                let platform = cc.instantiate(this.platformPrefabs[randIdx]);
+                platform.parent = this.platforms;
+                platform.position = cc.v2((Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*50 + Math.random()*5);
+            }
+            this.floor += num;
+            this.count += 1000;
             
-        }
+            //this.needmoreplatform = false;
+        //}
     }
 
     randomChoosePlatform()
@@ -71,8 +89,12 @@ export default class GameMgr extends cc.Component {
     }
 
     update (dt) {
-        if(this.player.y - this.camera.y > 100)
+        let height = parseInt(this.score.getComponent(cc.Label).string);
+        if(this.player.y - this.camera.y > 100){
+            height += Math.floor(3 + 3 * Math.random());
+            this.score.getComponent(cc.Label).string = height + '';
             this.camera.y = this.player.y - 100;
+        }
     
         if(this.camera.y-200 > this.player.y)
         {
@@ -80,7 +102,11 @@ export default class GameMgr extends cc.Component {
             {
                 //this.player.playerDie();
                 //this.gameOver();
-            }
+            }   
+        }
+        if(height >= this.count + 750){
+            //this.needmoreplatform = true;
+            this.generatePlatforms(50, 100);
         }
     }
 }

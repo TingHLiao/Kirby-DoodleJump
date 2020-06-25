@@ -50,6 +50,12 @@ export default class player extends cc.Component {
 
     update (dt) {
         this.playermovement(dt);
+        if(this.node.x-11.5 <= -480 && this.leftDown){
+            this.node.x = 491.5;
+        }
+        else if(this.node.x + 11.5 >= 480 && this.rightDown){
+            this.node.x = -491.5;
+        }
     }
 
     private playermovement(dt){

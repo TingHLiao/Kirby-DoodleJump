@@ -13,6 +13,9 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class platform extends cc.Component {
 
+    @property(cc.Prefab)
+    rocketPrefab: cc.Prefab = null;
+
     private anim: cc.Animation = null;
 
     private animState: cc.AnimationState = null;
@@ -26,12 +29,25 @@ export default class platform extends cc.Component {
         this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         if(this.node.name == "normal_basic"){
-            
+            let withrocket = (Math.random()< 0.05) ? true : false;
+            if(withrocket){
+                let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
+                newnode.scale = 0.6;
+            }
         }
         else if(this.node.name == "move_basic"){
             let dir = (Math.random() > 0.5) ? "v" : "h"; // choose move vertical or horizontal
             if(dir == 'v') this.platformmove_v();
             else this.platformmove_h();
+            let withrocket = (Math.random()< 0.01) ? true : false;
+            if(withrocket){
+                let newnode = cc.instantiate(this.rocketPrefab);
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
+                newnode.scale = 0.6;
+            }
         }
         else if(this.node.name == "time_basic"){
 

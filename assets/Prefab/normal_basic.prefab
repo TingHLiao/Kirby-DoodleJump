@@ -175,6 +175,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "rocketPrefab": {
+      "__uuid__": "cf9d5e37-5eb8-4d6c-a615-92890eb4d372"
+    },
     "_id": ""
   },
   {
@@ -185,7 +188,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "43sAIsXQRAx4VkkGwA/4ik",
+    "fileId": "0fX7/S4jhPGan5Y90dGlNY",
     "sync": false
   }
 ]
