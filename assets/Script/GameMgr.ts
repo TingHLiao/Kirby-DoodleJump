@@ -23,7 +23,11 @@ export default class GameMgr extends cc.Component {
     @property([cc.Prefab])
     platformPrefabs: cc.Prefab[] = [];
 
-    private posIdx: number = 0;
+    @property(cc.Node)
+    camera: cc.Node = null;
+
+    @property(cc.Node)
+    player : cc.Node = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -45,7 +49,7 @@ export default class GameMgr extends cc.Component {
             let platform = cc.instantiate(this.platformPrefabs[randIdx]);
             platform.parent = this.platforms;
             platform.position = cc.v2((Math.random()>0.5)? Math.random()*400: Math.random()*-400, 40*i-280);
-            this.posIdx = (this.posIdx + 1) % 7;
+            
         }
     }
 
@@ -66,5 +70,17 @@ export default class GameMgr extends cc.Component {
         }
     }
 
-    // update (dt) {}
+    update (dt) {
+        if(this.player.y - this.camera.y > 100)
+            this.camera.y = this.player.y - 100;
+    
+        if(this.camera.y-200 > this.player.y)
+        {
+            if(this.player.active)
+            {
+                //this.player.playerDie();
+                //this.gameOver();
+            }
+        }
+    }
 }

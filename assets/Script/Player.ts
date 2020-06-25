@@ -28,10 +28,10 @@ export default class player extends cc.Component {
     start () {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, 1000);
     }
 
     onKeyDown(event) {
-        cc.log("Key Down: " + event.keyCode);
         if(event.keyCode == cc.macro.KEY.left) {
             this.leftDown = true;
             this.rightDown = false;
@@ -54,8 +54,8 @@ export default class player extends cc.Component {
 
     private playermovement(dt){
         this.playerSpeed = 0;
-        if(this.leftDown) this.playerSpeed = -100;
-        else if(this.rightDown) this.playerSpeed = 100;
+        if(this.leftDown) this.playerSpeed = -400;
+        else if(this.rightDown) this.playerSpeed = 400;
 
         this.node.x += this.playerSpeed * dt;
     }

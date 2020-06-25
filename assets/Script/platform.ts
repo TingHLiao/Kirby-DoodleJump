@@ -13,11 +13,18 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class platform extends cc.Component {
 
+    private anim: cc.Animation = null;
+
+    private animState: cc.AnimationState = null;
+
+    private jumpvelocity : number = 1000;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
 
     start () {
+        this.anim = this.getComponent(cc.Animation);
+        this.animState = null;
         if(this.node.name == "normal_basic"){
             
         }
@@ -54,4 +61,28 @@ export default class platform extends cc.Component {
         this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
     }
     update (dt) {}
+
+    onBeginContact(contact, self, other){
+        if(contact.getWorldManifold().normal.y != 1 || contact.getWorldManifold().normal.x != 0){
+            contact.disabled = true;
+        }
+        else{
+            if(self.node.name == "break_basic"){
+                contact.disabled = true;
+                this.anim.play("basic_break");
+                this.scheduleOnce(function(){
+                    this.node.destroy();
+                  }, 0.3)
+            }
+            else if(self.node.name == "time_basic"){
+                if(this.animState == null || this.animState.name != "basic_time")this.animState = this.anim.play("basic_time");
+                this.scheduleOnce(function(){
+                    this.node.destroy();
+                  }, 1.3)
+                other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+                
+            }
+            else if(other.tag == 0 /* player*/ ) other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+        }
+    }
 }
