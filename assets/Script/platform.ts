@@ -79,6 +79,7 @@ export default class platform extends cc.Component {
             this.node.runAction(cc.repeatForever(cc.sequence(movedown, moveup)));
         }
     }
+    
     update (dt) {}
 
     onBeginContact(contact, self, other){
