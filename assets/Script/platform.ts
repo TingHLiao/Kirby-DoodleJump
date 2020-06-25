@@ -13,6 +13,10 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class platform extends cc.Component {
 
+    // Trampoline
+    @property([cc.Prefab])
+    trampoline: cc.Prefab = null;
+
     private anim: cc.Animation = null;
 
     private animState: cc.AnimationState = null;
@@ -26,7 +30,11 @@ export default class platform extends cc.Component {
         this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         if(this.node.name == "normal_basic"){
-            
+            if(Math.random()>0.9){
+                var newnode = cc.instantiate(this.trampoline);
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
+            }
         }
         else if(this.node.name == "move_basic"){
             let dir = (Math.random() > 0.5) ? "v" : "h"; // choose to move vertical or horizontal
