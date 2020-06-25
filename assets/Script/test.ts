@@ -25,7 +25,6 @@ export default class NewClass extends cc.Component {
 
     start () {
         let st = "2";
-        cc.log("hello!");
     }
 
     // update (dt) {}
