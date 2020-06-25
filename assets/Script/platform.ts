@@ -17,6 +17,10 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     trampoline: cc.Prefab = null;
 
+    // Shield
+    @property(cc.Prefab)
+    shield: cc.Prefab = null;
+
     private anim: cc.Animation = null;
 
     private animState: cc.AnimationState = null;
@@ -30,7 +34,7 @@ export default class platform extends cc.Component {
         this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         if(this.node.name == "normal_basic"){
-            if(Math.random()>0.9){
+            if(Math.random()>0.95){
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
@@ -46,6 +50,11 @@ export default class platform extends cc.Component {
         }
         else if(this.node.name == "break_basic"){
             
+        }
+        if(Math.random()>0.99){
+            var newnode = cc.instantiate(this.shield);
+            this.node.addChild(newnode);
+            newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
         }
     }
 
