@@ -2,7 +2,7 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Trampoline extends cc.Component {
-    @property(cc.AudioClip)
+    @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
 
     private springVelocity: number = 1500;
