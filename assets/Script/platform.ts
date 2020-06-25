@@ -14,7 +14,7 @@ const {ccclass, property} = cc._decorator;
 export default class platform extends cc.Component {
 
     // Trampoline
-    @property([cc.Prefab])
+    @property(cc.Prefab)
     trampoline: cc.Prefab = null;
 
     private anim: cc.Animation = null;
