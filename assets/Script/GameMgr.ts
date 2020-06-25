@@ -21,6 +21,8 @@ export default class GameMgr extends cc.Component {
 
     private count = 0;
 
+    private count1 = 0;
+
     // Get the node of platform
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -40,6 +42,10 @@ export default class GameMgr extends cc.Component {
 
     @property(cc.Node)
     score : cc.Node = null;
+
+    // @property(cc.Node)
+    // Gameover : cc.Node = null;
+
     private backgroundSize = 256;
 
     // LIFE-CYCLE CALLBACKS:
@@ -49,6 +55,7 @@ export default class GameMgr extends cc.Component {
         this.physicManager.enabled = true;
         this.floor = 0;
         this.count = -1000;
+        //this.Gameover.active = false;
     }
 
     start () {
@@ -113,6 +120,35 @@ export default class GameMgr extends cc.Component {
         if(height >= this.count + 750){
             //this.needmoreplatform = true;
             this.generatePlatforms(50, 60);
+        }
+
+        if(this.player.y - this.camera.y > 100)
+            this.camera.y = this.player.y - 100;
+    
+        if(this.camera.y-250 > this.player.y)
+        {
+            if(this.player.active)
+            {
+                this.platforms.removeAllChildren();
+                
+                if(this.count1 <= 5){
+                    this.camera.y = this.player.y + 250; 
+                }
+                else{
+                    this.camera.y = this.camera.y;
+                    //this.gameover();
+                    this.scheduleOnce(()=>{
+                        var action = cc.fadeIn(1.0);
+                        // this.Gameover.active = true;
+                        // this.Gameover.runAction(action);
+                        this.player.active = false;
+                        this.camera.y = 0;  
+                    }, 0.4);
+                }
+                //this.player.playerDie();
+                //this.gameOver();
+            }
+            this.count1+=1;
         }
     }
 }

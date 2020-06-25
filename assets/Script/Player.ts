@@ -19,10 +19,15 @@ export default class player extends cc.Component {
 
     private playerSpeed: number = 0;
 
+    private anim = null;
+
+    private animateState = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
+        this.anim = this.getComponent(cc.Animation);
     }
 
     start () {
@@ -58,10 +63,28 @@ export default class player extends cc.Component {
         }
     }
 
+    onBeginContact(contact, self, other){
+        if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0){
+            contact.disabled = true;
+        }
+        else{
+            if(other.tag == 1){
+                this.animateState = this.anim.play("jump");
+            }
+        }
+    }
+
+
     private playermovement(dt){
         this.playerSpeed = 0;
-        if(this.leftDown) this.playerSpeed = -400;
-        else if(this.rightDown) this.playerSpeed = 400;
+        if(this.leftDown){
+            this.playerSpeed = -400;
+            this.node.scaleX = -2;
+        }
+        else if(this.rightDown){
+            this.playerSpeed = 400;
+            this.node.scaleX = 2;
+        }
 
         this.node.x += this.playerSpeed * dt;
     }

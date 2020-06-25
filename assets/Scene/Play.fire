@@ -87,7 +87,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 17
+        "__id__": 18
       }
     ],
     "_prefab": null,
@@ -434,7 +434,7 @@
       "array": [
         0,
         0,
-        427.8165494695127,
+        328.2236280343023,
         0,
         0,
         0,
@@ -608,6 +608,9 @@
       },
       {
         "__id__": 16
+      },
+      {
+        "__id__": 17
       }
     ],
     "_prefab": null,
@@ -752,6 +755,25 @@
     },
     "_enabled": true,
     "_id": "00/tfDlv5OGKB1v0aueIMp"
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "_defaultClip": {
+      "__uuid__": "0fbad04b-037a-4c34-ae08-5797db42d19a"
+    },
+    "_clips": [
+      {
+        "__uuid__": "0fbad04b-037a-4c34-ae08-5797db42d19a"
+      }
+    ],
+    "playOnLoad": false,
+    "_id": "b0//ruyhxGb5Se3MrreEUq"
   },
   {
     "__type__": "cc.Canvas",
