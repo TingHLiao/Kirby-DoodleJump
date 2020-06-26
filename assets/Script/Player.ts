@@ -40,7 +40,6 @@ export default class player extends cc.Component {
     @property({type:cc.AudioClip})
     CoinEffect: cc.AudioClip = null;
 
-    // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
