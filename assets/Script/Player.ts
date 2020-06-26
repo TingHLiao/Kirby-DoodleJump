@@ -81,10 +81,6 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
-            if(other.tag == 4 && this.spaceDown){ //change to 5
-                //other.node.removeFromParent();
-                return;
-            }
             if(other.tag == 4 || other.tag == 5){
                 if(this.mode == 1){
                     contact.disabled = true; 
@@ -105,7 +101,7 @@ export default class player extends cc.Component {
                     }
                 }
             }
-        } else if(self.tag == 3 && other.tag == 4){ //change to 5
+        } else if(self.tag == 3 && other.tag == 5){ //change to 5
             contact.disabled = true;
             if(!this.spaceDown)
                 return;
@@ -116,17 +112,20 @@ export default class player extends cc.Component {
     }
 
     onPreSolve(contact, self, other){
-        if(self.tag == 3 && other.tag == 4){ //change to 5
-            //cc.log('c')
-            if(!this.spaceDown){
-                contact.disabled = true;
+        if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //change to 5
+            contact.disabled = true;
+            other.node.destroy();
+            return;
+        }
+        if(self.tag == 3 && other.tag == 5){ //change to 5
+            if(!this.spaceDown || !other.node.isValid){
+                //contact.disabled = true;
                 return;
             }
-            let move = self.node.position.sub(other.node.parent.position).sub(other.node.position);
+            let move = self.node.position.sub(other.node.parent.position).sub(other.node.position).divSelf(8);
             //cc.log(move)
-            other.node.stopAllActions();
-            other.node.runAction(cc.moveBy(1, move));
-            //.easing(cc.easeCubicActionOut())
+            //other.node.stopAllActions();
+            other.node.runAction(cc.moveBy(0.2, move));
         }
     }
 
