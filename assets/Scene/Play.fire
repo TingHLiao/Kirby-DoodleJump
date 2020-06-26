@@ -434,7 +434,7 @@
       "array": [
         0,
         0,
-        340.3479836872844,
+        252.8794179050561,
         0,
         0,
         0,
@@ -773,6 +773,12 @@
     "_clips": [
       {
         "__uuid__": "0fbad04b-037a-4c34-ae08-5797db42d19a"
+      },
+      {
+        "__uuid__": "cc46babd-a329-4ba3-aa9f-2d9a82e9c1f4"
+      },
+      {
+        "__uuid__": "3f2e0304-75da-4710-91df-0065eacd1997"
       }
     ],
     "playOnLoad": false,
@@ -787,9 +793,9 @@
     },
     "_enabled": true,
     "tag": 3,
-    "_density": 1,
+    "_density": 0,
     "_sensor": false,
-    "_friction": 0.2,
+    "_friction": 0,
     "_restitution": 0,
     "body": null,
     "_offset": {

@@ -121,7 +121,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 2,
     "_allowSleep": false,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -146,7 +146,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 2,
+    "tag": 4,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -170,7 +170,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
     },
     "fileId": "1eLRPyLxNOLIbUspEK4wlK",
     "sync": false
