@@ -434,7 +434,7 @@
       "array": [
         0,
         0,
-        252.8794179050561,
+        291.8505610753558,
         0,
         0,
         0,
@@ -760,9 +760,7 @@
     "platforms": {
       "__id__": 5
     },
-    "abilitySound": {
-      "__uuid__": "03b95ea1-b3b8-459b-b488-2d51481711c4"
-    },
+    "abilitySound": null,
     "_id": "00/tfDlv5OGKB1v0aueIMp"
   },
   {
@@ -785,6 +783,9 @@
       },
       {
         "__uuid__": "3f2e0304-75da-4710-91df-0065eacd1997"
+      },
+      {
+        "__uuid__": "7c246465-4b07-4b63-9b5d-199c90a0b24d"
       }
     ],
     "playOnLoad": false,
