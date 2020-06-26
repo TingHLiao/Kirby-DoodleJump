@@ -73,8 +73,9 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
-            if(other.tag == 4 && contact.getWorldManifold().normal.y == 1){ // enemy and doesn't contact from top
+            if((other.tag == 4 || other.tag == 5) && (contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0)){ // enemy and doesn't contact from top
                 this.isDied = true;
+                cc.log("DIED")
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)

@@ -33,6 +33,10 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     shield: cc.Prefab = null;
 
+    // Ninja enemy
+    @property(cc.Prefab)
+    NinjaEnemy: cc.Prefab = null;
+
     private anim: cc.Animation = null;
 
     private animState: cc.AnimationState = null;
@@ -63,18 +67,25 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.5){
+            if(!withitem && Math.random() < 0.01){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
-            if(!withitem && Math.random() > 0.5){
+            if(!withitem && Math.random() < 0.01){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
+            }
+
+            if(!withitem && Math.random() > 0.5){
+                withitem = true;
+                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the rocket
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 45.025);
             }
         }
         else if(this.node.name == "move_basic"){
