@@ -23,7 +23,7 @@ export default class RocketTool extends cc.Component {
             this.player.getComponent("Player").setmode("rocket");
             this.player.getComponent("Player").anim.play("rocket");
             cc.director.getPhysicsManager().enabled = false;
-            other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeCubicActionOut()));
+            other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeCubicActionInOut()));
             self.node.active = false;
             this.scheduleOnce(function () {
                 cc.director.getPhysicsManager().enabled = true;
