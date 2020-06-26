@@ -17,6 +17,13 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     rocketPrefab: cc.Prefab = null;
 
+     // virus_red1
+     @property(cc.Prefab)
+     virus_red1: cc.Prefab = null;
+
+     // virus_green1
+     @property(cc.Prefab)
+     virus_green1: cc.Prefab = null;
 
     // Trampoline
     @property(cc.Prefab)
@@ -39,18 +46,35 @@ export default class platform extends cc.Component {
         this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         if(this.node.name == "normal_basic"){
-            let withrocket = (Math.random()< 0.05) ? true : false;
+            let withrocket = (Math.random()< 0.01) ? true : false;
+            let withitem = false;
             if(withrocket){
+                withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
 
-            if(Math.random()>0.95 && !withrocket){
+            if(Math.random()>0.95 && !withitem){
+                withitem = true;
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
+            }
+
+            if(!withitem && Math.random() > 0.5){
+                withitem = true;
+                let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
+            }
+
+            if(!withitem && Math.random() > 0.5){
+                withitem = true;
+                let newnode = cc.instantiate(this.virus_green1); // newnode is the rocket
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
             }
         }
         else if(this.node.name == "move_basic"){
