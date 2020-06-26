@@ -23,8 +23,8 @@ export default class player extends cc.Component {
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
-    
-    platform: cc.Node;
+
+    platform: cc.Node;//
 
     @property(cc.Node)
     platforms: cc.Node = null;
