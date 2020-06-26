@@ -168,7 +168,7 @@ export default class platform extends cc.Component {
                     this.node.destroy();
                   }, 1.3)
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
-                
+                //
             }
             else if(other.tag == 0 /* player*/ ){
                 if(other.node.getComponent(cc.RigidBody).linearVelocity !== cc.v2(0, 0))
