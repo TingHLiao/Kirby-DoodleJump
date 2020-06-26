@@ -434,7 +434,7 @@
       "array": [
         0,
         0,
-        340.3479836872844,
+        252.8794179050561,
         0,
         0,
         0,
@@ -759,6 +759,9 @@
     "_enabled": true,
     "platforms": {
       "__id__": 5
+    },
+    "abilitySound": {
+      "__uuid__": "03b95ea1-b3b8-459b-b488-2d51481711c4"
     },
     "_id": "00/tfDlv5OGKB1v0aueIMp"
   },

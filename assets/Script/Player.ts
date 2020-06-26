@@ -22,6 +22,9 @@ export default class player extends cc.Component {
     @property(cc.Node)
     platforms: cc.Node = null;
 
+    @property({type:cc.AudioClip})
+    abilitySound: cc.AudioClip = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -111,12 +114,16 @@ export default class player extends cc.Component {
     }
 
     onPreSolve(contact, self, other){
-        if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //change to 5
+        if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //get ability
             contact.disabled = true;
+            cc.audioEngine.playEffect(this.abilitySound, false);
+            if(other.node.name == "ninja_enemy"){
+                
+            }
             other.node.destroy();
             return;
         }
-        if(self.tag == 3 && other.tag == 5){ //change to 5
+        if(self.tag == 3 && other.tag == 5){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
                 return;
