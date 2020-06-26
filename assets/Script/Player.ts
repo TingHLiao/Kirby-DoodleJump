@@ -40,8 +40,6 @@ export default class player extends cc.Component {
     @property({type:cc.AudioClip})
     CoinEffect: cc.AudioClip = null;
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
@@ -191,7 +189,6 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        //this.node.getComponent(cc.RigidBody).bullet = true; 
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
         this.anim.stop('jump');
         this.animateState = this.anim.play("die");
