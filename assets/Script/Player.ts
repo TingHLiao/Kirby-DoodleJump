@@ -104,8 +104,18 @@ export default class player extends cc.Component {
 
             if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
                 if(other.tag == 5 && this.spaceDown){
-                    this.anim.play("changetosnow");
-                    this.kirby_state = 1;
+                    if(other.node.name == "ninja_enemy"){
+                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
+                        // this.node.scaleY = 1.5;
+                        this.anim.play("changetoninja");
+                        this.kirby_state = 2;
+                    }
+                    else if(other.node.name == "snowman_enemy"){
+                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
+                        // this.node.scaleY = 1.5;
+                        this.anim.play("changetosnow");
+                        this.kirby_state = 1;
+                    }
                 }
                 if(this.mode > 0){
                     contact.disabled = true; 
@@ -139,6 +149,9 @@ export default class player extends cc.Component {
                     }
                     else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 1){
                         this.animateState = this.anim.play("snow_jump");
+                    }
+                    else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 2){
+                        this.animateState = this.anim.play("ninja_jump");
                     }
                 }
             }
@@ -190,13 +203,35 @@ export default class player extends cc.Component {
 
     private gameover(){
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
-        this.anim.stop('jump');
-        this.animateState = this.anim.play("die");
+        
+        switch(this.kirby_state){
+            case 0: {                 // normal
+                this.anim.stop('jump');
+                this.animateState = this.anim.play("die");
+                break;
+            }
+            case 1: {                 // snowman
+                this.anim.stop('snow_jump');
+                this.animateState = this.anim.play("snowman_die");
+                break;
+            }
+            case 2: {                 // ninja
+                cc.log(this.kirby_state);
+                this.anim.stop('ninja_jump');
+                this.animateState = this.anim.play("ninja_die");
+                break;
+            }
+            default: {
+                this.anim.stop('jump');
+                this.animateState = this.anim.play("die");
+                break;
+            }
+        }
         //this.node.getComponent(cc.RigidBody).active = false;
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{ 
             this.platforms.removeAllChildren();
-            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -250);
+            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
         }, 0.3);
     }
 

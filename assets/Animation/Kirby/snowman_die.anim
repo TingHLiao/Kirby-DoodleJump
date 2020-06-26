@@ -1,9 +1,9 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "die",
+  "_name": "snowman_die",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 5.016666666666667,
+  "_duration": 0.43333333333333335,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -14,43 +14,37 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "8991302f-6843-475a-b2f8-25ca8aa336ce"
+              "__uuid__": "1313bb55-85ee-4a9a-b993-7c73cdf9296b"
             }
           },
           {
             "frame": 0.08333333333333333,
             "value": {
-              "__uuid__": "14282fa4-7957-4c8d-9d3f-2c12bb33088f"
+              "__uuid__": "ce8ed1d9-96f3-4ba4-bdc0-779850fd5ae9"
             }
           },
           {
             "frame": 0.16666666666666666,
             "value": {
-              "__uuid__": "774fced1-7306-4b97-b771-e017b3961f00"
+              "__uuid__": "46ed3891-87c0-4123-9378-4c5dc1c647b4"
             }
           },
           {
             "frame": 0.25,
             "value": {
-              "__uuid__": "d911b073-cc7d-4a69-9afe-77e826c1e3ca"
+              "__uuid__": "06300250-7489-46f9-adc0-20a2676e443c"
             }
           },
           {
             "frame": 0.3333333333333333,
             "value": {
-              "__uuid__": "8a8ee691-9ded-41c7-bea6-d324047612c6"
+              "__uuid__": "8ed2877a-7642-419a-ac14-f2ed9accbaa2"
             }
           },
           {
             "frame": 0.4166666666666667,
             "value": {
-              "__uuid__": "a6fc8b3c-06d2-4284-9499-d1c002ff1b68"
-            }
-          },
-          {
-            "frame": 5,
-            "value": {
-              "__uuid__": "a6fc8b3c-06d2-4284-9499-d1c002ff1b68"
+              "__uuid__": "78858dd4-0088-4f0c-ba50-016a5323eb72"
             }
           }
         ]
