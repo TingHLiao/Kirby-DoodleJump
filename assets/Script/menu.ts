@@ -6,6 +6,11 @@ export default class Stage extends cc.Component {
     @property
     public user = null;
 
+    @property(cc.Button)
+    leaderbutton: cc.Button = null;
+    @property(cc.Button)
+    storebutton: cc.Button = null;
+
     @property(cc.Node)
     cover: cc.Node = null; //stop
     
@@ -31,6 +36,7 @@ export default class Stage extends cc.Component {
     player: cc.Prefab = null;
 
     private show: boolean = false;
+    private storeshow: boolean = false;
 
     nameText: cc.Label;
     highestText: cc.Label;
@@ -40,6 +46,7 @@ export default class Stage extends cc.Component {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
         this.highestText = cc.find("Canvas/cover/highest/score").getComponent(cc.Label);
         this.coinText = cc.find("Canvas/cover/coin/number").getComponent(cc.Label);
+        
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
             var ID = user.email.replace('@', '-').split('.').join('_');
@@ -67,6 +74,7 @@ export default class Stage extends cc.Component {
     showboard(){
         if(this.show){
             this.boardPanel.active = false;
+            this.storebutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.show = false;
             this.content.removeAllChildren();
@@ -74,6 +82,7 @@ export default class Stage extends cc.Component {
         }
         this.leader();
         //cc.find("Canvas").getComponent("leader").leader();
+        this.storebutton.interactable = false;
         this.show = true;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel.active = true;
@@ -119,15 +128,17 @@ export default class Stage extends cc.Component {
     }
 
     onStoreClick(){
-        if(this.show){
+        if(this.storeshow){
             this.boardPanel_store.active = false;
+            this.leaderbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
-            this.show = false;
+            this.storeshow = false;
             this.content.removeAllChildren();
             return;
         }
         //cc.find("Canvas").getComponent("leader").leader();
-        this.show = true;
+        this.storeshow = true;
+        this.leaderbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_store.active = true;
         this.boardPanel_store.runAction(cc.fadeIn(0.2));

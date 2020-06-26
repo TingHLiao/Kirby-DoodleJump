@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        427.8165494695127,
+        328.2236280343023,
         0,
         0,
         0,
@@ -1588,7 +1588,9 @@
       "__id__": 29
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -2589,7 +2591,7 @@
         "__id__": 60
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 110
@@ -5074,6 +5076,12 @@
     },
     "_enabled": true,
     "user": null,
+    "leaderbutton": {
+      "__id__": 26
+    },
+    "storebutton": {
+      "__id__": 33
+    },
     "cover": {
       "__id__": 5
     },
