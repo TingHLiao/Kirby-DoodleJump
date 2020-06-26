@@ -81,6 +81,7 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
+<<<<<<< HEAD
             if(other.tag == 4 && this.spaceDown){ //change to 5
                 //other.node.removeFromParent();
                 return;
@@ -94,6 +95,12 @@ export default class player extends cc.Component {
                     this.isDied = true;
                     //this.gameover();
                 }
+=======
+            if((other.tag == 4 || other.tag == 5) && (contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0)){ // enemy and doesn't contact from top
+                this.isDied = true;
+                this.gameover();
+                cc.log(contact.getWorldManifold().normal);
+>>>>>>> die anim
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
@@ -146,10 +153,10 @@ export default class player extends cc.Component {
     private gameover(){
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{
+            this.anim.play("die");
             this.platforms.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -250);
         }, 0.3);
-        
     }
     setmode(status : string){
         if(status == "shield")

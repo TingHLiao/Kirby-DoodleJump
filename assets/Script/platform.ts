@@ -18,12 +18,12 @@ export default class platform extends cc.Component {
     rocketPrefab: cc.Prefab = null;
 
      // virus_red1
-     @property(cc.Prefab)
-     virus_red1: cc.Prefab = null;
+    @property(cc.Prefab)
+    virus_red1: cc.Prefab = null;
 
      // virus_green1
-     @property(cc.Prefab)
-     virus_green1: cc.Prefab = null;
+    @property(cc.Prefab)
+    virus_green1: cc.Prefab = null;
 
     // Trampoline
     @property(cc.Prefab)
@@ -167,7 +167,10 @@ export default class platform extends cc.Component {
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 
             }
-            else if(other.tag == 0 /* player*/ ) other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+            else if(other.tag == 0 /* player*/ ){
+                if(other.node.getComponent(cc.RigidBody).linearVelocity !== cc.v2(0, 0))
+                    other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+            }
         }
     }
 }
