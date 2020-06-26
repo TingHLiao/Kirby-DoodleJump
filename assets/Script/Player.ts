@@ -154,7 +154,7 @@ export default class player extends cc.Component {
 
         this.node.x += this.playerSpeed * dt;
     }
-
+    //
     private gameover(){
         //this.node.getComponent(cc.RigidBody).bullet = true; 
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
