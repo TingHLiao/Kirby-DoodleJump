@@ -17,6 +17,9 @@ export default class Enemy extends cc.Component {
 
     private jumpvelocity : number = 1000;
 
+    @property(cc.Prefab)
+    snowball: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -28,6 +31,10 @@ export default class Enemy extends cc.Component {
         if(this.node.name == "ninja_enemy"){
             this.anim.play("ninja_enemy");
             this.ninja_move();
+        }
+        else if(this.node.name == "snowman_enemy"){
+            this.anim.play("snowman_enemy");
+            this.snowman_attack();
         }
     }
 
@@ -60,14 +67,31 @@ export default class Enemy extends cc.Component {
         }
     }
 
+    private snowman_attack(){
+        let speed = (this.node.scaleX > 0) ? 50 : -50;
+        this.schedule(()=>{
+            let newnode = cc.instantiate(this.snowball);
+            this.node.addChild(newnode);
+            newnode.position = cc.v2(14, 0);
+            newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2(speed, 0);
+        }, 2.55);
+
+        for (var i = 0; i < this.node.children.length; ++i) {
+            let pos = this.node.children[i].position.x + this.node.position.x;
+            if( pos > 425 || pos < 425)
+                this.node.children[i].destroy();
+        }
+    }
+
     onBeginContact(contact, self, other){
         if(other.tag == 0){
             if(contact.getWorldManifold().normal.y == 1) {
+                cc.log("snow");
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
-                this.node.stopAllActions();
-                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
-                this.scheduleOnce(()=>{
-                    this.node.destroy();
+                self.node.stopAllActions();
+                self.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
+                self.scheduleOnce(()=>{
+                    self.node.destroy();
                 }, 1)
             }
         }

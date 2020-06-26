@@ -96,7 +96,7 @@ export default class player extends cc.Component {
 
             if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) cc.audioEngine.playEffect(this.soundEffect, false);
 
-            if(other.tag == 4 || other.tag == 5){
+            if(other.tag == 4 || other.tag == 5 || other.tag == 6){
                 if(other.tag == 5 && this.spaceDown){
                     this.anim.play("changetosnow");
                     this.kirby_state = 1;
@@ -111,7 +111,10 @@ export default class player extends cc.Component {
                         this.gameover();
                     }
                 }
-                
+                if(other.tag == 6){ 
+                    this.isDied = true;
+                    this.gameover();
+                }  
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
@@ -170,7 +173,7 @@ export default class player extends cc.Component {
 
         this.node.x += this.playerSpeed * dt;
     }
-    //
+
     private gameover(){
         //this.node.getComponent(cc.RigidBody).bullet = true; 
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
