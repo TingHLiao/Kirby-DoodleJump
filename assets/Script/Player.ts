@@ -96,7 +96,7 @@ export default class player extends cc.Component {
                 return;
             }
         } else{
-            contact.disabled = true;
+            contact.disabled = true; //test
         }
         
     }
