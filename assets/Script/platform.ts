@@ -141,14 +141,14 @@ export default class platform extends cc.Component {
             contact.disabled = true;
         }
         else{
-            if(self.node.name == "break_basic"){
+            if(self.node.name == "break_basic" && other.tag == 0 ){
                 contact.disabled = true;
                 this.anim.play("basic_break");
                 this.scheduleOnce(function(){
                     this.node.destroy();
                   }, 0.3)
             }
-            else if(self.node.name == "time_basic"){
+            else if(self.node.name == "time_basic" && other.tag == 0 ){
                 if(this.animState == null || this.animState.name != "basic_time")this.animState = this.anim.play("basic_time");
                 this.scheduleOnce(function(){
                     this.node.destroy();

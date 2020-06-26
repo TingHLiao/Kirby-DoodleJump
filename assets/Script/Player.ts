@@ -1,13 +1,3 @@
-// Learn TypeScript:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -50,6 +40,10 @@ export default class player extends cc.Component {
         } 
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = true;
+            if(this.anim.getAnimationState('jump').isPlaying){
+                this.anim.stop('jump');
+                this.animateState = this.anim.play('suck');
+            }
         }
     }
     
@@ -58,8 +52,13 @@ export default class player extends cc.Component {
             this.leftDown = false;
         else if(event.keyCode == cc.macro.KEY.right)
             this.rightDown = false;
-        if(event.keyCode == cc.macro.KEY.space)
+        if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
+            if(this.anim.getAnimationState('suck').isPlaying){
+                this.anim.stop('suck');
+                this.animateState = this.anim.play('stopsuck');
+            }
+        }
     }
 
     update (dt) {
@@ -86,12 +85,17 @@ export default class player extends cc.Component {
                     }
                 }
             }
-        } else if(self.tag == 3){
+            if(other.tag == 4 && this.spaceDown){ //change to 5
+                other.node.removeFromParent();;
+                return;
+            }
+        } else if(self.tag == 3 && other.tag == 4){ //change to 5
             if(!this.spaceDown){
                 contact.disabled = true;
                 return;
             }
-            
+        } else{
+            contact.disabled = true; //test
         }
         
     }

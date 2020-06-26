@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "stopsuck",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.15,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "f32f4b7d-9997-4300-941b-e85bac75542e"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "7ceaa369-9674-467d-9d09-6e4de3afc703"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "9d3435f5-c3d3-4f1a-a04e-7c48cd74975f"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "9d3435f5-c3d3-4f1a-a04e-7c48cd74975f"
+            }
+          },
+          {
+            "frame": 0.13333333333333333,
+            "value": {
+              "__uuid__": "d32a1292-3ee1-4f0f-b333-e9d794b41020"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
