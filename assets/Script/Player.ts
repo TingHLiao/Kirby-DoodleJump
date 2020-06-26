@@ -16,6 +16,8 @@ export default class player extends cc.Component {
     private animateState = null;
 
     private isDied = false;
+    //0:default 1:shield protect
+    private mode = 0;
 
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -79,9 +81,19 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
-            if((other.tag == 4 || other.tag == 5) && (contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0)){ // enemy and doesn't contact from top
-                this.isDied = true;
-                //this.gameover();
+            if(other.tag == 4 && this.spaceDown){ //change to 5
+                //other.node.removeFromParent();
+                return;
+            }
+            if(other.tag == 4 || other.tag == 5){
+                if(this.mode == 1){
+                    contact.disabled = true; 
+                    return;
+                }
+                if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
+                    this.isDied = true;
+                    //this.gameover();
+                }
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
@@ -92,17 +104,11 @@ export default class player extends cc.Component {
                     }
                 }
             }
-            if(other.tag == 4 && this.spaceDown){ //change to 5
-                //other.node.removeFromParent();
-                return;
-            }
         } else if(self.tag == 3 && other.tag == 4){ //change to 5
-            if(!this.spaceDown){
-                contact.disabled = true;
-                return;
-            }
             contact.disabled = true;
-            other.node.runAction(cc.moveTo(3, self.node.position.sub(cc.v2(480, 320))).easing(cc.easeCubicActionOut()));
+            if(!this.spaceDown)
+                return;
+            //other.node.runAction(cc.moveTo(3, self.node.position.sub(cc.v2(480, 320))).easing(cc.easeCubicActionOut()));
         } else{
             contact.disabled = true;
         }
@@ -144,5 +150,11 @@ export default class player extends cc.Component {
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -250);
         }, 0.3);
         
+    }
+    setmode(status : string){
+        if(status == "shield")
+            this.mode = 1;
+        else if(status == "unshield")
+            this.mode = 0;
     }
 }
