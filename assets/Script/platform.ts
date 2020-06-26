@@ -106,14 +106,14 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.7 && this.score > -1){
+            if(!withitem && Math.random() > 0.7 && this.score > 500){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 45.025);
             }
 
-            if(!withitem && Math.random() > 0.75){
+            if(!withitem && Math.random() > 0.8){
                 withitem = true;
                 let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
