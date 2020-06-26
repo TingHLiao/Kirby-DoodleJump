@@ -19,14 +19,20 @@ export default class player extends cc.Component {
     //0:default 1:shield protect
     private mode = 0;
 
+    platform: cc.Node;
+
     @property(cc.Node)
     platforms: cc.Node = null;
+
+    @property({type:cc.AudioClip})
+    abilitySound: cc.AudioClip = null;
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
+        this.platform = cc.find("Canvas/platform");
     }
 
     start () {
@@ -86,11 +92,13 @@ export default class player extends cc.Component {
                     contact.disabled = true; 
                     return;
                 }
-                
-                if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
-                    this.isDied = true;
-                    //this.gameover();
+                if((!this.spaceDown && other.tag == 5) || other.tag == 4){
+                    if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
+                        this.isDied = true;
+                        this.gameover();
+                    }
                 }
+                
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
@@ -112,12 +120,16 @@ export default class player extends cc.Component {
     }
 
     onPreSolve(contact, self, other){
-        if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //change to 5
+        if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //get ability
             contact.disabled = true;
+            cc.audioEngine.playEffect(this.abilitySound, false);
+            if(other.node.name == "ninja_enemy"){
+                
+            }
             other.node.destroy();
             return;
         }
-        if(self.tag == 3 && other.tag == 5){ //change to 5
+        if(self.tag == 3 && other.tag == 5){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
                 return;
@@ -142,15 +154,20 @@ export default class player extends cc.Component {
 
         this.node.x += this.playerSpeed * dt;
     }
-
+    //
     private gameover(){
+        //this.node.getComponent(cc.RigidBody).bullet = true; 
+        //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
+        this.anim.stop('jump');
+        this.animateState = this.anim.play("die");
+        //this.node.getComponent(cc.RigidBody).active = false;
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
-        this.scheduleOnce(()=>{
+        this.scheduleOnce(()=>{ 
             this.platforms.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -250);
         }, 0.3);
-        
     }
+
     setmode(status : string){
         if(status == "shield")
             this.mode = 1;
