@@ -67,21 +67,21 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() < 0.01){
+            if(!withitem && Math.random() > 0.9){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
-            if(!withitem && Math.random() < 0.01){
+            if(!withitem && Math.random() > 1){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.5){
+            if(!withitem && Math.random() > 0.95){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the rocket
                 this.node.addChild(newnode);
@@ -152,15 +152,15 @@ export default class platform extends cc.Component {
             contact.disabled = true;
         }
         else{
-            if(self.node.name == "break_basic" && other.tag == 0 ){
+            if(self.node.name == "break_basic" && other.tag == 0){
                 contact.disabled = true;
                 this.anim.play("basic_break");
                 this.scheduleOnce(function(){
                     this.node.destroy();
                   }, 0.3)
             }
-            else if(self.node.name == "time_basic" && other.tag == 0 ){
-                if(this.animState == null || this.animState.name != "basic_time")this.animState = this.anim.play("basic_time");
+            else if(self.node.name == "time_basic"){
+                if(this.animState == null || this.animState.name != "basic_time") this.animState = this.anim.play("basic_time");
                 this.scheduleOnce(function(){
                     this.node.destroy();
                   }, 1.3)
