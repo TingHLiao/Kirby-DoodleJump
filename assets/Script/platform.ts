@@ -10,6 +10,8 @@
 
 const {ccclass, property} = cc._decorator;
 
+//import Player from "./Player";
+
 @ccclass
 export default class platform extends cc.Component {
 
@@ -36,6 +38,7 @@ export default class platform extends cc.Component {
     // Ninja enemy
     @property(cc.Prefab)
     NinjaEnemy: cc.Prefab = null;
+
 
     private anim: cc.Animation = null;
 
