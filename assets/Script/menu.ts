@@ -126,7 +126,6 @@ export default class Stage extends cc.Component {
             this.content.removeAllChildren();
             return;
         }
-        this.store();
         //cc.find("Canvas").getComponent("leader").leader();
         this.show = true;
         this.cover.runAction(cc.fadeTo(0.2, 128));
@@ -134,9 +133,16 @@ export default class Stage extends cc.Component {
         this.boardPanel_store.runAction(cc.fadeIn(0.2));
     }
 
-    store(){
+    buy_snow(){
 
     }
 
+    buy_ninja(){
+
+    }
+
+    buy_kirby(){
+
+    }
     // update (dt) {}
 }
