@@ -15,6 +15,9 @@ export default class Stage extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
+    @property(cc.Node)
+    boardPanel_store: cc.Node = null;
+
     @property(cc.Prefab)
     player1: cc.Prefab = null;
 
@@ -116,6 +119,26 @@ export default class Stage extends cc.Component {
                 }
             })
         })
+    }
+
+    onStoreClick(){
+        if(this.show){
+            this.boardPanel_store.active = false;
+            this.cover.runAction(cc.fadeTo(0.2, 255));
+            this.show = false;
+            this.content.removeAllChildren();
+            return;
+        }
+        this.store();
+        //cc.find("Canvas").getComponent("leader").leader();
+        this.show = true;
+        this.cover.runAction(cc.fadeTo(0.2, 128));
+        this.boardPanel_store.active = true;
+        this.boardPanel_store.runAction(cc.fadeIn(0.2));
+    }
+
+    store(){
+
     }
 
     // update (dt) {}
