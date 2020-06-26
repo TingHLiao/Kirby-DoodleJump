@@ -21,12 +21,14 @@ export default class RocketTool extends cc.Component {
             contact.disabled = true;
             cc.audioEngine.playEffect(this.soundEffect, false);
             this.player.getComponent("Player").setmode("rocket");
-            //other.anim.play("rocket");
-            other.node.runAction(cc.moveBy(4, cc.v2(0, 3000)).easing(cc.easeCubicActionOut()));
+            other.anim.play("rocket");
+            cc.director.getPhysicsManager().enabled = false;
+            other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2200)).easing(cc.easeCubicActionOut()));
             self.node.active = false;
             this.scheduleOnce(function () {
+                cc.director.getPhysicsManager().enabled = true;
                 this.player.getComponent("Player").setmode("unshield");
-            }, 4);
+            }, 2.6);
         }
       }
 }

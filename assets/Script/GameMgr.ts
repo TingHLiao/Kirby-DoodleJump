@@ -58,7 +58,7 @@ export default class GameMgr extends cc.Component {
 
     start () {
         //this.needmoreplatform = true;
-        this.generatePlatforms(50, 40);
+        this.generatePlatforms(100, 40);
     }
 
     generatePlatforms(num, stepsize)
@@ -71,7 +71,7 @@ export default class GameMgr extends cc.Component {
                 let randIdx = this.randomChoosePlatform();
                 let platform = cc.instantiate(this.platformPrefabs[randIdx]);
                 platform.parent = this.platforms;
-                platform.position = cc.v2((Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*50 + Math.random()*5);
+                platform.position = cc.v2((Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*100 + Math.random()*5);
             }
             this.floor += num;
             this.count += 1000;
@@ -109,7 +109,7 @@ export default class GameMgr extends cc.Component {
     
         if(height >= this.count + 750){
             //this.needmoreplatform = true;
-            this.generatePlatforms(50, 60);
+            this.generatePlatforms(100, 60);
         }
 
         if(this.player.y - this.camera.y > 100)

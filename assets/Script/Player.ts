@@ -16,7 +16,7 @@ export default class player extends cc.Component {
     private animateState = null;
 
     private isDied = false;
-    //0:default 1:shield protect
+    //0:default 1:shield protect 2:rocket
     private mode = 0;
 
     platform: cc.Node;
@@ -88,7 +88,7 @@ export default class player extends cc.Component {
     onBeginContact(contact, self, other){
         if(self.tag == 0){
             if(other.tag == 4 || other.tag == 5){
-                if(this.mode == 1){
+                if(this.mode == 1 || this.mode == 2){
                     contact.disabled = true; 
                     return;
                 }
@@ -104,12 +104,12 @@ export default class player extends cc.Component {
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
                 contact.disabled = true;
                 else{
-                    if(other.tag == 1){
+                    if(other.tag == 1 && this.mode!=2){
                         this.animateState = this.anim.play("jump");
                     }
                 }
             }
-        } else if(self.tag == 3 && other.tag == 5){ //change to 5
+        } else if(self.tag == 3 && other.tag == 5){ //can't suck during rocket
             contact.disabled = true;
             if(!this.spaceDown)
                 return;
@@ -129,7 +129,7 @@ export default class player extends cc.Component {
             other.node.destroy();
             return;
         }
-        if(self.tag == 3 && other.tag == 5){
+        if(self.tag == 3 && other.tag == 5 && self.mode!=2){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
                 return;
@@ -173,5 +173,7 @@ export default class player extends cc.Component {
             this.mode = 1;
         else if(status == "unshield")
             this.mode = 0;
+        else if(status == "rocket")
+            this.mode = 2;
     }
 }
