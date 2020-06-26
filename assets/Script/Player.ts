@@ -19,7 +19,12 @@ export default class player extends cc.Component {
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
+    // 0: normal, 1: snow
     private kirby_state = 0;
+
+    // record money
+    @property(cc.Node)
+    money: cc.Node = null;
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
@@ -31,6 +36,9 @@ export default class player extends cc.Component {
 
     @property({type:cc.AudioClip})
     abilitySound: cc.AudioClip = null;
+
+    @property({type:cc.AudioClip})
+    CoinEffect: cc.AudioClip = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -96,7 +104,7 @@ export default class player extends cc.Component {
 
             if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) cc.audioEngine.playEffect(this.soundEffect, false);
 
-            if(other.tag == 4 || other.tag == 5 || other.tag == 6){
+            if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
                 if(other.tag == 5 && this.spaceDown){
                     this.anim.play("changetosnow");
                     this.kirby_state = 1;
@@ -115,6 +123,14 @@ export default class player extends cc.Component {
                     this.isDied = true;
                     this.gameover();
                 }  
+            }
+            else if(other.tag == 7){
+                let num = parseInt(this.money.getComponent(cc.Label).string);
+                num += 1;
+                this.money.getComponent(cc.Label).string = num + '';
+                cc.audioEngine.playEffect(this.CoinEffect, false);
+                contact.disabled = true;
+                other.node.destroy();
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)

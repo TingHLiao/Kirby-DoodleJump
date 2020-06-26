@@ -145,11 +145,14 @@
     "NinjaEnemy": {
       "__uuid__": "d302fe73-3358-4953-a2be-5f08610045d0"
     },
-    "soundEffect": {
-      "__uuid__": "4d2ac333-16f4-480b-bffa-3d9049ad9e59"
-    },
     "SnowmanEnemy": {
       "__uuid__": "f6e38456-3d8d-4d96-9479-c233d387d24d"
+    },
+    "coinPrefab": {
+      "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
+    },
+    "soundEffect": {
+      "__uuid__": "4d2ac333-16f4-480b-bffa-3d9049ad9e59"
     },
     "_id": ""
   },

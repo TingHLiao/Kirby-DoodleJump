@@ -196,6 +196,10 @@
     "SnowmanEnemy": {
       "__uuid__": "f6e38456-3d8d-4d96-9479-c233d387d24d"
     },
+    "coinPrefab": {
+      "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
+    },
+    "soundEffect": null,
     "_id": ""
   },
   {

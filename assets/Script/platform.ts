@@ -39,8 +39,13 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     NinjaEnemy: cc.Prefab = null;
     
+    // Snowman_enemy
     @property(cc.Prefab)
     SnowmanEnemy: cc.Prefab = null;
+
+    // Coin
+    @property(cc.Prefab)
+    coinPrefab: cc.Prefab = null;
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
@@ -75,7 +80,7 @@ export default class platform extends cc.Component {
         this.animState = null;
         //this.node.zIndex = 100;
         if(this.node.name == "normal_basic"){
-            let withrocket = (Math.random()< 0.05) ? true : false;
+            let withrocket = (Math.random()< 0.02) ? true : false;
             let withitem = false;
             if(withrocket){
                 withitem = true;
@@ -85,35 +90,41 @@ export default class platform extends cc.Component {
                 newnode.scale = 0.6;
             }
 
+            if(Math.random()>0.8){
+                var newnode = cc.instantiate(this.coinPrefab); // newnode is coin
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 25.7);
+            }
+
             if(!withitem && Math.random()>0.95){
                 withitem = true;
-                var newnode = cc.instantiate(this.trampoline);
+                var newnode = cc.instantiate(this.trampoline); // newnode is trampoline
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.9 && this.score > 500){
+            if(!withitem && Math.random() > 0.8 && this.score > 500){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 38.35);
             }
 
-            if(!withitem && Math.random() > 1 && this.score > 1000){
+            if(!withitem && Math.random() > 0.85 && this.score > 1000){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.7 && this.score > -1){
+            if(!withitem && Math.random() > 0.95 && this.score > 1500){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 45.025);
             }
 
-            if(!withitem && Math.random() > 0.75){
+            if(!withitem && Math.random() > 0.95 && this.score > 2500){
                 withitem = true;
                 let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
