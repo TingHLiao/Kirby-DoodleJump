@@ -37,6 +37,8 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     NinjaEnemy: cc.Prefab = null;
 
+    private cnt_jump = 0;
+
     private anim: cc.Animation = null;
 
     private animState: cc.AnimationState = null;
@@ -69,21 +71,21 @@ export default class platform extends cc.Component {
 
             if(!withitem && Math.random() > 0.9){
                 withitem = true;
-                let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
+                let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
             if(!withitem && Math.random() > 1){
                 withitem = true;
-                let newnode = cc.instantiate(this.virus_green1); // newnode is the rocket
+                let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.95){
+            if(!withitem && Math.random() > 0.1){
                 withitem = true;
-                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the rocket
+                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 45.025);
             }
@@ -152,6 +154,13 @@ export default class platform extends cc.Component {
             contact.disabled = true;
         }
         else{
+            if(this.node.name == "normal_basic" && other.tag == 0) this.cnt_jump++;
+
+            if(this.cnt_jump == 5 && other.tag == 0){
+                var newnode = cc.instantiate(this.trampoline);
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
+            }
             if(self.node.name == "break_basic" && other.tag == 0){
                 contact.disabled = true;
                 this.anim.play("basic_break");
