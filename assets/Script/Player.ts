@@ -17,6 +17,9 @@ export default class player extends cc.Component {
 
     private isDied = false;
 
+    @property(cc.Node)
+    platforms: cc.Node = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -28,6 +31,7 @@ export default class player extends cc.Component {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, 1000);
+        this.anim.play("jump");
     }
 
     onKeyDown(event) {
@@ -77,6 +81,7 @@ export default class player extends cc.Component {
         if(self.tag == 0){
             if(other.tag == 4 && contact.getWorldManifold().normal.y == 1){ // enemy and doesn't contact from top
                 this.isDied = true;
+                this.gameover();
                 cc.log("DIED")
             }
             else{
@@ -119,7 +124,6 @@ export default class player extends cc.Component {
         }
     }
 
-
     private playermovement(dt){
         this.playerSpeed = 0;
         if(this.leftDown){
@@ -132,5 +136,14 @@ export default class player extends cc.Component {
         }
 
         this.node.x += this.playerSpeed * dt;
+    }
+
+    private gameover(){
+        this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+        this.scheduleOnce(()=>{
+            this.platforms.removeAllChildren();
+            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -250);
+        }, 0.3);
+        
     }
 }

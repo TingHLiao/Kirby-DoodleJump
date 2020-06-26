@@ -109,14 +109,6 @@ export default class GameMgr extends cc.Component {
         if(this.camera.y - this.background.y >= this.backgroundSize)
             this.background.y += this.backgroundSize;
     
-        if(this.camera.y-200 > this.player.y)
-        {
-            if(this.player.active)
-            {
-                //this.player.playerDie();
-                //this.gameOver();
-            }   
-        }
         if(height >= this.count + 750){
             //this.needmoreplatform = true;
             this.generatePlatforms(50, 60);
@@ -125,26 +117,20 @@ export default class GameMgr extends cc.Component {
         if(this.player.y - this.camera.y > 100)
             this.camera.y = this.player.y - 100;
     
-        if(this.camera.y-250 > this.player.y)
+        if(this.camera.y-300 > this.player.y)
         {
             if(this.player.active)
             {
                 this.platforms.removeAllChildren();
-                
-                if(this.count1 <= 5){
-                    this.camera.y = this.player.y + 250; 
-                }
-                else{
-                    this.camera.y = this.camera.y;
-                    //this.gameover();
-                    this.scheduleOnce(()=>{
-                        var action = cc.fadeIn(1.0);
-                        // this.Gameover.active = true;
-                        // this.Gameover.runAction(action);
+                //this.gameover();
+                     this.scheduleOnce(()=>{
+                //         var action = cc.fadeIn(1.0);
+                //         // this.Gameover.active = true;
+                //         // this.Gameover.runAction(action);
                         this.player.active = false;
-                        this.camera.y = 0;  
-                    }, 0.4);
-                }
+                //         this.camera.y = 0;  
+                     }, 0.6);
+                // }
                 //this.player.playerDie();
                 //this.gameOver();
             }
