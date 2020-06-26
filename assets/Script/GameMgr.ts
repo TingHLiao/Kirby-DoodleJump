@@ -21,8 +21,6 @@ export default class GameMgr extends cc.Component {
 
     private count = 0;
 
-    private count1 = 0;
-
     // Get the node of platform
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -134,7 +132,6 @@ export default class GameMgr extends cc.Component {
                 //this.player.playerDie();
                 //this.gameOver();
             }
-            this.count1+=1;
         }
     }
 }
