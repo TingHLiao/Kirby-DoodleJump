@@ -15,6 +15,8 @@ export default class Enemy extends cc.Component {
 
     private anim = null;
 
+    private jumpvelocity : number = 1000;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -56,5 +58,22 @@ export default class Enemy extends cc.Component {
             }, t1);
             
         }
+    }
+
+    onBeginContact(contact, self, other){
+        if(other.tag == 0){
+            if(contact.getWorldManifold().normal.y == 1) {
+                other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+                this.node.stopAllActions();
+                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
+                this.scheduleOnce(()=>{
+                    this.node.destroy();
+                }, 1)
+            }
+        }
+    }
+
+    onCollisionEnter(){
+
     }
 }

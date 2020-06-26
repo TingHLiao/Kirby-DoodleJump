@@ -89,6 +89,7 @@ export default class player extends cc.Component {
                     contact.disabled = true; 
                     return;
                 }
+                
                 if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
                     this.isDied = true;
                     //this.gameover();
