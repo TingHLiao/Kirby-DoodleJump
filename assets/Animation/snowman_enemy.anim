@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "snowman_enemy",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "a8db0091-fb3e-4318-b5ce-7e425afd6d3f"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "16dfdbb8-d4ee-4d5b-a0e2-53f60e4eb9e0"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "a8db0091-fb3e-4318-b5ce-7e425afd6d3f"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

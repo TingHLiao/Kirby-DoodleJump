@@ -38,6 +38,9 @@ export default class platform extends cc.Component {
     // Ninja enemy
     @property(cc.Prefab)
     NinjaEnemy: cc.Prefab = null;
+    
+    @property(cc.Prefab)
+    SnowmanEnemy: cc.Prefab = null;
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
@@ -70,6 +73,7 @@ export default class platform extends cc.Component {
     start () {
         this.anim = this.getComponent(cc.Animation);
         this.animState = null;
+        //this.node.zIndex = 100;
         if(this.node.name == "normal_basic"){
             let withrocket = (Math.random()< 0.05) ? true : false;
             let withitem = false;
@@ -77,11 +81,11 @@ export default class platform extends cc.Component {
                 withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
 
-            if(Math.random()>0.95 && !withitem){
+            if(!withitem && Math.random()>0.95){
                 withitem = true;
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
@@ -92,21 +96,29 @@ export default class platform extends cc.Component {
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 38.35);
             }
 
             if(!withitem && Math.random() > 1 && this.score > 1000){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.99 && this.score > 1500){
+            if(!withitem && Math.random() > 0.7 && this.score > -1){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 45.025);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 45.025);
+            }
+
+            if(!withitem && Math.random() > 0.75){
+                withitem = true;
+                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
+                this.node.addChild(newnode);
+                newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
             }
         }
         else if(this.node.name == "move_basic"){
@@ -202,8 +214,11 @@ export default class platform extends cc.Component {
                 //
             }
             else if(other.tag == 0 /* player*/ ){
-                if(this.player.getComponent("Player").isDied)
-                    other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+                if(this.player.getComponent("Player").isDied){
+                    //other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+                    contact.disabled = true;
+                }
+                    
                 else
                     other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
             }

@@ -19,7 +19,12 @@ export default class player extends cc.Component {
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
-    platform: cc.Node;
+    private kirby_state = 0;
+
+    @property({ type: cc.AudioClip })
+    soundEffect: cc.AudioClip = null;
+
+    platform: cc.Node;//
 
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -33,6 +38,7 @@ export default class player extends cc.Component {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
         this.platform = cc.find("Canvas/platform");
+        this.kirby_state = 0;
     }
 
     start () {
@@ -87,7 +93,14 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
-            if(other.tag == 4 || other.tag == 5){
+
+            if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) cc.audioEngine.playEffect(this.soundEffect, false);
+
+            if(other.tag == 4 || other.tag == 5 || other.tag == 6){
+                if(other.tag == 5 && this.spaceDown){
+                    this.anim.play("changetosnow");
+                    this.kirby_state = 1;
+                }
                 if(this.mode > 0){
                     contact.disabled = true; 
                     return;
@@ -98,14 +111,20 @@ export default class player extends cc.Component {
                         this.gameover();
                     }
                 }
-                
+                if(other.tag == 6){ 
+                    this.isDied = true;
+                    this.gameover();
+                }  
             }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
                 contact.disabled = true;
                 else{
-                    if(other.tag == 1){
+                    if(other.tag == 1 && this.mode != 2 && this.kirby_state == 0){
                         this.animateState = this.anim.play("jump");
+                    }
+                    else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 1){
+                        this.animateState = this.anim.play("snow_jump");
                     }
                 }
             }
@@ -154,7 +173,7 @@ export default class player extends cc.Component {
 
         this.node.x += this.playerSpeed * dt;
     }
-    //
+
     private gameover(){
         //this.node.getComponent(cc.RigidBody).bullet = true; 
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;

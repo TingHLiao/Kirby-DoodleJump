@@ -171,6 +171,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "snowball": {
+      "__uuid__": "79e4dcfd-b7e2-47a6-a600-526291e41ec6"
+    },
     "_id": ""
   },
   {
