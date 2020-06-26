@@ -25,6 +25,8 @@ export default class player extends cc.Component {
 
     private animateState = null;
 
+    private isDied = false;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -72,11 +74,17 @@ export default class player extends cc.Component {
 
     onBeginContact(contact, self, other){
         if(self.tag == 0){
-            if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
-                contact.disabled = true;
+            if(other.tag == 4 && contact.getWorldManifold().normal.y == 1){ // enemy and doesn't contact from top
+                this.isDied = true;
+                cc.log("DIED")
+            }
             else{
-                if(other.tag == 1){
-                    this.animateState = this.anim.play("jump");
+                if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
+                contact.disabled = true;
+                else{
+                    if(other.tag == 1){
+                        this.animateState = this.anim.play("jump");
+                    }
                 }
             }
         } else if(self.tag == 3){

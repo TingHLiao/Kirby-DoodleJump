@@ -178,6 +178,12 @@
     "rocketPrefab": {
       "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
     },
+    "virus_red1": {
+      "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
+    },
+    "virus_green1": {
+      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
+    },
     "trampoline": {
       "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
     },

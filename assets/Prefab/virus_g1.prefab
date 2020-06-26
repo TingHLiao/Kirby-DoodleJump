@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "move_basic",
+    "_name": "virus_g1",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -45,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 114,
-      "height": 30
+      "width": 464,
+      "height": 467
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -57,15 +57,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        391,
-        40,
+        116,
+        267,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0.15,
+        0.15,
         1
       ]
     },
@@ -98,7 +98,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "aaff20a8-d197-4ea9-bded-e164354df717"
+      "__uuid__": "f55ef410-50ac-4f18-a71c-20025a3e8217"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -112,33 +112,27 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "b9ff96e0-3fad-4c4b-8702-e72bc58d0cc6"
+      "__uuid__": "72606356-c33d-4e45-abb0-12a63020d1b8"
     },
     "_id": ""
   },
   {
-    "__type__": "7bb61aPfpxOJZPilmYBdRqQ",
+    "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "rocketPrefab": {
-      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
+    "_defaultClip": {
+      "__uuid__": "62f6c641-21d5-4306-9692-f4f53b3a7086"
     },
-    "virus_red1": {
-      "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
-    },
-    "virus_green1": {
-      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
-    },
-    "trampoline": {
-      "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
-    },
-    "shield": {
-      "__uuid__": "f976e259-62fc-482a-81fe-7eed5eb47a85"
-    },
+    "_clips": [
+      {
+        "__uuid__": "62f6c641-21d5-4306-9692-f4f53b3a7086"
+      }
+    ],
+    "playOnLoad": true,
     "_id": ""
   },
   {
@@ -167,14 +161,14 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsBoxCollider",
+    "__type__": "cc.PhysicsCircleCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 1,
+    "tag": 4,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -185,11 +179,7 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 114,
-      "height": 30
-    },
+    "_radius": 180,
     "_id": ""
   },
   {
@@ -198,9 +188,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "2e355cb9-6676-4a66-8981-9c5b7ac9e595"
+      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
     },
-    "fileId": "39keAd9M9FN512SbFPaw0U",
+    "fileId": "0cdNyIdnlMxK+fzcDBx4eC",
     "sync": false
   }
 ]

@@ -23,8 +23,8 @@ export default class virus extends cc.Component {
     }
 
     start () {
-        if(this.node.name == "virus_r1"){
-            this.anim.play("virus_r1");
+        if(this.node.name == "virus_red1"){
+            this.anim.play("virus_red1");
             this.virus_r1_move();
         }
     }
@@ -32,8 +32,8 @@ export default class virus extends cc.Component {
     //update (dt) {}
 
     private virus_r1_move(){
-        let moveup = cc.moveTo(6, this.node.position.x, 15);
-        let movedown = cc.moveTo(6, this.node.position.x, -15);
+        let moveup = cc.moveBy(2, 0, 15);
+        let movedown = cc.moveBy(2, 0, -15);
         this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
     }
 }

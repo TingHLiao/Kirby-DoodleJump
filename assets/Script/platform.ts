@@ -67,7 +67,7 @@ export default class platform extends cc.Component {
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
+                newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
             if(!withitem && Math.random() > 0.5){
