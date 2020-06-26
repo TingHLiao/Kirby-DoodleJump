@@ -47,15 +47,12 @@ export default class Stage extends cc.Component {
             this.user = firebase.database().ref(`users/${ID}`);
             this.user.once('value', snapshot => {
                 this.nameText.string = snapshot.val().name;
+                this.coinText.string = (Array(8).join("0") + snapshot.val().coin.toString()).slice(-8);
             });
             //@ts-ignore
             firebase.database().ref(`users/${ID}/highest`).once('value', snapshot => {
                 this.highestText.string = (Array(8).join("0") + snapshot.val().score.toString()).slice(-8);
             });
-            //@ts-ignore
-            firebase.database().ref(`users/${ID}/lastplay`).once('value', snapshot => {
-                this.coinText.string = (Array(8).join("0") + snapshot.val().lastscore.toString()).slice(-8);
-            })
         });
     }
 
