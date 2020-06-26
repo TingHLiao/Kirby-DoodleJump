@@ -17,6 +17,8 @@ export default class player extends cc.Component {
 
     private rightDown: boolean = false; // key for player to go right
 
+    private spaceDown: boolean = false; //get enemy
+
     private playerSpeed: number = 0;
 
     private anim = null;
@@ -43,6 +45,9 @@ export default class player extends cc.Component {
         } else if(event.keyCode == cc.macro.KEY.right) {
             this.leftDown = false;
             this.rightDown = true;
+        } 
+        if(event.keyCode == cc.macro.KEY.space){
+            this.spaceDown = true;
         }
     }
     
@@ -51,6 +56,8 @@ export default class player extends cc.Component {
             this.leftDown = false;
         else if(event.keyCode == cc.macro.KEY.right)
             this.rightDown = false;
+        if(event.keyCode == cc.macro.KEY.space)
+            this.spaceDown = false;
     }
 
     update (dt) {
@@ -64,14 +71,22 @@ export default class player extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
-        if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0){
-            contact.disabled = true;
-        }
-        else{
-            if(other.tag == 1){
-                this.animateState = this.anim.play("jump");
+        if(self.tag == 0){
+            if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
+                contact.disabled = true;
+            else{
+                if(other.tag == 1){
+                    this.animateState = this.anim.play("jump");
+                }
             }
+        } else if(self.tag == 3){
+            if(!this.spaceDown){
+                contact.disabled = true;
+                return;
+            }
+            
         }
+        
     }
 
 
