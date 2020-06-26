@@ -99,7 +99,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.99 && this.score > 1500){
+            if(!withitem && Math.random() > 0.7 && this.score > -1){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);

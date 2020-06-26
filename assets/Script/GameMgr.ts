@@ -58,7 +58,7 @@ export default class GameMgr extends cc.Component {
 
     start () {
         //this.needmoreplatform = true;
-        this.generatePlatforms(60, 40);
+        this.generatePlatforms(100, 40);
     }
 
     generatePlatforms(num, stepsize)
@@ -71,7 +71,7 @@ export default class GameMgr extends cc.Component {
                 let randIdx = this.randomChoosePlatform();
                 let platform = cc.instantiate(this.platformPrefabs[randIdx]);
                 platform.parent = this.platforms;
-                platform.position = cc.v2((i < 5)?(Math.random()>0.5)? Math.random()*75: Math.random()*-75: (Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*60 + Math.random()*5);
+                platform.position = cc.v2((i < 5)?(Math.random()>0.5)? Math.random()*75: Math.random()*-75: (Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*100 + Math.random()*5);
             }
             this.floor += num;
             this.count += 1000;
@@ -110,19 +110,19 @@ export default class GameMgr extends cc.Component {
         if(height >= this.count + 750){
             //this.needmoreplatform = true;
             if(height >= 750)
-                this.generatePlatforms(60, 45);
+                this.generatePlatforms(100, 45);
             else if(height >= 1750)
-                this.generatePlatforms(60, 50);
+                this.generatePlatforms(100, 50);
             else if(height >= 2750)
-                this.generatePlatforms(60, 60);
+                this.generatePlatforms(100, 60);
             else if(height >= 3750)
-                this.generatePlatforms(60, 65);
+                this.generatePlatforms(100, 65);
             else if(height >= 4750)
-                this.generatePlatforms(60, 70);
+                this.generatePlatforms(100, 70);
             else if(height >= 5750)
-                this.generatePlatforms(60, 75);
+                this.generatePlatforms(100, 75);
             else if(height >= 6750)
-                this.generatePlatforms(60, 80);
+                this.generatePlatforms(100, 80);
         }
 
         if(this.player.y - this.camera.y > 100)
