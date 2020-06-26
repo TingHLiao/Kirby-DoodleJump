@@ -47,11 +47,20 @@ export default class platform extends cc.Component {
 
     player: cc.Node;
 
+    camera: cc.Node;
+
+    scoreNode: cc.Node;
+    
+    score: number;
+
     private jumpvelocity : number = 1000;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad(){
         this.player = cc.find("Canvas/player");
+        this.camera = cc.find("Canvas/Main Camera");
+        this.scoreNode = cc.find("Canvas/Main Camera/score");
+        this.score = parseInt(this.scoreNode.getComponent(cc.Label).string);
     }
 
 
@@ -76,21 +85,21 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.99){
+            if(!withitem && Math.random() > 0.9 && this.score > 500){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
-            if(!withitem && Math.random() > 1){
+            if(!withitem && Math.random() > 1 && this.score > 1000){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.99){
+            if(!withitem && Math.random() > 0.99 && this.score > 1500){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
@@ -154,7 +163,11 @@ export default class platform extends cc.Component {
         }
     }
     
-    update (dt) {}
+    update (dt) {
+        if(this.camera.position.y - this.node.position.y > 1000) {
+            this.node.destroy();
+        }
+    }
 
     onBeginContact(contact, self, other){
         if(contact.getWorldManifold().normal.y != 1 || contact.getWorldManifold().normal.x != 0){
@@ -191,4 +204,5 @@ export default class platform extends cc.Component {
             }
         }
     }
+    
 }

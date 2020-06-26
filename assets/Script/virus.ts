@@ -15,6 +15,8 @@ export default class virus extends cc.Component {
 
     private anim = null;
 
+    private jumpvelocity : number = 1000;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -35,5 +37,17 @@ export default class virus extends cc.Component {
         let moveup = cc.moveBy(2, 0, 15);
         let movedown = cc.moveBy(2, 0, -15);
         this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
+    }
+
+    onBeginContact(contact, self, other){
+        if(other.tag == 0){
+            if(contact.getWorldManifold().normal.y == 1) {
+                other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
+                this.scheduleOnce(()=>{
+                    this.node.destroy();
+                }, 1)
+            }
+        }
     }
 }
