@@ -17,7 +17,6 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     rocketPrefab: cc.Prefab = null;
 
-
     // Trampoline
     @property(cc.Prefab)
     trampoline: cc.Prefab = null;
