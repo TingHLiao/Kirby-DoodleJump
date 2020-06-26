@@ -791,7 +791,7 @@
     "node": {
       "__id__": 12
     },
-    "_enabled": true,
+    "_enabled": false,
     "tag": 3,
     "_density": 0,
     "_sensor": false,

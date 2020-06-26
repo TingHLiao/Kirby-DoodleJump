@@ -40,6 +40,7 @@ export default class player extends cc.Component {
         } 
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = true;
+            //this.node.getComponent(cc.PhysicsPolygonCollider).enabled = true;
             if(this.anim.getAnimationState('jump').isPlaying){
                 this.anim.stop('jump');
                 this.animateState = this.anim.play('suck');
@@ -54,6 +55,7 @@ export default class player extends cc.Component {
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
+            //this.node.getComponent(cc.PhysicsPolygonCollider).enabled = false;
             if(this.anim.getAnimationState('suck').isPlaying){
                 this.anim.stop('suck');
                 this.animateState = this.anim.play('stopsuck');
@@ -87,7 +89,7 @@ export default class player extends cc.Component {
                 }
             }
             if(other.tag == 4 && this.spaceDown){ //change to 5
-                other.node.removeFromParent();;
+                //other.node.removeFromParent();
                 return;
             }
         } else if(self.tag == 3 && other.tag == 4){ //change to 5
@@ -95,10 +97,26 @@ export default class player extends cc.Component {
                 contact.disabled = true;
                 return;
             }
+            contact.disabled = true;
+            other.node.runAction(cc.moveTo(3, self.node.position.sub(cc.v2(480, 320))).easing(cc.easeCubicActionOut()));
         } else{
-            contact.disabled = true; //test
+            contact.disabled = true;
         }
-        
+    }
+
+    onPreSolve(contact, self, other){
+        if(self.tag == 3 && other.tag == 4){ //change to 5
+            //cc.log('c')
+            if(!this.spaceDown){
+                contact.disabled = true;
+                return;
+            }
+            let move = self.node.position.sub(other.node.parent.position).sub(other.node.position);
+            //cc.log(move)
+            other.node.stopAllActions();
+            other.node.runAction(cc.moveBy(1, move));
+            //.easing(cc.easeCubicActionOut())
+        }
     }
 
 

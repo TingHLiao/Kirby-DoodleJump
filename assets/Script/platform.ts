@@ -63,14 +63,14 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.5){
+            if(!withitem && Math.random() > 0.9){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the rocket
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 60*Math.random() : -60*Math.random(), 38.35);
             }
 
-            if(!withitem && Math.random() > 0.5){
+            if(!withitem && Math.random() > 1){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the rocket
                 this.node.addChild(newnode);
