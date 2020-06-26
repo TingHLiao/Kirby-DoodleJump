@@ -69,12 +69,18 @@ export default class Enemy extends cc.Component {
 
     private snowman_attack(){
         let speed = (this.node.scaleX > 0) ? 50 : -50;
+        let t = 2.55*5 +6;
         this.schedule(()=>{
-            let newnode = cc.instantiate(this.snowball);
-            this.node.addChild(newnode);
-            newnode.position = cc.v2(14, 0);
-            newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2(speed, 0);
-        }, 2.55);
+            this.schedule(()=>{
+                let newnode = cc.instantiate(this.snowball);
+                this.node.addChild(newnode);
+                newnode.position = cc.v2(14, 0);
+                newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2(speed, 0);
+                cc.log("in")
+            }, 3.4, 2, 5);    //interval, repeat, delay
+        }, t);
+            
+        
 
         for (var i = 0; i < this.node.children.length; ++i) {
             let pos = this.node.children[i].position.x + this.node.position.x;
