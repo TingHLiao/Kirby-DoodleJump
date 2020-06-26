@@ -11,8 +11,19 @@ export default class Register extends cc.Component {
     @property(cc.EditBox)
     password: cc.EditBox = null;
 
-    start(){
+    onLoad () {
+        cc.director.getCollisionManager().enabled = true;
+        cc.director.getPhysicsManager().enabled = true;
+    }
 
+    start () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
+
+    onKeyDown(event) {
+        if(event.keyCode == cc.macro.KEY.escape){
+            cc.director.loadScene("Member");
+        }
     }
 
     register(){
