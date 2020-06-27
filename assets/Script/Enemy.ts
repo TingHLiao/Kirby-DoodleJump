@@ -215,7 +215,7 @@ export default class Enemy extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
-        if(other.tag == 0){
+        if(other.tag == 0 && !this.player.getComponent("Player").isKnifing){
             if(contact.getWorldManifold().normal.y == 1) {
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 self.node.stopAllActions();
@@ -230,24 +230,26 @@ export default class Enemy extends cc.Component {
     }
 
     update (dt) {
+        let diffx = this.node.parent.x - this.player.x;
+        let diffy = this.node.parent.y - this.player.y;
+        let dist = Math.sqrt(diffx*diffx + diffy*diffy);
+        //cc.log(diffx, diffx1, dist1);
+        if(dist < 100){
+            if(this.player.getComponent("Player").isKnifing){
+                this.node.destroy();
+            }
+        }
         if(this.node.name == "knight_enemy"){
-            let diffx = this.node.parent.x - this.player.x;
-            let diffy = this.node.parent.y - this.player.y;
-            let dist = Math.sqrt(diffx*diffx + diffy*diffy);
             if(dist < 300 && this.knight_canshoot){
                 this.knight_canshoot = false;
                 this.knight_attack();
             }
         }
         else if(this.node.name == "bomb_enemy"){
-            let diffx = this.node.parent.x - this.player.x;
-            let diffy = this.node.parent.y - this.player.y;
-            let dist = Math.sqrt(diffx*diffx + diffy*diffy);
             if(this.isbomb && dist < 89){
                 this.cnt++;
                 if(this.cnt > 15) {
                     this.player.getComponent("Player").setdie();
-                    cc.log("KIRBY BOMB")
                 }
             }
             if(dist < 150 && !this.isbomb && !this.spacedown){
@@ -255,5 +257,6 @@ export default class Enemy extends cc.Component {
                 this.bomb_attack();
             }
         }
+        
     }
 }

@@ -25,6 +25,8 @@ export default class player extends cc.Component {
 
     private knife: cc.Node = null;
 
+    private isKnifing : boolean = false;
+
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
@@ -311,9 +313,7 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
         this.isDied = true;
-        //cc.log(this.isDied);
         switch(this.kirby_state){
             case 0: {                 // normal
                 this.anim.stop('jump');
@@ -369,13 +369,45 @@ export default class player extends cc.Component {
             this.node.scaleX = -2;
         else
             this.node.scaleX = 2;
-        let newnode = cc.instantiate(this.bullet);
-        this.bulletPool.addChild(newnode);
-        newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
-        //direction vector for bullet
-        let dir = cc.v2(x,y).sub(playerpos);
-        //linearVelocity = unit vector multiple bulletspeed
-        newnode.getComponent(cc.RigidBody).linearVelocity = dir.divSelf(dir.mag()).mulSelf(this.bulletspeed);
+
+        switch(this.kirby_state){
+            case 0: {                 // normal
+                break;
+            }
+            case 1: {                 // snowman
+                let newnode = cc.instantiate(this.bullet);
+                this.bulletPool.addChild(newnode);
+                newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
+                //direction vector for bullet
+                let dir = cc.v2(x,y).sub(playerpos);
+                //linearVelocity = unit vector multiple bulletspeed
+                newnode.getComponent(cc.RigidBody).linearVelocity = dir.divSelf(dir.mag()).mulSelf(this.bulletspeed);
+                break;
+            }
+            case 2: {                 // ninja
+                this.anim.stop('ninja_jump');
+                this.animateState = this.anim.play("ninja_die");
+                break;
+            }
+            case 3: {                //magic
+                this.anim.stop('magic_jump');
+                this.animateState = this.anim.play("magic_die");
+                break;
+            }
+            case 4:{                   // knight
+                this.anim.play("knight_attack");
+                this.isKnifing = true;
+                this.scheduleOnce(()=>{
+                    this.isKnifing = false;
+                }, 0.35)
+                break; 
+            }
+            default: {
+                this.anim.stop('jump');
+                this.animateState = this.anim.play("die");
+                break;
+            }
+        }
     }
 
     setmode(status : string){

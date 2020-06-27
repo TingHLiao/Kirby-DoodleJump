@@ -126,7 +126,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.95 && this.score > 1500){
+            if(!withitem && Math.random() > 0.95 /*&& this.score > 1500*/){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
@@ -248,16 +248,12 @@ export default class platform extends cc.Component {
                 //
             }
             else if(other.tag == 0 /* player*/ ){
-                cc.log(this.player.getComponent("Player").isDied);
                 if(this.player.getComponent("Player").isDied){
-                    //cc.log(this.player.getComponent("Player").isDied);
-                    cc.log("dead");
                     other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
                     contact.disabled = true;
                 }      
                 else{
                     other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
-                    cc.log("still jumping");
                 }
             }
         }

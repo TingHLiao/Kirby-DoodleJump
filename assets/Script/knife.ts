@@ -20,6 +20,10 @@ export default class knife extends cc.Component {
 
     private NeedDestroy: boolean = false;
 
+    private startx : number = 0;
+
+    private starty : number = 0;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -29,11 +33,12 @@ export default class knife extends cc.Component {
     }
 
     start () {
-
+        this.startx = this.node.x;
+        this.starty = this.node.y;
     }
 
     update (dt) {
-        if((this.node.x > 480 || this.node.x < -480 || this.node.y - this.camera.y > 320 || this.node.y - this.camera.y < -320) && !this.NeedDestroy){
+        if((this.node.x > this.startx + 240 || this.node.x < this.startx - 240 || this.node.y - this.starty > 160 || this.node.y - this.starty < -160) && !this.NeedDestroy){
             this.NeedDestroy = true;
             this.des();
         }

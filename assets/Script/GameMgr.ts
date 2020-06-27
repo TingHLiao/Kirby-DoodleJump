@@ -29,7 +29,10 @@ export default class GameMgr extends cc.Component {
     private username: string = '';
 
     private highestScore: number = 0;
+
     private remaincoin: number = 0;
+
+    private knife : cc.Node = null;
 
     // Get the node of platform
     @property(cc.Node)
@@ -63,7 +66,7 @@ export default class GameMgr extends cc.Component {
         this.physicManager.enabled = true;
         this.floor = 0;
         this.count = -1000;
-        //this.Gameover.active = false;
+        this.knife = cc.find("Canvas/knife");
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
             this.ID = user.email.replace('@', '-').split('.').join('_');
@@ -104,7 +107,6 @@ export default class GameMgr extends cc.Component {
     {
         //if(this.needmoreplatform){
             //this.platforms.removeAllChildren();
-            cc.log(this.floor);
             for(let i = this.floor; i < this.floor+num; i++)
             {
                 let randIdx = this.randomChoosePlatform();
@@ -172,14 +174,14 @@ export default class GameMgr extends cc.Component {
             if(this.player.active)
             {
                 this.platforms.removeAllChildren();
-                //this.gameover();
-                     this.scheduleOnce(()=>{
-                //         var action = cc.fadeIn(1.0);
-                //         // this.Gameover.active = true;
-                //         // this.Gameover.runAction(action);
-                        this.player.active = false;
-                //         this.camera.y = 0;  
-                     }, 0.6);
+                this.knife.destroy();
+                this.scheduleOnce(()=>{
+        //         var action = cc.fadeIn(1.0);
+        //         // this.Gameover.active = true;
+        //         // this.Gameover.runAction(action);
+                    this.player.active = false;
+        //         this.camera.y = 0;  
+                }, 0.6);
                 // }
                 //this.player.playerDie();
                 //this.gameOver();
