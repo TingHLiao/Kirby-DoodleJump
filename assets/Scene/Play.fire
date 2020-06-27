@@ -82,18 +82,12 @@
       },
       {
         "__id__": 8
-      },
-      {
-        "__id__": 23
-      },
-      {
-        "__id__": 24
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 25
+        "__id__": 23
       }
     ],
     "_prefab": null,
@@ -1039,6 +1033,21 @@
       },
       {
         "__uuid__": "43f1bfb5-5e65-471b-8d99-38120481f86c"
+      },
+      {
+        "__uuid__": "79cd5699-61ec-4c4e-aad8-b2bc553d6deb"
+      },
+      {
+        "__uuid__": "78c6e09b-8299-4661-93b0-8b2e0bc019b6"
+      },
+      {
+        "__uuid__": "522bc08a-7801-449b-8dbb-cfef20d25669"
+      },
+      {
+        "__uuid__": "4da795a8-aa61-4cf7-ac43-ef5a84221fcb"
+      },
+      {
+        "__uuid__": "f8e7cbf9-b3aa-44d3-864e-2672428f775c"
       }
     ],
     "playOnLoad": false,
@@ -1101,122 +1110,6 @@
       }
     ],
     "_id": "d2t0D4S6NPFIL4baittmOo"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "knife",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "_id": "39HTK2T5xLf4GmflloRi0X"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "bullet",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "_id": "99+2M2zy5Nfoi5reK2l3g4"
   },
   {
     "__type__": "cc.Canvas",
