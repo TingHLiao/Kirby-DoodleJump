@@ -233,6 +233,7 @@ export default class player extends cc.Component {
                 }
                 if(other.tag == 6){ 
                     this.isDied = true;
+                    other.node.destroy();
                     this.gameover();
                 }  
             }

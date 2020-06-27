@@ -114,8 +114,6 @@ export default class Enemy extends cc.Component {
             }, 3.4, 2, 5);    //interval, repeat, delay
         }, t);
             
-        
-
         for (var i = 0; i < this.node.children.length; ++i) {
             let pos = this.node.children[i].position.x + this.node.position.x;
             if( pos > 425 || pos < 425)
