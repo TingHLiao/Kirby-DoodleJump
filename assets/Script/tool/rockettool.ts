@@ -31,7 +31,7 @@ export default class RocketTool extends cc.Component {
             self.node.active = false;
             this.scheduleOnce(function () {
                 cc.director.getPhysicsManager().enabled = true;
-                this.player.getComponent("Player").setmode("unshield");
+                this.player.getComponent("Player").setmode("unrocket");
             }, 2.5);
         }
       }
