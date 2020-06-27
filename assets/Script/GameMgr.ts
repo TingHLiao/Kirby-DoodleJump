@@ -35,7 +35,6 @@ export default class GameMgr extends cc.Component {
     private knife : cc.Node = null;
 
     // Get the node of platform
-    @property(cc.Node)
     platforms: cc.Node = null;
 
     // Get the Prefab of platform
@@ -64,6 +63,7 @@ export default class GameMgr extends cc.Component {
     onLoad () {
         this.physicManager = cc.director.getPhysicsManager();
         this.physicManager.enabled = true;
+        this.platforms = cc.find("Canvas/platform");
         this.floor = 0;
         this.count = -1000;
         this.knife = cc.find("Canvas/knife");
@@ -174,18 +174,10 @@ export default class GameMgr extends cc.Component {
             if(this.player.active)
             {
                 this.platforms.removeAllChildren();
-                if(this.knife.isValid)
-                    this.knife.destroy();
+                if(this.knife.isValid)this.knife.destroy();
                 this.scheduleOnce(()=>{
-        //         var action = cc.fadeIn(1.0);
-        //         // this.Gameover.active = true;
-        //         // this.Gameover.runAction(action);
                     this.player.active = false;
-        //         this.camera.y = 0;  
                 }, 0.6);
-                // }
-                //this.player.playerDie();
-                //this.gameOver();
             }
         }
     }
