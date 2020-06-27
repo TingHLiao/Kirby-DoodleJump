@@ -103,6 +103,13 @@ export default class player extends cc.Component {
                     }
                     break;
                 }
+                case 4: {
+                    if(this.anim.getAnimationState('knight_jump').isPlaying){
+                        this.anim.stop('knight_jump');
+                        this.animateState = this.anim.play('knight_suck');
+                    }
+                    break;
+                }
                 default: {
                     if(this.anim.getAnimationState('jump').isPlaying){
                         this.anim.stop('jump');
@@ -151,6 +158,13 @@ export default class player extends cc.Component {
                     }
                     break;
                 }
+                case 4: {
+                    if(this.anim.getAnimationState('knight_suck').isPlaying){
+                        this.anim.stop('knight_suck');
+                        this.animateState = this.anim.play('stop_knightsuck');
+                    }
+                    break;
+                }
                 default: {
                     if(this.anim.getAnimationState('suck').isPlaying){
                         this.anim.stop('suck');
@@ -195,6 +209,10 @@ export default class player extends cc.Component {
                         this.anim.play("changetomagic");
                         this.kirby_state = 3;
                     }
+                    else if(other.node.name == "knight_enemy"){
+                        this.anim.play("changetoknight");
+                        this.kirby_state = 4;
+                    }
                 }
                 if(this.mode > 0){
                     contact.disabled = true; 
@@ -235,6 +253,9 @@ export default class player extends cc.Component {
                     else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 3){
                         this.animateState = this.anim.play("magic_jump");
                     }
+                    else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 4){
+                        this.animateState = this.anim.play("knight_jump");
+                    }
                 }
             }
         } else if(self.tag == 3 && other.tag == 5){ //can't suck during rocket
@@ -251,9 +272,6 @@ export default class player extends cc.Component {
         if(self.tag == 0 && other.tag == 5 && this.spaceDown){ //get ability
             contact.disabled = true;
             cc.audioEngine.playEffect(this.abilitySound, false);
-            if(other.node.name == "ninja_enemy"){
-                
-            }
             other.node.destroy();
             return;
         }
@@ -307,6 +325,11 @@ export default class player extends cc.Component {
                 this.anim.stop('magic_jump');
                 this.animateState = this.anim.play("magic_die");
                 break;
+            }
+            case 4:{
+                this.anim.stop('knight_jump');
+                this.animateState = this.anim.play("knight_die");
+                break; 
             }
             default: {
                 this.anim.stop('jump');
