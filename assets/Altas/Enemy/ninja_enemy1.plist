@@ -104,13 +104,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>ninja_enemy.png</string>
+            <string>ninja_enemy1.png</string>
             <key>size</key>
             <string>{25,166}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ed99725789e65331b77e8e3254a5e20a:b1b537f3f50041894bca9b285a5a4fe9:0b93cf00fca6a7ea4d80936de8ef0bf2$</string>
+            <string>$TexturePacker:SmartUpdate:f4ae39db6a2e51c975a43c3173c86e54:b1b537f3f50041894bca9b285a5a4fe9:6f1a3e94343a8da42a453a741b89030b$</string>
             <key>textureFileName</key>
-            <string>ninja_enemy.png</string>
+            <string>ninja_enemy1.png</string>
         </dict>
     </dict>
 </plist>

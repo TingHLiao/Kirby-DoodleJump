@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "snow_suck",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.13333333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "3dc08237-8770-4857-b6cf-dd8e1ce29893"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "60b4be1d-294c-4355-8c35-bc7a55ee24e5"
+            }
+          },
+          {
+            "frame": 0.11666666666666667,
+            "value": {
+              "__uuid__": "45e3e365-e578-4ef4-b1bf-aea2a01d7107"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
