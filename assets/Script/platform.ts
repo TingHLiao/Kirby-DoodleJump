@@ -175,15 +175,13 @@ export default class platform extends cc.Component {
             this.node.runAction(moveleft1);
             this.scheduleOnce(()=>{
                 this.node.runAction(cc.repeatForever(cc.sequence(moveright, moveleft)));
-            }, t2);
-            
+            }, t2); 
         }
         else{
             this.node.runAction(moveright1);
             this.scheduleOnce(()=>{
                 this.node.runAction(cc.repeatForever(cc.sequence(moveleft, moveright)));
-            }, t1);
-            
+            }, t1);   
         }
     }
     
