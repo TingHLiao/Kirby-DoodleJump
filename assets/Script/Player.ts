@@ -68,25 +68,39 @@ export default class player extends cc.Component {
         } 
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = true;
-            //this.node.getComponent(cc.PhysicsPolygonCollider).enabled = true;
-            if(this.anim.getAnimationState('jump').isPlaying){
-                this.anim.stop('jump');
-                this.animateState = this.anim.play('suck');
+            if(this.kirby_state == 0){                               // Normal Kirby
+                if(this.anim.getAnimationState('jump').isPlaying){
+                    this.anim.stop('jump');
+                    this.animateState = this.anim.play('suck');
+                }
+            } 
+            else if(this.kirby_state == 1){                           // Snow Kirby          
+                if(this.anim.getAnimationState('snow_jump').isPlaying){
+                    this.anim.stop('snow_jump');
+                    this.animateState = this.anim.play('snow_suck');
+                }
             }
         }
     }
     
     onKeyUp(event) {
-        if(event.keyCode == cc.macro.KEY.left)
+        if(event.keyCode == cc.macro.KEY.left)  
             this.leftDown = false;
         else if(event.keyCode == cc.macro.KEY.right)
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
-            //this.node.getComponent(cc.PhysicsPolygonCollider).enabled = false;
-            if(this.anim.getAnimationState('suck').isPlaying){
-                this.anim.stop('suck');
-                this.animateState = this.anim.play('stopsuck');
+            if(this.kirby_state == 0){
+                if(this.anim.getAnimationState('suck').isPlaying){
+                    this.anim.stop('suck');
+                    this.animateState = this.anim.play('stopsuck');
+                }
+            }
+            else if(this.kirby_state == 1){
+                if(this.anim.getAnimationState('snow_suck').isPlaying){
+                    this.anim.stop('snow_suck');
+                    this.animateState = this.anim.play('stop_snowsuck');
+                }
             }
         }
     }
