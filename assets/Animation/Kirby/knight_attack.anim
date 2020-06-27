@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "knight_attack",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.26666666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "e9756467-0e4f-4207-9916-03370e47a312"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "b86f0386-4458-41fe-bb55-03eb9bf12c23"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "44f1529c-d3fb-4ad5-a1bc-8170e89ac300"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "74d412ee-c424-4abf-a410-074e6616c4a6"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "d8e0a8b3-ca92-47df-bc65-0f9f0f5bfdd8"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "48f6e4ba-2d9f-40e0-8442-1e3ed3e5ad5f"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

@@ -19,4 +19,8 @@ export default class Bullet extends cc.Component {
             this.node.destroy();
         }
     }
+
+    onBeginContact(contact, self, other){
+        if(other.tag == 4 || other.tag == 5) self.node.destroy();
+    }
 }
