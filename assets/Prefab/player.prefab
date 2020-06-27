@@ -46,7 +46,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 370,
+      "width": 400,
       "height": 70
     },
     "_anchorPoint": {
@@ -122,7 +122,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -140,
+        -145,
         0,
         0,
         0,
@@ -185,7 +185,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
     },
     "fileId": "e4n5KXLSJBMr7N/Swo359m",
     "sync": false
@@ -217,19 +217,19 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 57.57,
+      "width": 143.6,
       "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 0.5,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -82.981,
+        -30,
         0,
         0,
         0,
@@ -268,9 +268,9 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "123",
-    "_N$string": "123",
-    "_fontSize": 30,
+    "_string": "12345678",
+    "_N$string": "12345678",
+    "_fontSize": 25,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
@@ -292,7 +292,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
     },
     "fileId": "e3alfcypJN86UOjzx68uU0",
     "sync": false
@@ -324,7 +324,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 135.18,
+      "width": 115.87,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -336,7 +336,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        37.257,
+        75,
         0,
         0,
         0,
@@ -375,8 +375,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "0000000",
-    "_N$string": "0000000",
+    "_string": "000000",
+    "_N$string": "000000",
     "_fontSize": 25,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -399,7 +399,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
     },
     "fileId": "35LegWSelKbrbEZ99jllau",
     "sync": false
@@ -442,7 +442,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
     },
     "fileId": "1eUd9D3fpE6bBy+YSDHtXz",
     "sync": false

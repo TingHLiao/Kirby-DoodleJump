@@ -43,7 +43,9 @@ export default class Register extends cc.Component {
                 highest: {
                     score: 0
                 },
-                coin: 0
+                coin: {
+                    number: 0
+                }
             });
             //alert("Create Success!");
             setTimeout(() => {

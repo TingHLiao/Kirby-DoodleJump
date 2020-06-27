@@ -54,11 +54,14 @@ export default class Stage extends cc.Component {
             this.user = firebase.database().ref(`users/${ID}`);
             this.user.once('value', snapshot => {
                 this.nameText.string = snapshot.val().name;
-                this.coinText.string = (Array(8).join("0") + snapshot.val().coin.toString()).slice(-8);
             });
             //@ts-ignore
             firebase.database().ref(`users/${ID}/highest`).once('value', snapshot => {
-                this.highestText.string = (Array(8).join("0") + snapshot.val().score.toString()).slice(-8);
+                this.highestText.string = (Array(6).join("0") + snapshot.val().score.toString()).slice(-6);
+            });
+            //@ts-ignore
+            firebase.database().ref(`users/${ID}/coin`).once('value', snapshot => {
+                this.coinText.string = snapshot.val().number.toString() + '$';
             });
         });
     }
@@ -103,24 +106,24 @@ export default class Stage extends cc.Component {
                 rank++;
                 if(rank == 1){
                     var node = cc.instantiate(this.player1);
-                    node.getChildByName("name").getComponent(cc.Label).string = data[0].toUpperCase();
-                    node.getChildByName("score").getComponent(cc.Label).string = (Array(8).join("0") + data[1].toString()).slice(-8);
+                    node.getChildByName("name").getComponent(cc.Label).string = data[0];
+                    node.getChildByName("score").getComponent(cc.Label).string = (Array(6).join("0") + data[1].toString()).slice(-6);
                     this.content.addChild(node);
                 } else if(rank == 2){
                     var node = cc.instantiate(this.player2);
-                    node.getChildByName("name").getComponent(cc.Label).string = data[0].toUpperCase();
-                    node.getChildByName("score").getComponent(cc.Label).string = (Array(8).join("0") + data[1].toString()).slice(-8);
+                    node.getChildByName("name").getComponent(cc.Label).string = data[0];
+                    node.getChildByName("score").getComponent(cc.Label).string = (Array(6).join("0") + data[1].toString()).slice(-6);
                     this.content.addChild(node);
                 } else if(rank == 3){
                     var node = cc.instantiate(this.player3);
-                    node.getChildByName("name").getComponent(cc.Label).string = data[0].toUpperCase();
-                    node.getChildByName("score").getComponent(cc.Label).string = (Array(8).join("0") + data[1].toString()).slice(-8);
+                    node.getChildByName("name").getComponent(cc.Label).string = data[0];
+                    node.getChildByName("score").getComponent(cc.Label).string = (Array(6).join("0") + data[1].toString()).slice(-6);
                     this.content.addChild(node);
                 } else{
                     var node = cc.instantiate(this.player);
                     node.getChildByName("rank").getComponent(cc.Label).string = rank.toString();
-                    node.getChildByName("name").getComponent(cc.Label).string = data[0].toUpperCase();
-                    node.getChildByName("score").getComponent(cc.Label).string = (Array(8).join("0") + data[1].toString()).slice(-8);
+                    node.getChildByName("name").getComponent(cc.Label).string = data[0];
+                    node.getChildByName("score").getComponent(cc.Label).string = (Array(6).join("0") + data[1].toString()).slice(-6);
                     this.content.addChild(node);
                 }
             })

@@ -21,6 +21,12 @@ export default class GameMgr extends cc.Component {
 
     private count = 0;
 
+    private ID: string = '';
+    private username: string = '';
+
+    private highestScore: number = 0;
+    private remaincoin: number = 0;
+
     // Get the node of platform
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -54,6 +60,22 @@ export default class GameMgr extends cc.Component {
         this.floor = 0;
         this.count = -1000;
         //this.Gameover.active = false;
+        //@ts-ignore
+        firebase.auth().onAuthStateChanged(user => {
+            this.ID = user.email.replace('@', '-').split('.').join('_');
+            //@ts-ignore
+            firebase.database().ref(`users/${this.ID}`).once('value', snapshot => {
+                this.username = snapshot.val().name.toString().toUpperCase();
+            });
+            //@ts-ignore
+            firebase.database().ref(`users/${this.ID}/highest`).once('value', snapshot => {
+                this.highestScore = snapshot.val().score;
+            });
+            //@ts-ignore
+            firebase.database().ref(`users/${this.ID}/coin`).once('value', snapshot => {
+                this.remaincoin = snapshot.val().number;
+            });
+        });
     }
 
     start () {
@@ -146,5 +168,24 @@ export default class GameMgr extends cc.Component {
                 //this.gameOver();
             }
         }
+    }
+
+    gameover(money: number){
+        let s = parseInt(this.score.getComponent(cc.Label).string);
+        if(s > this.highestScore){
+            //@ts-ignore
+            firebase.database().ref(`users/${this.ID}/highest`).set({
+                score: s
+            });
+            //@ts-ignore
+            firebase.database().ref(`leader/${this.ID}`).set({
+                name: this.username,
+                score: s
+            });
+        }
+        //@ts-ignore
+        firebase.database().ref(`users/${this.ID}/coin`).set({
+            number: this.remaincoin + money
+        });
     }
 }
