@@ -80,11 +80,11 @@ export default class platform extends cc.Component {
         this.camera = cc.find("Canvas/Main Camera");
         this.scoreNode = cc.find("Canvas/Main Camera/score");
         this.score = parseInt(this.scoreNode.getComponent(cc.Label).string);
+        this.anim = this.getComponent(cc.Animation);
     }
 
 
     start () {
-        this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         //this.node.zIndex = 100;
         if(this.node.name == "normal_basic"){
@@ -126,7 +126,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
 
-            if(!withitem && Math.random() > 0.95 /*&& this.score > 1500*/){
+            if(!withitem && Math.random() > 0.95 && this.score > 1500){
                 withitem = true;
                 let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
@@ -141,7 +141,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
             }
 
-            if(!withitem && Math.random() > 0.9 /*&& this.score > 3500*/){
+            if(!withitem && Math.random() > 0.95 && this.score > 3500){
                 withitem = true;
                 let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Knight_enemy
                 this.node.addChild(newnode);
@@ -149,7 +149,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
             }
 
-            if(!withitem && Math.random() > 0.7 && this.score > 4500){
+            if(!withitem && Math.random() > 0.8 && this.score > 4500){
                 withitem = true;
                 let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);
@@ -213,7 +213,7 @@ export default class platform extends cc.Component {
     }
     
     update (dt) {
-        if(this.camera.position.y - this.node.position.y > 2500) {
+        if(this.camera.position.y - this.node.position.y > 2500 && this.node.isValid) {
             this.node.destroy();
         }
     }

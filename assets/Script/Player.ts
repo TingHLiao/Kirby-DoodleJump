@@ -15,6 +15,9 @@ export default class player extends cc.Component {
     private playerSpeed: number = 0;
 
     private bulletspeed = 500;
+
+    private magic_bomb_speed = 650;
+
     private maxbullet = 3;
 
     private anim = null;
@@ -60,6 +63,10 @@ export default class player extends cc.Component {
 
     @property(cc.Prefab)
     bullet: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    magicbomb: cc.Prefab = null;
+
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -208,14 +215,10 @@ export default class player extends cc.Component {
             if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
                 if(other.tag == 5 && this.spaceDown){
                     if(other.node.name == "snowman_enemy"){
-                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
-                        // this.node.scaleY = 1.5;
                         if(this.kirby_state != 1) this.anim.play("changetosnow");
                         this.kirby_state = 1;
                     }
                     else if(other.node.name == "ninja_enemy"){
-                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
-                        // this.node.scaleY = 1.5;
                         if(this.kirby_state != 2) this.anim.play("changetoninja");
                         this.kirby_state = 2;
                     }
@@ -234,7 +237,6 @@ export default class player extends cc.Component {
                 }
                 if((!this.spaceDown && other.tag == 5) || other.tag == 4){
                     if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
-                        //cc.log("gameover");
                         this.gameover();
                     }
                 }
@@ -277,7 +279,6 @@ export default class player extends cc.Component {
             contact.disabled = true;
             if(!this.spaceDown)
                 return;
-            //other.node.runAction(cc.moveTo(3, self.node.position.sub(cc.v2(480, 320))).easing(cc.easeCubicActionOut()));
         } else{
             contact.disabled = true;
         }
@@ -292,7 +293,6 @@ export default class player extends cc.Component {
         }
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(!this.spaceDown || !other.node.isValid){
-                //contact.disabled = true;
                 if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
                     other.node.stopAllActions();
                     other.node.getComponent("Enemy").sucktrigger = false;
@@ -303,8 +303,6 @@ export default class player extends cc.Component {
             }
             other.node.getComponent("Enemy").sucktrigger = true;
             let move = self.node.position.sub(other.node.parent.position).sub(other.node.position).divSelf(8);
-            //cc.log(move)
-            //other.node.stopAllActions();
             other.node.runAction(cc.moveBy(0.2, move));
         }
     }
@@ -337,7 +335,7 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        this.isDied = true;
+        /*this.isDied = true;
         switch(this.kirby_state){
             case 0: {                 // normal
                 this.anim.stop('jump');
@@ -380,7 +378,7 @@ export default class player extends cc.Component {
             this.bulletPool.removeAllChildren();
             this.knife.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
-        }, 0.3);
+        }, 0.3);*/
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
@@ -415,8 +413,13 @@ export default class player extends cc.Component {
                 break;
             }
             case 3: {                //magic
-                this.anim.stop('magic_jump');
-                this.animateState = this.anim.play("magic_die");
+                let newnode = cc.instantiate(this.magicbomb);
+                this.bulletPool.addChild(newnode);
+                newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
+                //direction vector for bullet
+                let dir = cc.v2(x,y).sub(playerpos);
+                //linearVelocity = unit vector multiple bulletspeed
+                newnode.getComponent(cc.RigidBody).linearVelocity = dir.divSelf(dir.mag()).mulSelf(this.magic_bomb_speed);
                 break;
             }
             case 4:{                   // knight

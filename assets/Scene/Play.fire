@@ -981,6 +981,9 @@
     "bullet": {
       "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
     },
+    "magicbomb": {
+      "__uuid__": "b140b058-2bc7-48c5-8c23-fa30fc1afa37"
+    },
     "_id": "00/tfDlv5OGKB1v0aueIMp"
   },
   {
@@ -1084,6 +1087,9 @@
       },
       {
         "__uuid__": "0f7cf003-adf3-4bed-b7c4-493fe350f53c"
+      },
+      {
+        "__uuid__": "c6c21fae-8283-4e52-b795-34076fcc7f3b"
       }
     ],
     "playOnLoad": false,
