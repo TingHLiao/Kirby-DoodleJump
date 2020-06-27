@@ -1,3 +1,4 @@
+import GameMgr from "./GameMgr";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -39,6 +40,9 @@ export default class player extends cc.Component {
 
     @property({type:cc.AudioClip})
     CoinEffect: cc.AudioClip = null;
+
+    @property(GameMgr)
+    gamemanager: GameMgr = null;
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
@@ -228,6 +232,8 @@ export default class player extends cc.Component {
             }
         }
         //this.node.getComponent(cc.RigidBody).active = false;
+        //get money and score to database, handle by GameMgr
+        this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{ 
             this.platforms.removeAllChildren();

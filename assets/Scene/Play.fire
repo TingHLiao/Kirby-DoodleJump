@@ -966,6 +966,9 @@
     "CoinEffect": {
       "__uuid__": "316c3938-a5fa-4f4d-a90b-2cfdbb01f5dc"
     },
+    "gamemanager": {
+      "__id__": 7
+    },
     "_id": "00/tfDlv5OGKB1v0aueIMp"
   },
   {
