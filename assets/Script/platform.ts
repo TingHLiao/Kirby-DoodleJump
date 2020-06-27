@@ -149,7 +149,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
             }
 
-            if(!withitem && Math.random() > 0.8 && this.score > 4500){
+            if(!withitem && Math.random() > 0.8 /*&& this.score > 4500*/){
                 withitem = true;
                 let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);

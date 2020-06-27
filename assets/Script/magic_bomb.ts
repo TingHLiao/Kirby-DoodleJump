@@ -46,7 +46,7 @@ export default class magicbomb extends cc.Component {
                 this.anim.play("bomb_explode");
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
-                    this.node.parent.destroy();
+                    other.node.parent.destroy();
                     other.node.destroy();
                 },0.27)
            }

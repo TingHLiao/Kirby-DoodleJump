@@ -366,9 +366,6 @@
       "__id__": 6
     },
     "_enabled": true,
-    "platforms": {
-      "__id__": 5
-    },
     "platformPrefabs": [
       {
         "__uuid__": "79b34c42-f3fe-43ec-aede-5d1e44393285"
@@ -1090,9 +1087,6 @@
       },
       {
         "__uuid__": "0f7cf003-adf3-4bed-b7c4-493fe350f53c"
-      },
-      {
-        "__uuid__": "c6c21fae-8283-4e52-b795-34076fcc7f3b"
       }
     ],
     "playOnLoad": false,
