@@ -366,9 +366,6 @@
       "__id__": 6
     },
     "_enabled": true,
-    "platforms": {
-      "__id__": 5
-    },
     "platformPrefabs": [
       {
         "__uuid__": "79b34c42-f3fe-43ec-aede-5d1e44393285"
@@ -446,7 +443,7 @@
       "array": [
         0,
         0,
-        427.8165494695127,
+        420.8883462392372,
         0,
         0,
         0,
@@ -981,6 +978,7 @@
     "bullet": {
       "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
     },
+    "ninja_bullet": null,
     "magicbomb": {
       "__uuid__": "b140b058-2bc7-48c5-8c23-fa30fc1afa37"
     },

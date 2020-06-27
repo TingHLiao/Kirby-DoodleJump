@@ -1,5 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
+import * as Buy from "./Buy"
+
 @ccclass
 export default class Stage extends cc.Component {
 
@@ -52,6 +54,8 @@ export default class Stage extends cc.Component {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
         this.highestText = cc.find("Canvas/cover/highest/score").getComponent(cc.Label);
         this.coinText = cc.find("Canvas/cover/coin/number").getComponent(cc.Label);
+        //this.kirby_state = 0;   //normal
+        Buy.Global.Buy_Kirby = 0;
         
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
@@ -157,14 +161,30 @@ export default class Stage extends cc.Component {
     }
 
     buy_snow(){
-
+        Buy.Global.Buy_Kirby = 1;
     }
 
     buy_ninja(){
+        Buy.Global.Buy_Kirby = 2;
+    }
+
+    buy_magic(){
+        Buy.Global.Buy_Kirby = 3;
+    }
+
+    buy_knight(){
+        Buy.Global.Buy_Kirby = 4;
+    }
+
+    buy_extralife(){
 
     }
 
-    buy_kirby(){
+    buy_rocket(){
+
+    }
+
+    but_shield(){
 
     }
 

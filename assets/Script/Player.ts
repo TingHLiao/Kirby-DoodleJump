@@ -1,4 +1,5 @@
 import GameMgr from "./GameMgr";
+import * as Buy from "./Buy"
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -29,12 +30,17 @@ export default class player extends cc.Component {
     private knife: cc.Node = null;
 
     private isKnifing : boolean = false;
+    //ninja attack
+    private isThrow: boolean = false;
+    private isThrowBack: boolean = false;
 
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
     // 0: normal, 1: snow, 2:ninja
     private kirby_state = 0;
+
+    //private BuySth = 0;
 
     // record money
     @property(cc.Node)
@@ -65,6 +71,9 @@ export default class player extends cc.Component {
     bullet: cc.Prefab = null;
 
     @property(cc.Prefab)
+    ninja_bullet: cc.Prefab = null;
+
+    @property(cc.Prefab)
     magicbomb: cc.Prefab = null;
 
 
@@ -74,14 +83,18 @@ export default class player extends cc.Component {
         this.platform = cc.find("Canvas/platform");
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
-        this.kirby_state = 0;
+        this.kirby_state = Buy.Global.Buy_Kirby;
     }
 
     start () {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, 1000);
-        this.anim.play("jump");
+        if(this.kirby_state == 0) this.anim.play("jump");
+        else if(this.kirby_state == 1) this.anim.play("snow_jump");
+        else if(this.kirby_state == 2) this.anim.play("ninja_jump");
+        else if(this.kirby_state == 3) this.anim.play("magic_jump");
+        else if(this.kirby_state == 4) this.anim.play("knight_jump");
     }
 
     onKeyDown(event) {
@@ -199,6 +212,7 @@ export default class player extends cc.Component {
 
     update (dt) {
         this.playermovement(dt);
+        this.ninja_bullet_back();
         if(this.node.x-11.5 <= -480 && this.leftDown){
             this.node.x = 491.5;
         }
@@ -254,6 +268,11 @@ export default class player extends cc.Component {
                 contact.disabled = true;
                 other.node.destroy();
             }
+            else if(other.tag == 10 && this.isThrowBack){
+                this.isThrow = false;
+                this.isThrowBack = false;
+                this.bulletPool.removeAllChildren();
+            }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
                 contact.disabled = true;
@@ -298,6 +317,9 @@ export default class player extends cc.Component {
                     other.node.getComponent("Enemy").sucktrigger = false;
                     other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                     other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                    other.scheduleOnce( function(){
+                        other.node.destroy();
+                    }, 1.5);
                 }
                 return;
             }
@@ -314,7 +336,9 @@ export default class player extends cc.Component {
                 //other.node.getComponent("Enemy").sucktrigger = false;
                 //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                 other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
-                //cc.log('end')
+                other.scheduleOnce( function(){
+                    other.node.destroy();
+                }, 1.5);
             }
             
         }
@@ -410,6 +434,19 @@ export default class player extends cc.Component {
             case 2: {                 // ninja
                 this.anim.stop('ninja_jump');
                 this.animateState = this.anim.play("ninja_die");
+                
+                if(!this.isThrow){
+                    this.isThrow = true;
+                    let newnode = cc.instantiate(this.ninja_bullet);
+                    this.bulletPool.addChild(newnode);
+                    newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
+                    let dir = cc.v2(x,y).sub(playerpos);
+                    cc.log(dir);
+                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
+                    this.scheduleOnce(function(){
+                        this.isThrowBack = true;
+                    }, 0.81);
+                }
                 break;
             }
             case 3: {                //magic
@@ -434,6 +471,22 @@ export default class player extends cc.Component {
                 this.anim.stop('jump');
                 this.animateState = this.anim.play("die");
                 break;
+            }
+        }
+    }
+
+    ninja_bullet_back(){
+        if(this.isThrowBack){
+            let n = this.bulletPool.children[0];
+            if(this.bulletPool.childrenCount!=0 && n.isValid){
+                let move = this.node.position.sub(n.position).divSelf(15);
+                if(move.mag() < 50)
+                    n.runAction(cc.moveBy(0.001, move));
+                else
+                    n.runAction(cc.moveBy(0.05, move));
+            } else{
+                cc.log('d')
+                this.isThrowBack = false;
             }
         }
     }

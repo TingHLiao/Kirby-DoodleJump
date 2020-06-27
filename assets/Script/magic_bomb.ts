@@ -51,5 +51,8 @@ export default class magicbomb extends cc.Component {
                 },0.27)
            }
        }
+       else{
+           contact.disabled = true;
+       }
     }
 }

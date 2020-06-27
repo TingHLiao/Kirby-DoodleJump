@@ -112,7 +112,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.7 && this.score > 500){
+            if(!withitem && Math.random() > 0.9 && this.score > 500){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
@@ -141,7 +141,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
             }
 
-            if(!withitem && Math.random() > 0.95 && this.score > 3500){
+            if(!withitem && Math.random() > 0.9 && this.score > 3500){
                 withitem = true;
                 let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Knight_enemy
                 this.node.addChild(newnode);
@@ -168,7 +168,7 @@ export default class platform extends cc.Component {
         else if(this.node.name == "break_basic"){
             
         }
-        if(Math.random()>0.99){
+        if(Math.random()>0.99 && this.node.name !== "move_basic"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
