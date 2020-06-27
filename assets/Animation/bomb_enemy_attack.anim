@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "bomb_enemy_attack",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.43333333333333335,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "e3a34158-91a0-4945-b599-568518387b62"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "41d25797-a503-4a3f-8aba-e28bbf56e6ee"
+            }
+          },
+          {
+            "frame": 0.23333333333333334,
+            "value": {
+              "__uuid__": "54c685fa-41aa-4a9c-b0a0-eb6fb2c52d87"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "5abeda59-897a-4e0f-8c70-cc1950473cf0"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "c5af6f9a-697e-4850-96dc-ef67683f6d36"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

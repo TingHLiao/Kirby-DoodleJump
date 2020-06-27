@@ -354,6 +354,10 @@ export default class player extends cc.Component {
             this.mode++;
     }
 
+    setdie(){
+        this.gameover();
+    }
+
     get_state(){
         return this.kirby_state;
     }
