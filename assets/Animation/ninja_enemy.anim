@@ -1,9 +1,9 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "ninja",
+  "_name": "ninja_enemy",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.5333333333333333,
+  "_duration": 0.6833333333333333,
   "sample": 60,
   "speed": 1,
   "wrapMode": 2,
@@ -14,19 +14,19 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "5cd41b96-0aac-4c0a-b058-86dcc251f218"
+              "__uuid__": "cfc0fad8-7dff-4c1a-8334-92bcf71df91b"
             }
           },
           {
-            "frame": 0.26666666666666666,
+            "frame": 0.3333333333333333,
             "value": {
-              "__uuid__": "85ddc0a5-a585-4e72-a561-c59a83e0f9d8"
+              "__uuid__": "66a79460-52bd-4e1c-9db4-7f774df35881"
             }
           },
           {
-            "frame": 0.5166666666666667,
+            "frame": 0.6666666666666666,
             "value": {
-              "__uuid__": "5cd41b96-0aac-4c0a-b058-86dcc251f218"
+              "__uuid__": "cfc0fad8-7dff-4c1a-8334-92bcf71df91b"
             }
           }
         ]

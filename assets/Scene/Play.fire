@@ -588,7 +588,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30.9,
+      "width": 27.04,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -641,7 +641,7 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 40,
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
@@ -682,7 +682,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30.9,
+      "width": 27.04,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -735,7 +735,7 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 40,
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
@@ -971,6 +971,9 @@
     },
     "CoinEffect": {
       "__uuid__": "316c3938-a5fa-4f4d-a90b-2cfdbb01f5dc"
+    },
+    "DieEffect": {
+      "__uuid__": "76a4a34c-b37b-49b4-a5cb-3071ade77452"
     },
     "gamemanager": {
       "__id__": 7
