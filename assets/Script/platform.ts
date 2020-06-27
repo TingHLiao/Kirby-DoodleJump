@@ -137,7 +137,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
             }
 
-            if(!withitem && Math.random() > 0.9 /*&& this.score > 2500*/){
+            if(!withitem && Math.random() > 0.99 /*&& this.score > 2500*/){
                 withitem = true;
                 let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
