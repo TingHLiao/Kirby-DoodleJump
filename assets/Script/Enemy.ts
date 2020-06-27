@@ -132,7 +132,6 @@ export default class Enemy extends cc.Component {
 
     // Knight Enemy Attack
     knight_attack(){
-        cc.log("In")
         let offsetx = (Math.random()>0.5)? 40*Math.random() : -40*Math.random();
         let offsety = (Math.random()>0.5)? 40*Math.random() : -40*Math.random();
         let diffx = this.player.x- this.node.parent.x + offsetx;
@@ -166,6 +165,8 @@ export default class Enemy extends cc.Component {
                     self.node.destroy();
                 }, 1)
             }
+        } else if(other.tag == 8){
+            self.node.destroy();
         }
     }
 

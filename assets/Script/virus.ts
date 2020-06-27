@@ -17,6 +17,8 @@ export default class virus extends cc.Component {
 
     private jumpvelocity : number = 1000;
 
+    private isDead: boolean = false;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -40,6 +42,10 @@ export default class virus extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
+        if(this.isDead){
+            contact.disable = true;
+            return;
+        }
         if(other.tag == 0){
             if(contact.getWorldManifold().normal.y == 1) {
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
@@ -48,6 +54,14 @@ export default class virus extends cc.Component {
                     this.node.destroy();
                 }, 1)
             }
+        } else if(other.tag == 8){
+            other.node.destroy();
+            this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
+            this.isDead = true;   
+            this.anim.play("virus_die");
+            this.scheduleOnce(()=>{
+                this.node.destroy();
+            }, 1)
         }
     }
 }

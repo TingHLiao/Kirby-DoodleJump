@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "virus_g1",
+    "_name": "snowball",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -27,13 +27,10 @@
       },
       {
         "__id__": 4
-      },
-      {
-        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 6
+      "__id__": 5
     },
     "_opacity": 255,
     "_color": {
@@ -45,8 +42,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 69.6,
-      "height": 70.05
+      "width": 20,
+      "height": 20
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -57,8 +54,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        116,
-        267,
+        223,
+        171,
         0,
         0,
         0,
@@ -98,7 +95,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f55ef410-50ac-4f18-a71c-20025a3e8217"
+      "__uuid__": "1b01463f-3904-4737-a080-6530333de822"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -112,27 +109,8 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "72606356-c33d-4e45-abb0-12a63020d1b8"
+      "__uuid__": "272c2c60-68e4-4521-ae91-b76a8510ca5d"
     },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "62f6c641-21d5-4306-9692-f4f53b3a7086"
-    },
-    "_clips": [
-      {
-        "__uuid__": "62f6c641-21d5-4306-9692-f4f53b3a7086"
-      }
-    ],
-    "playOnLoad": true,
     "_id": ""
   },
   {
@@ -143,7 +121,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 1,
     "_allowSleep": false,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -168,9 +146,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 4,
+    "tag": 8,
     "_density": 1,
-    "_sensor": false,
+    "_sensor": true,
     "_friction": 0.2,
     "_restitution": 0,
     "body": null,
@@ -179,7 +157,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 27,
+    "_radius": 3,
     "_id": ""
   },
   {
@@ -188,9 +166,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
+      "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
     },
-    "fileId": "0cdNyIdnlMxK+fzcDBx4eC",
+    "fileId": "adF3A37H5LjI4ByrPLdMsX",
     "sync": false
   }
 ]

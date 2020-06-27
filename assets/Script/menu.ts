@@ -10,6 +10,8 @@ export default class Stage extends cc.Component {
     leaderbutton: cc.Button = null;
     @property(cc.Button)
     storebutton: cc.Button = null;
+    @property(cc.Button)
+    instrbutton: cc.Button = null;
 
     @property(cc.Node)
     cover: cc.Node = null; //stop
@@ -22,6 +24,9 @@ export default class Stage extends cc.Component {
 
     @property(cc.Node)
     boardPanel_store: cc.Node = null;
+
+    @property(cc.Node)
+    boardPanel_instr: cc.Node = null;
 
     @property(cc.Prefab)
     player1: cc.Prefab = null;
@@ -37,6 +42,7 @@ export default class Stage extends cc.Component {
 
     private show: boolean = false;
     private storeshow: boolean = false;
+    private instrshow: boolean = false;
 
     nameText: cc.Label;
     highestText: cc.Label;
@@ -78,6 +84,7 @@ export default class Stage extends cc.Component {
         if(this.show){
             this.boardPanel.active = false;
             this.storebutton.interactable = true;
+            this.instrbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.show = false;
             this.content.removeAllChildren();
@@ -86,6 +93,7 @@ export default class Stage extends cc.Component {
         this.leader();
         //cc.find("Canvas").getComponent("leader").leader();
         this.storebutton.interactable = false;
+        this.instrbutton.interactable = false;
         this.show = true;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel.active = true;
@@ -134,14 +142,15 @@ export default class Stage extends cc.Component {
         if(this.storeshow){
             this.boardPanel_store.active = false;
             this.leaderbutton.interactable = true;
+            this.instrbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.storeshow = false;
-            this.content.removeAllChildren();
             return;
         }
         //cc.find("Canvas").getComponent("leader").leader();
         this.storeshow = true;
         this.leaderbutton.interactable = false;
+        this.instrbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_store.active = true;
         this.boardPanel_store.runAction(cc.fadeIn(0.2));
@@ -157,6 +166,23 @@ export default class Stage extends cc.Component {
 
     buy_kirby(){
 
+    }
+
+    onInstrClick(){
+        if(this.instrshow){
+            this.boardPanel_instr.active = false;
+            this.leaderbutton.interactable = true;
+            this.storebutton.interactable = true;
+            this.cover.runAction(cc.fadeTo(0.2, 255));
+            this.instrshow = false;
+            return;
+        }
+        this.instrshow = true;
+        this.leaderbutton.interactable = false;
+        this.storebutton.interactable = false;
+        this.cover.runAction(cc.fadeTo(0.2, 128));
+        this.boardPanel_instr.active = true;
+        this.boardPanel_instr.runAction(cc.fadeIn(0.2));
     }
     // update (dt) {}
 }
