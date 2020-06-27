@@ -80,11 +80,11 @@ export default class platform extends cc.Component {
         this.camera = cc.find("Canvas/Main Camera");
         this.scoreNode = cc.find("Canvas/Main Camera/score");
         this.score = parseInt(this.scoreNode.getComponent(cc.Label).string);
+        this.anim = this.getComponent(cc.Animation);
     }
 
 
     start () {
-        this.anim = this.getComponent(cc.Animation);
         this.animState = null;
         //this.node.zIndex = 100;
         if(this.node.name == "normal_basic"){
@@ -112,7 +112,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
 
-            if(!withitem && Math.random() > 0.7 && this.score > 500){
+            if(!withitem && Math.random() > 0.9 && this.score > 500){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
@@ -213,7 +213,7 @@ export default class platform extends cc.Component {
     }
     
     update (dt) {
-        if(this.camera.position.y - this.node.position.y > 2500) {
+        if(this.camera.position.y - this.node.position.y > 2500 && this.node.isValid) {
             this.node.destroy();
         }
     }

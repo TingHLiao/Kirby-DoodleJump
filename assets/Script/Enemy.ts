@@ -229,6 +229,14 @@ export default class Enemy extends cc.Component {
         }
     }
 
+    onPreSolve(contact, self, other){
+        if(this.node.name == "bomb_enemy"){
+            if(this.sucktrigger && other.tag == 3){
+                this.unscheduleAllCallbacks();
+            }
+        }
+    }
+
     update (dt) {
         let diffx = this.node.parent.x - this.player.x;
         let diffy = this.node.parent.y - this.player.y;
@@ -239,6 +247,7 @@ export default class Enemy extends cc.Component {
                 this.node.destroy();
             }
         }
+
         if(this.node.name == "knight_enemy"){
             if(dist < 300 && this.knight_canshoot){
                 this.knight_canshoot = false;
