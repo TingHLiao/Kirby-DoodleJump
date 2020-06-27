@@ -23,6 +23,8 @@ export default class Enemy extends cc.Component {
 
     private spacedown : boolean = false;
 
+    private sucktrigger: boolean = false;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
