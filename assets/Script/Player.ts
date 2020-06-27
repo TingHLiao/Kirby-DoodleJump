@@ -1,4 +1,5 @@
 import GameMgr from "./GameMgr";
+import * as Buy from "./Buy"
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -32,6 +33,8 @@ export default class player extends cc.Component {
 
     // 0: normal, 1: snow, 2:ninja
     private kirby_state = 0;
+
+    //private BuySth = 0;
 
     // record money
     @property(cc.Node)
@@ -67,14 +70,18 @@ export default class player extends cc.Component {
         this.platform = cc.find("Canvas/platform");
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
-        this.kirby_state = 0;
+        this.kirby_state = Buy.Global.Buy_Kirby;
     }
 
     start () {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, 1000);
-        this.anim.play("jump");
+        if(this.kirby_state == 0) this.anim.play("jump");
+        else if(this.kirby_state == 1) this.anim.play("snow_jump");
+        else if(this.kirby_state == 2) this.anim.play("ninja_jump");
+        else if(this.kirby_state == 3) this.anim.play("magic_jump");
+        else if(this.kirby_state == 4) this.anim.play("knight_jump");
     }
 
     onKeyDown(event) {
