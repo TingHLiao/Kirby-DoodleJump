@@ -303,7 +303,7 @@ export default class player extends cc.Component {
                 this.animateState = this.anim.play("ninja_die");
                 break;
             }
-            case 3: {
+            case 3: {                //magic
                 this.anim.stop('magic_jump');
                 this.animateState = this.anim.play("magic_die");
                 break;
