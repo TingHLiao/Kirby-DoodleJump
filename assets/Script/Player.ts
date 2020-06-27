@@ -212,7 +212,7 @@ export default class player extends cc.Component {
                         this.anim.play("changetoninja");
                         this.kirby_state = 2;
                     }
-                    else if(other.node.name == "magic_enemy"){
+                    else if(other.node.name == "bomb_enemy"){
                         this.anim.play("changetomagic");
                         this.kirby_state = 3;
                     }
