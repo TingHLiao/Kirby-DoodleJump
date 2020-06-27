@@ -19,7 +19,7 @@ export default class player extends cc.Component {
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
-    // 0: normal, 1: snow
+    // 0: normal, 1: snow, 2:ninja
     private kirby_state = 0;
 
     // record money
@@ -175,7 +175,7 @@ export default class player extends cc.Component {
             other.node.destroy();
             return;
         }
-        if(self.tag == 3 && other.tag == 5 && !this.anim.getAnimationState('rocket').isPlaying){
+        if(self.tag == 3 && other.tag == 5 && !this.anim.getAnimationState('rocket').isPlaying && !this.anim.getAnimationState('snow_rocket').isPlaying){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
                 return;
@@ -242,5 +242,9 @@ export default class player extends cc.Component {
             this.mode--;
         else if(status == "rocket")
             this.mode++;
+    }
+
+    get_state(){
+        return this.kirby_state;
     }
 }

@@ -21,7 +21,11 @@ export default class RocketTool extends cc.Component {
             contact.disabled = true;
             cc.audioEngine.playEffect(this.soundEffect, false);
             this.player.getComponent("Player").setmode("rocket");
-            this.player.getComponent("Player").anim.play("rocket");
+            
+            let state = this.player.getComponent("Player").get_state();
+            if(state == 0) this.player.getComponent("Player").anim.play("rocket");
+            else if(state == 1) this.player.getComponent("Player").anim.play("snow_rocket");
+
             cc.director.getPhysicsManager().enabled = false;
             other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeQuadraticActionInOut()));
             self.node.active = false;
