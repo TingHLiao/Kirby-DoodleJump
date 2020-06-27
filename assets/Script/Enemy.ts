@@ -21,6 +21,8 @@ export default class Enemy extends cc.Component {
 
     private isbomb: boolean = false;
 
+    private spacedown : boolean = false;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
@@ -40,6 +42,9 @@ export default class Enemy extends cc.Component {
     }
 
     start () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
         if(this.node.name == "ninja_enemy"){
             this.anim.play("ninja_enemy");
             this.ninja_move();
@@ -84,6 +89,15 @@ export default class Enemy extends cc.Component {
             }, t1);
             
         }
+    }
+
+    onKeyDown(event){
+        if(event.keyCode == cc.macro.KEY.space) this.spacedown = true;
+        else this.spacedown = false;
+    }
+
+    onKeyUp(event){
+        if(event.keyCode == cc.macro.KEY.space) this.spacedown = false;
     }
 
 
@@ -236,7 +250,7 @@ export default class Enemy extends cc.Component {
                     cc.log("KIRBY BOMB")
                 }
             }
-            if(dist < 200 && !this.isbomb){
+            if(dist < 150 && !this.isbomb && !this.spacedown){
                 this.isbomb = true;
                 this.bomb_attack();
             }
