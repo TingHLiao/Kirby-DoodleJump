@@ -19,6 +19,8 @@ export default class Enemy extends cc.Component {
 
     private knight_canshoot: boolean = true;
 
+    private isbomb: boolean = false;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
@@ -26,6 +28,8 @@ export default class Enemy extends cc.Component {
     knife: cc.Prefab = null;
 
     player: cc.Node = null;
+
+    private cnt : number = 0;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -47,6 +51,10 @@ export default class Enemy extends cc.Component {
         else if(this.node.name == "knight_enemy"){
             this.anim.play("knight_enemy");
             this.knight_move();
+        }
+        else if(this.node.name == "bomb_enemy"){
+            this.anim.play("bomb_enemy");
+            this.bomb_move();
         }
     }
 
@@ -130,6 +138,34 @@ export default class Enemy extends cc.Component {
         }
     }
 
+    // bomb_enemy
+    private bomb_move(){
+        let t1 = (25-this.node.position.x)/20;
+        let t2 = (this.node.position.x+25)/20;
+        let moveright1 = cc.moveTo(t1, 30, this.node.position.y);
+        let moveleft1 = cc.moveTo(t2, -30, this.node.position.y);
+        let flipx = cc.flipX(false);
+        let nflipx = cc.flipX(true);
+        let moveright = cc.moveTo(3, 30, this.node.position.y);
+        let moveleft = cc.moveTo(3, -30, this.node.position.y);
+        
+        if(Math.random() > 0.5){
+            this.node.runAction(flipx);
+            this.node.runAction(moveleft1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(cc.spawn(nflipx, moveright), cc.spawn(flipx, moveleft))));
+            }, t2);
+            
+        }
+        else{
+            this.node.runAction(moveright1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(cc.spawn(flipx, moveleft), cc.spawn(nflipx, moveright))));
+            }, t1);
+            
+        }
+    }
+
     // Knight Enemy Attack
     knight_attack(){
         let offsetx = (Math.random()>0.5)? 40*Math.random() : -40*Math.random();
@@ -148,11 +184,20 @@ export default class Enemy extends cc.Component {
         this.node.addChild(newnode);
         newnode.position = cc.v2(14, 0);
         newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2((this.player.x- this.node.parent.x + offsetx), (this.player.y - this.node.parent.y + offsety));
-        newnode.parent = cc.find("Canvas");
+        newnode.parent = cc.find("Canvas/knife");
         this.anim.play("knight_enemy_attack");
         this.scheduleOnce(()=>{
             this.anim.play("knight_enemy");
         }, 0.38);
+    }
+
+    bomb_attack(){
+        this.scheduleOnce(()=>{
+            this.anim.play("bomb_enemy_attack");
+            this.scheduleOnce(()=>{
+                this.node.parent.destroy();
+            },0.8)
+        }, 1)
     }
 
     onBeginContact(contact, self, other){
@@ -178,6 +223,22 @@ export default class Enemy extends cc.Component {
             if(dist < 300 && this.knight_canshoot){
                 this.knight_canshoot = false;
                 this.knight_attack();
+            }
+        }
+        else if(this.node.name == "bomb_enemy"){
+            let diffx = this.node.parent.x - this.player.x;
+            let diffy = this.node.parent.y - this.player.y;
+            let dist = Math.sqrt(diffx*diffx + diffy*diffy);
+            if(this.isbomb && dist < 89){
+                this.cnt++;
+                if(this.cnt > 15) {
+                    this.player.getComponent("Player").setdie();
+                    cc.log("KIRBY BOMB")
+                }
+            }
+            if(dist < 200 && !this.isbomb){
+                this.isbomb = true;
+                this.bomb_attack();
             }
         }
     }

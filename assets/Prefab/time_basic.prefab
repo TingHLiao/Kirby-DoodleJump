@@ -151,6 +151,9 @@
     "KnightEnemy": {
       "__uuid__": "f13ed3e9-75e5-4281-9d6f-7e2485437322"
     },
+    "BombEnemy": {
+      "__uuid__": "874f7b21-9fb6-4a53-af8e-0d53d27afe6b"
+    },
     "coinPrefab": {
       "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
     },

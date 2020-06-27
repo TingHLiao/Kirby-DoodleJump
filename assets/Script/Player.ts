@@ -13,12 +13,16 @@ export default class player extends cc.Component {
     private playerSpeed: number = 0;
 
     private bulletspeed = 500;
+    private maxbullet = 3;
 
     private anim = null;
 
     private animateState = null;
 
     private isDied = false;
+
+    private knife: cc.Node = null;
+
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
@@ -33,6 +37,7 @@ export default class player extends cc.Component {
     soundEffect: cc.AudioClip = null;
 
     platform: cc.Node;//
+    bulletPool: cc.Node;
 
     @property(cc.Node)
     platforms: cc.Node = null;
@@ -53,6 +58,8 @@ export default class player extends cc.Component {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
         this.platform = cc.find("Canvas/platform");
+        this.bulletPool = cc.find("Canvas/bullet");
+        this.knife = cc.find("Canvas/knife");
         this.kirby_state = 0;
     }
 
@@ -64,10 +71,10 @@ export default class player extends cc.Component {
     }
 
     onKeyDown(event) {
-        if(event.keyCode == cc.macro.KEY.left) {
+        if(event.keyCode == cc.macro.KEY.a) {
             this.leftDown = true;
             this.rightDown = false;
-        } else if(event.keyCode == cc.macro.KEY.right) {
+        } else if(event.keyCode == cc.macro.KEY.d) {
             this.leftDown = false;
             this.rightDown = true;
         } 
@@ -122,9 +129,9 @@ export default class player extends cc.Component {
     }
     
     onKeyUp(event) {
-        if(event.keyCode == cc.macro.KEY.left)  
+        if(event.keyCode == cc.macro.KEY.a)  
             this.leftDown = false;
-        else if(event.keyCode == cc.macro.KEY.right)
+        else if(event.keyCode == cc.macro.KEY.d)
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
@@ -343,6 +350,8 @@ export default class player extends cc.Component {
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{ 
             this.platforms.removeAllChildren();
+            this.bulletPool.removeAllChildren();
+            this.knife.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
         }, 0.3);
     }
@@ -350,12 +359,16 @@ export default class player extends cc.Component {
     private attack(x: number, y: number, playerpos: cc.Vec2){
         if(this.anim.getAnimationState('rocket').isPlaying || this.anim.getAnimationState('snow_rocket').isPlaying)
             return;
+        //can only attack maxbullet in window
+        if(this.bulletPool.childrenCount >= this.maxbullet)
+            return;
+
         if(playerpos.x > x)
             this.node.scaleX = -2;
         else
             this.node.scaleX = 2;
         let newnode = cc.instantiate(this.bullet);
-        this.node.parent.addChild(newnode);
+        this.bulletPool.addChild(newnode);
         newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
         //direction vector for bullet
         let dir = cc.v2(x,y).sub(playerpos);
@@ -370,6 +383,10 @@ export default class player extends cc.Component {
             this.mode--;
         else if(status == "rocket")
             this.mode++;
+    }
+
+    setdie(){
+        this.gameover();
     }
 
     get_state(){

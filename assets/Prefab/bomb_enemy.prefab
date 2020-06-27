@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bullet",
+    "_name": "bomb_enemy",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -30,10 +30,13 @@
       },
       {
         "__id__": 5
+      },
+      {
+        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 6
+      "__id__": 7
     },
     "_opacity": 255,
     "_color": {
@@ -45,8 +48,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 17,
-      "height": 17
+      "width": 19,
+      "height": 18
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -57,15 +60,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        223,
-        171,
+        -101.498,
+        -94.449,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        2.5,
+        2,
         1
       ]
     },
@@ -98,10 +101,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "1b01463f-3904-4737-a080-6530333de822"
+      "__uuid__": "22e4f0ba-5cfe-4ab2-96c7-de11e22c5477"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -112,7 +115,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "272c2c60-68e4-4521-ae91-b76a8510ca5d"
+      "__uuid__": "2832a0ae-74e6-4964-b5e2-4cfdf3f382d0"
     },
     "_id": ""
   },
@@ -142,16 +145,16 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsCircleCollider",
+    "__type__": "cc.PhysicsBoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 8,
+    "tag": 5,
     "_density": 1,
-    "_sensor": true,
+    "_sensor": false,
     "_friction": 0.2,
     "_restitution": 0,
     "body": null,
@@ -160,17 +163,43 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 3,
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 19,
+      "height": 18
+    },
     "_id": ""
   },
   {
-    "__type__": "a21a5+Yy95I1bPECIPohEtO",
+    "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
+    "_defaultClip": null,
+    "_clips": [
+      {
+        "__uuid__": "c426abe2-df82-4997-b62d-c76ce19cabed"
+      },
+      {
+        "__uuid__": "780dc122-5044-4fa5-ad8c-09c3eb99465f"
+      }
+    ],
+    "playOnLoad": false,
+    "_id": ""
+  },
+  {
+    "__type__": "02195NVfhRObadYPKeH7rSy",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "snowball": null,
+    "knife": null,
     "_id": ""
   },
   {
@@ -179,9 +208,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
+      "__uuid__": "874f7b21-9fb6-4a53-af8e-0d53d27afe6b"
     },
-    "fileId": "adF3A37H5LjI4ByrPLdMsX",
+    "fileId": "ceklHjV4dFPo+egujz6iNx",
     "sync": false
   }
 ]
