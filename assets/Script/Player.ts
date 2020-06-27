@@ -284,7 +284,7 @@ export default class player extends cc.Component {
             other.node.destroy();
             return;
         }
-        if(self.tag == 3 && other.tag == 5 && !this.anim.getAnimationState('rocket').isPlaying && !this.anim.getAnimationState('snow_rocket').isPlaying){
+        if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
                 return;
@@ -359,7 +359,7 @@ export default class player extends cc.Component {
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
-        if(this.anim.getAnimationState('rocket').isPlaying || this.anim.getAnimationState('snow_rocket').isPlaying)
+        if(this.rocketOn)
             return;
         //can only attack maxbullet in window
         if(this.bulletPool.childrenCount >= this.maxbullet)
