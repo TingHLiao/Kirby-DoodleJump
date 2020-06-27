@@ -43,6 +43,10 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     SnowmanEnemy: cc.Prefab = null;
 
+    // Knight_enemy
+    @property(cc.Prefab)
+    KnightEnemy: cc.Prefab = null;
+
     // Coin
     @property(cc.Prefab)
     coinPrefab: cc.Prefab = null;
@@ -125,12 +129,20 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 45.025);
             }
 
-            if(!withitem && Math.random() > 0.65 /*&& this.score > 2500*/){
+            if(!withitem && Math.random() > 0.95 && this.score > 2500){
                 withitem = true;
                 let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
+            }
+
+            if(!withitem && Math.random() > 0.9 /*&& this.score > 2500*/){
+                withitem = true;
+                let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Snowman_enemy
+                this.node.addChild(newnode);
+                newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
             }
         }
         else if(this.node.name == "move_basic"){
