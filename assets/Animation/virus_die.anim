@@ -1,0 +1,67 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "virus_die",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.9375,
+  "sample": 16,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "0c2c8b5b-9dc9-42e2-a90d-04d31e590b30"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "54ba7217-d192-4888-9557-5fdf4534356e"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "81a21979-1ebe-4b6c-8449-5246d959b0c7"
+            }
+          },
+          {
+            "frame": 0.375,
+            "value": {
+              "__uuid__": "2085bfab-6c12-4193-887a-909464d3b4bd"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "f5152941-f35a-4468-8ff0-68bc265d426f"
+            }
+          },
+          {
+            "frame": 0.625,
+            "value": {
+              "__uuid__": "f179c055-5839-4bbe-bf5f-3b44a194f905"
+            }
+          },
+          {
+            "frame": 0.75,
+            "value": {
+              "__uuid__": "bb74a1c6-446b-4c11-8a6c-ca4554098806"
+            }
+          },
+          {
+            "frame": 0.875,
+            "value": {
+              "__uuid__": "40c8bcad-b807-45ae-8a38-d730d13eede7"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

@@ -12,6 +12,8 @@ export default class player extends cc.Component {
 
     private playerSpeed: number = 0;
 
+    private bulletspeed = 500;
+
     private anim = null;
 
     private animateState = null;
@@ -43,6 +45,9 @@ export default class player extends cc.Component {
 
     @property(GameMgr)
     gamemanager: GameMgr = null;
+
+    @property(cc.Prefab)
+    bullet: cc.Prefab = null;
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
@@ -253,6 +258,22 @@ export default class player extends cc.Component {
             this.platforms.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
         }, 0.3);
+    }
+
+    private attack(x: number, y: number, playerpos: cc.Vec2){
+        if(this.anim.getAnimationState('rocket').isPlaying || this.anim.getAnimationState('snow_rocket').isPlaying)
+            return;
+        if(playerpos.x > x)
+            this.node.scaleX = -2;
+        else
+            this.node.scaleX = 2;
+        let newnode = cc.instantiate(this.bullet);
+        this.node.parent.addChild(newnode);
+        newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
+        //direction vector for bullet
+        let dir = cc.v2(x,y).sub(playerpos);
+        //linearVelocity = unit vector multiple bulletspeed
+        newnode.getComponent(cc.RigidBody).linearVelocity = dir.divSelf(dir.mag()).mulSelf(this.bulletspeed);
     }
 
     setmode(status : string){

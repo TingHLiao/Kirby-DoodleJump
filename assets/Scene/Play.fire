@@ -426,8 +426,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 960,
+      "height": 640
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -440,7 +440,7 @@
       "array": [
         0,
         0,
-        427.8165494695127,
+        326.4915772267334,
         0,
         0,
         0,
@@ -968,6 +968,9 @@
     },
     "gamemanager": {
       "__id__": 7
+    },
+    "bullet": {
+      "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
     },
     "_id": "00/tfDlv5OGKB1v0aueIMp"
   },

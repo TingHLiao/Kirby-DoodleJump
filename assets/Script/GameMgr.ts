@@ -19,6 +19,8 @@ export default class GameMgr extends cc.Component {
 
     private needmoreplatform : Boolean = false;
 
+    private mousedown : Boolean = false;
+
     private floor = 0;
 
     private count = 0;
@@ -83,6 +85,19 @@ export default class GameMgr extends cc.Component {
     start () {
         //this.needmoreplatform = true;
         this.generatePlatforms(100, 40);
+        this.camera.on('mousedown', function(event){
+            if(event.getButton() == 0){
+                this.mouseDown = true;
+                //calculate the position relating to center
+                let pos = cc.v2(this.player.x - this.camera.x, this.player.y - this.camera.y);
+                this.player.getComponent('Player').attack(event.getLocationX()-480, event.getLocationY()-320, pos);
+            }
+        }, this);
+        this.camera.on('mouseup', function(event){
+            if(event.getButton() == 0){
+                this.mouseDown = false;
+            }
+        }, this);
     }
 
     generatePlatforms(num, stepsize)
