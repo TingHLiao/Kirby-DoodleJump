@@ -287,12 +287,32 @@ export default class player extends cc.Component {
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
+                if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
+                    other.node.stopAllActions();
+                    other.node.getComponent("Enemy").sucktrigger = false;
+                    other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
+                    other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                }
                 return;
             }
+            other.node.getComponent("Enemy").sucktrigger = true;
             let move = self.node.position.sub(other.node.parent.position).sub(other.node.position).divSelf(8);
             //cc.log(move)
             //other.node.stopAllActions();
             other.node.runAction(cc.moveBy(0.2, move));
+        }
+    }
+    
+    onEndContact(contact, self, other){
+        if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
+            if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
+                //other.node.stopAllActions();
+                //other.node.getComponent("Enemy").sucktrigger = false;
+                //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
+                other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                //cc.log('end')
+            }
+            
         }
     }
 
