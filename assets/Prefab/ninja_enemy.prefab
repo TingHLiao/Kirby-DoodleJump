@@ -49,7 +49,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 24,
-      "height": 35
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -67,8 +67,8 @@
         0,
         0,
         1,
-        2,
-        2,
+        1.5,
+        1.5,
         1
       ]
     },
@@ -101,7 +101,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "65dd3e22-bf1e-4f2f-9331-480c74c33ecb"
+      "__uuid__": "cfc0fad8-7dff-4c1a-8334-92bcf71df91b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -115,7 +115,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "0439ecac-5dce-4af0-8f12-71e4bd99f031"
+      "__uuid__": "5d51a105-f8af-4257-a492-0a256d559a74"
     },
     "_id": ""
   },
@@ -174,6 +174,7 @@
     "snowball": {
       "__uuid__": "79e4dcfd-b7e2-47a6-a600-526291e41ec6"
     },
+    "knife": null,
     "_id": ""
   },
   {

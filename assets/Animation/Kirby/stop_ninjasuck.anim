@@ -3,7 +3,7 @@
   "_name": "stop_ninjasuck",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.325,
+  "_duration": 0.4,
   "sample": 40,
   "speed": 1,
   "wrapMode": 1,
@@ -18,25 +18,25 @@
             }
           },
           {
-            "frame": 0.05,
+            "frame": 0.075,
             "value": {
               "__uuid__": "c05a4cdb-1e76-4328-bb92-0a16a01bcfc3"
             }
           },
           {
-            "frame": 0.15,
+            "frame": 0.175,
             "value": {
               "__uuid__": "759fe6c8-9e27-4f76-baa2-dca335e939e9"
             }
           },
           {
-            "frame": 0.25,
+            "frame": 0.325,
             "value": {
               "__uuid__": "34d3f967-ca7f-46b9-b2c8-57f6546b15db"
             }
           },
           {
-            "frame": 0.3,
+            "frame": 0.375,
             "value": {
               "__uuid__": "34d3f967-ca7f-46b9-b2c8-57f6546b15db"
             }

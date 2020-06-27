@@ -52,6 +52,9 @@ export default class player extends cc.Component {
     @property({type:cc.AudioClip})
     CoinEffect: cc.AudioClip = null;
 
+    @property({type: cc.AudioClip})
+    DieEffect: cc.AudioClip = null;
+
     @property(GameMgr)
     gamemanager: GameMgr = null;
 
@@ -59,7 +62,7 @@ export default class player extends cc.Component {
     bullet: cc.Prefab = null;
 
     onLoad () {
-        cc.director.getPhysicsManager().enabled = true;   
+        cc.director.getPhysicsManager().enabled = true;
         this.anim = this.getComponent(cc.Animation);
         this.platform = cc.find("Canvas/platform");
         this.bulletPool = cc.find("Canvas/bullet");
@@ -207,21 +210,21 @@ export default class player extends cc.Component {
                     if(other.node.name == "snowman_enemy"){
                         // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
                         // this.node.scaleY = 1.5;
-                        this.anim.play("changetosnow");
+                        if(this.kirby_state != 1) this.anim.play("changetosnow");
                         this.kirby_state = 1;
                     }
                     else if(other.node.name == "ninja_enemy"){
                         // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
                         // this.node.scaleY = 1.5;
-                        this.anim.play("changetoninja");
+                        if(this.kirby_state != 2) this.anim.play("changetoninja");
                         this.kirby_state = 2;
                     }
                     else if(other.node.name == "bomb_enemy"){
-                        this.anim.play("changetomagic");
+                        if(this.kirby_state != 3) this.anim.play("changetomagic");
                         this.kirby_state = 3;
                     }
                     else if(other.node.name == "knight_enemy"){
-                        this.anim.play("changetoknight");
+                        if(this.kirby_state != 4) this.anim.play("changetoknight");
                         this.kirby_state = 4;
                     }
                 }
@@ -237,6 +240,7 @@ export default class player extends cc.Component {
                 }
                 if(other.tag == 6){ 
                     this.isDied = true;
+                    other.node.destroy();
                     this.gameover();
                 }  
             }
@@ -289,12 +293,32 @@ export default class player extends cc.Component {
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(!this.spaceDown || !other.node.isValid){
                 //contact.disabled = true;
+                if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
+                    other.node.stopAllActions();
+                    other.node.getComponent("Enemy").sucktrigger = false;
+                    other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
+                    other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                }
                 return;
             }
+            other.node.getComponent("Enemy").sucktrigger = true;
             let move = self.node.position.sub(other.node.parent.position).sub(other.node.position).divSelf(8);
             //cc.log(move)
             //other.node.stopAllActions();
             other.node.runAction(cc.moveBy(0.2, move));
+        }
+    }
+    
+    onEndContact(contact, self, other){
+        if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
+            if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
+                //other.node.stopAllActions();
+                //other.node.getComponent("Enemy").sucktrigger = false;
+                //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
+                other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                //cc.log('end')
+            }
+            
         }
     }
 
@@ -351,6 +375,7 @@ export default class player extends cc.Component {
         this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{ 
+            cc.audioEngine.playEffect(this.DieEffect, false);
             this.platforms.removeAllChildren();
             this.bulletPool.removeAllChildren();
             this.knife.removeAllChildren();

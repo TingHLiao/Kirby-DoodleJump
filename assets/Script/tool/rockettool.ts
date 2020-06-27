@@ -23,9 +23,33 @@ export default class RocketTool extends cc.Component {
             this.player.getComponent("Player").setmode("rocket");
             
             let state = this.player.getComponent("Player").get_state();
-            if(state == 0) this.player.getComponent("Player").anim.play("rocket");
-            else if(state == 1) this.player.getComponent("Player").anim.play("snow_rocket");
-
+            switch(state){
+                case 0:{
+                    this.player.getComponent("Player").anim.play("rocket");
+                    break;
+                }
+                case 1: {
+                    this.player.getComponent("Player").anim.play("snow_rocket");
+                    break;
+                }
+                case 2: {
+                    this.player.getComponent("Player").anim.play("ninja_rocket");
+                    break;
+                }
+                case 3: {
+                    this.player.getComponent("Player").anim.play("magic_rocket");
+                    break;
+                }
+                case 4: {
+                    this.player.getComponent("Player").anim.play("knight_rocket");
+                    break;
+                }
+                default: {
+                    this.player.getComponent("Player").anim.play("rocket");
+                    break;
+                }
+            }
+           
             cc.director.getPhysicsManager().enabled = false;
             other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeQuadraticActionInOut()));
             self.node.active = false;

@@ -972,6 +972,9 @@
     "CoinEffect": {
       "__uuid__": "316c3938-a5fa-4f4d-a90b-2cfdbb01f5dc"
     },
+    "DieEffect": {
+      "__uuid__": "76a4a34c-b37b-49b4-a5cb-3071ade77452"
+    },
     "gamemanager": {
       "__id__": 7
     },
@@ -1072,6 +1075,15 @@
       },
       {
         "__uuid__": "006eba93-9824-43dd-910b-167e5d59b7d3"
+      },
+      {
+        "__uuid__": "dbfbc435-808c-4833-834e-e2fc43635d8c"
+      },
+      {
+        "__uuid__": "240016e6-0441-4301-b954-c495b63a9bf4"
+      },
+      {
+        "__uuid__": "0f7cf003-adf3-4bed-b7c4-493fe350f53c"
       }
     ],
     "playOnLoad": false,
