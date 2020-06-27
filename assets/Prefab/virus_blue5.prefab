@@ -177,6 +177,9 @@
     "_clips": [
       {
         "__uuid__": "b797c75b-e316-4cea-9a19-877cc3039eae"
+      },
+      {
+        "__uuid__": "29892db0-dafb-4a2d-b168-9ca947f2eedc"
       }
     ],
     "playOnLoad": false,

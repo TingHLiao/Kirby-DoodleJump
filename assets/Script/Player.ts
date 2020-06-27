@@ -10,6 +10,8 @@ export default class player extends cc.Component {
 
     private spaceDown: boolean = false; //get enemy
 
+    private rocketOn: boolean = false;
+
     private playerSpeed: number = 0;
 
     private bulletspeed = 500;
@@ -358,8 +360,13 @@ export default class player extends cc.Component {
             this.mode++;
         else if(status == "unshield")
             this.mode--;
-        else if(status == "rocket")
+        else if(status == "rocket"){
             this.mode++;
+            this.rocketOn = true;
+        } else if(status == "unrocket"){
+            this.mode--;
+            this.rocketOn = false;
+        }
     }
 
     get_state(){

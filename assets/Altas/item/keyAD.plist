@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>A 1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{246,161}</string>
+                <key>spriteSourceSize</key>
+                <string>{246,161}</string>
+                <key>textureRect</key>
+                <string>{{0,0},{246,161}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>A 3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{246,161}</string>
+                <key>spriteSourceSize</key>
+                <string>{246,161}</string>
+                <key>textureRect</key>
+                <string>{{0,161},{246,161}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>A 5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{246,161}</string>
+                <key>spriteSourceSize</key>
+                <string>{246,161}</string>
+                <key>textureRect</key>
+                <string>{{0,322},{246,161}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>keyAD.png</string>
+            <key>size</key>
+            <string>{246,483}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:1bbf5c144c0533e7789c0af486c12126:07dbf5188c9ca36274b8da5c2861c052:86054856a9748b7bdab9745e2bf94275$</string>
+            <key>textureFileName</key>
+            <string>keyAD.png</string>
+        </dict>
+    </dict>
+</plist>
