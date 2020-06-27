@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "break_basic",
+    "_name": "ninjaKirby_bullet",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -27,16 +27,10 @@
       },
       {
         "__id__": 4
-      },
-      {
-        "__id__": 5
-      },
-      {
-        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 5
     },
     "_opacity": 255,
     "_color": {
@@ -48,8 +42,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
-      "height": 30
+      "width": 17,
+      "height": 17
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -60,8 +54,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        391,
-        64.576,
+        223,
+        171,
         0,
         0,
         0,
@@ -101,10 +95,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "90293349-11bd-4e0e-be7d-a078d7e05a52"
+      "__uuid__": "1b01463f-3904-4737-a080-6530333de822"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -115,50 +109,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "b9ff96e0-3fad-4c4b-8702-e72bc58d0cc6"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "7bb61aPfpxOJZPilmYBdRqQ",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "rocketPrefab": {
-      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
-    },
-    "virus_red1": {
-      "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
-    },
-    "virus_green1": {
-      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
-    },
-    "trampoline": {
-      "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
-    },
-    "shield": {
-      "__uuid__": "f976e259-62fc-482a-81fe-7eed5eb47a85"
-    },
-    "NinjaEnemy": {
-      "__uuid__": "d302fe73-3358-4953-a2be-5f08610045d0"
-    },
-    "SnowmanEnemy": {
-      "__uuid__": "f6e38456-3d8d-4d96-9479-c233d387d24d"
-    },
-    "KnightEnemy": {
-      "__uuid__": "f13ed3e9-75e5-4281-9d6f-7e2485437322"
-    },
-    "BombEnemy": {
-      "__uuid__": "874f7b21-9fb6-4a53-af8e-0d53d27afe6b"
-    },
-    "coinPrefab": {
-      "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
-    },
-    "soundEffect": {
-      "__uuid__": "c6b68753-0664-4e79-b2ab-d71e73a0d015"
+      "__uuid__": "272c2c60-68e4-4521-ae91-b76a8510ca5d"
     },
     "_id": ""
   },
@@ -170,7 +121,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 1,
     "_allowSleep": false,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -188,16 +139,16 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsBoxCollider",
+    "__type__": "cc.PhysicsCircleCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 1,
+    "tag": 10,
     "_density": 1,
-    "_sensor": false,
+    "_sensor": true,
     "_friction": 0.2,
     "_restitution": 0,
     "body": null,
@@ -206,28 +157,7 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 114,
-      "height": 30
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_defaultClip": null,
-    "_clips": [
-      {
-        "__uuid__": "9def74ed-a392-4aaf-bfc4-3e314d15a284"
-      }
-    ],
-    "playOnLoad": false,
+    "_radius": 3,
     "_id": ""
   },
   {
@@ -236,9 +166,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a6d03b41-ee59-4ae7-8cc8-cda781dbd8c2"
+      "__uuid__": "e4d8eff2-b9a8-4387-8ed1-d653a4f9c898"
     },
-    "fileId": "09uZvRP4RI8qyt+FlH50Sf",
+    "fileId": "adF3A37H5LjI4ByrPLdMsX",
     "sync": false
   }
 ]

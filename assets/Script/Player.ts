@@ -15,7 +15,7 @@ export default class player extends cc.Component {
     private playerSpeed: number = 0;
 
     private bulletspeed = 500;
-    private maxbullet = 3;
+    private maxbullet = 300;
 
     private anim = null;
 
@@ -26,6 +26,9 @@ export default class player extends cc.Component {
     private knife: cc.Node = null;
 
     private isKnifing : boolean = false;
+    //ninja attack
+    private isThrow: boolean = false;
+    private isThrowBack: boolean = false;
 
     //0:default 1:shield protect 2:rocket
     private mode = 0;
@@ -60,6 +63,9 @@ export default class player extends cc.Component {
 
     @property(cc.Prefab)
     bullet: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    ninja_bullet: cc.Prefab = null;
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -192,6 +198,7 @@ export default class player extends cc.Component {
 
     update (dt) {
         this.playermovement(dt);
+        this.ninja_bullet_back();
         if(this.node.x-11.5 <= -480 && this.leftDown){
             this.node.x = 491.5;
         }
@@ -252,6 +259,11 @@ export default class player extends cc.Component {
                 contact.disabled = true;
                 other.node.destroy();
             }
+            else if(other.tag == 10 && this.isThrowBack){
+                this.isThrow = false;
+                this.isThrowBack = false;
+                this.bulletPool.removeAllChildren();
+            }
             else{
                 if(contact.getWorldManifold().normal.y != -1 || contact.getWorldManifold().normal.x != 0)
                 contact.disabled = true;
@@ -298,6 +310,9 @@ export default class player extends cc.Component {
                     other.node.getComponent("Enemy").sucktrigger = false;
                     other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                     other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
+                    other.scheduleOnce( function(){
+                        other.node.destroy();
+                    }, 1.5);
                 }
                 return;
             }
@@ -316,7 +331,9 @@ export default class player extends cc.Component {
                 //other.node.getComponent("Enemy").sucktrigger = false;
                 //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                 other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
-                //cc.log('end')
+                other.scheduleOnce( function(){
+                    other.node.destroy();
+                }, 1.5);
             }
             
         }
@@ -412,6 +429,19 @@ export default class player extends cc.Component {
             case 2: {                 // ninja
                 this.anim.stop('ninja_jump');
                 this.animateState = this.anim.play("ninja_die");
+                
+                if(!this.isThrow){
+                    //this.isThrow = true;
+                    let newnode = cc.instantiate(this.ninja_bullet);
+                    this.bulletPool.addChild(newnode);
+                    newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
+                    let dir = cc.v2(x,y).sub(playerpos);
+                    cc.log(dir);
+                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
+                    this.scheduleOnce(function(){
+                        this.isThrowBack = true;
+                    }, 0.81);
+                }
                 break;
             }
             case 3: {                //magic
@@ -431,6 +461,22 @@ export default class player extends cc.Component {
                 this.anim.stop('jump');
                 this.animateState = this.anim.play("die");
                 break;
+            }
+        }
+    }
+
+    ninja_bullet_back(){
+        if(this.isThrowBack){
+            let n = this.bulletPool.children[0];
+            if(this.bulletPool.childrenCount!=0 && n.isValid){
+                let move = this.node.position.sub(n.position).divSelf(15);
+                if(move.mag() < 50)
+                    n.runAction(cc.moveBy(0.001, move));
+                else
+                    n.runAction(cc.moveBy(0.05, move));
+            } else{
+                cc.log('d')
+                this.isThrowBack = false;
             }
         }
     }
