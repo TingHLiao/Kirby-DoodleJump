@@ -3,10 +3,10 @@
   "_name": "snow_suck",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.13333333333333333,
-  "sample": 60,
-  "speed": 1,
-  "wrapMode": 1,
+  "_duration": 0.3,
+  "sample": 20,
+  "speed": 0.3,
+  "wrapMode": 2,
   "curveData": {
     "comps": {
       "cc.Sprite": {
@@ -18,15 +18,9 @@
             }
           },
           {
-            "frame": 0.05,
+            "frame": 0.25,
             "value": {
               "__uuid__": "60b4be1d-294c-4355-8c35-bc7a55ee24e5"
-            }
-          },
-          {
-            "frame": 0.11666666666666667,
-            "value": {
-              "__uuid__": "45e3e365-e578-4ef4-b1bf-aea2a01d7107"
             }
           }
         ]

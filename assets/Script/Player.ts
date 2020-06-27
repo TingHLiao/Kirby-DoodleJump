@@ -73,16 +73,42 @@ export default class player extends cc.Component {
         } 
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = true;
-            if(this.kirby_state == 0){                               // Normal Kirby
-                if(this.anim.getAnimationState('jump').isPlaying){
-                    this.anim.stop('jump');
-                    this.animateState = this.anim.play('suck');
+
+            switch(this.kirby_state){
+                case 0: {
+                    if(this.anim.getAnimationState('jump').isPlaying){
+                        this.anim.stop('jump');
+                        this.animateState = this.anim.play('suck');
+                    }
+                    break;
                 }
-            } 
-            else if(this.kirby_state == 1){                           // Snow Kirby          
-                if(this.anim.getAnimationState('snow_jump').isPlaying){
-                    this.anim.stop('snow_jump');
-                    this.animateState = this.anim.play('snow_suck');
+                case 1: {
+                    if(this.anim.getAnimationState('snow_jump').isPlaying){
+                        this.anim.stop('snow_jump');
+                        this.animateState = this.anim.play('snow_suck');
+                    }
+                    break;
+                }
+                case 2: {
+                    if(this.anim.getAnimationState('ninja_jump').isPlaying){
+                        this.anim.stop('ninja_jump');
+                        this.animateState = this.anim.play('ninja_suck');
+                    }
+                    break;
+                }
+                case 3: {
+                    if(this.anim.getAnimationState('magic_jump').isPlaying){
+                        this.anim.stop('magic_jump');
+                        this.animateState = this.anim.play('magic_suck');
+                    }
+                    break;
+                }
+                default: {
+                    if(this.anim.getAnimationState('jump').isPlaying){
+                        this.anim.stop('jump');
+                        this.animateState = this.anim.play('suck');
+                    }
+                    break;
                 }
             }
         }
@@ -95,16 +121,42 @@ export default class player extends cc.Component {
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
-            if(this.kirby_state == 0){
-                if(this.anim.getAnimationState('suck').isPlaying){
-                    this.anim.stop('suck');
-                    this.animateState = this.anim.play('stopsuck');
+
+            switch(this.kirby_state){
+                case 0: {
+                    if(this.anim.getAnimationState('suck').isPlaying){
+                        this.anim.stop('suck');
+                        this.animateState = this.anim.play('stopsuck');
+                    }
+                    break;
                 }
-            }
-            else if(this.kirby_state == 1){
-                if(this.anim.getAnimationState('snow_suck').isPlaying){
-                    this.anim.stop('snow_suck');
-                    this.animateState = this.anim.play('stop_snowsuck');
+                case 1: {
+                    if(this.anim.getAnimationState('snow_suck').isPlaying){
+                        this.anim.stop('snow_suck');
+                        this.animateState = this.anim.play('stop_snowsuck');
+                    }
+                    break;
+                }
+                case 2: {
+                    if(this.anim.getAnimationState('ninja_suck').isPlaying){
+                        this.anim.stop('ninja_suck');
+                        this.animateState = this.anim.play('stop_ninjasuck');
+                    }
+                    break;
+                }
+                case 3: {
+                    if(this.anim.getAnimationState('magic_suck').isPlaying){
+                        this.anim.stop('magic_suck');
+                        this.animateState = this.anim.play('stop_magicsuck');
+                    }
+                    break;
+                }
+                default: {
+                    if(this.anim.getAnimationState('suck').isPlaying){
+                        this.anim.stop('suck');
+                        this.animateState = this.anim.play('stopsuck');
+                    }
+                    break;
                 }
             }
         }
@@ -127,17 +179,21 @@ export default class player extends cc.Component {
 
             if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
                 if(other.tag == 5 && this.spaceDown){
-                    if(other.node.name == "ninja_enemy"){
+                    if(other.node.name == "snowman_enemy"){
+                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
+                        // this.node.scaleY = 1.5;
+                        this.anim.play("changetosnow");
+                        this.kirby_state = 1;
+                    }
+                    else if(other.node.name == "ninja_enemy"){
                         // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
                         // this.node.scaleY = 1.5;
                         this.anim.play("changetoninja");
                         this.kirby_state = 2;
                     }
-                    else if(other.node.name == "snowman_enemy"){
-                        // this.node.scaleX = (this.node.scaleX > 0) ? 1.5 : -1.5;
-                        // this.node.scaleY = 1.5;
-                        this.anim.play("changetosnow");
-                        this.kirby_state = 1;
+                    else if(other.node.name == "magic_enemy"){
+                        this.anim.play("changetomagic");
+                        this.kirby_state = 3;
                     }
                 }
                 if(this.mode > 0){
@@ -146,7 +202,7 @@ export default class player extends cc.Component {
                 }
                 if((!this.spaceDown && other.tag == 5) || other.tag == 4){
                     if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
-                        this.isDied = true;
+                        //cc.log("gameover");
                         this.gameover();
                     }
                 }
@@ -175,6 +231,9 @@ export default class player extends cc.Component {
                     }
                     else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 2){
                         this.animateState = this.anim.play("ninja_jump");
+                    }
+                    else if(other.tag == 1 && this.mode != 2 && this.kirby_state == 3){
+                        this.animateState = this.anim.play("magic_jump");
                     }
                 }
             }
@@ -226,7 +285,8 @@ export default class player extends cc.Component {
 
     private gameover(){
         //this.node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Kinematic;
-        
+        this.isDied = true;
+        //cc.log(this.isDied);
         switch(this.kirby_state){
             case 0: {                 // normal
                 this.anim.stop('jump');
@@ -239,9 +299,13 @@ export default class player extends cc.Component {
                 break;
             }
             case 2: {                 // ninja
-                cc.log(this.kirby_state);
                 this.anim.stop('ninja_jump');
                 this.animateState = this.anim.play("ninja_die");
+                break;
+            }
+            case 3: {
+                this.anim.stop('magic_jump');
+                this.animateState = this.anim.play("magic_die");
                 break;
             }
             default: {
@@ -250,7 +314,7 @@ export default class player extends cc.Component {
                 break;
             }
         }
-        //this.node.getComponent(cc.RigidBody).active = false;
+        this.node.getComponent(cc.RigidBody).enabledContactListener = false;
         //get money and score to database, handle by GameMgr
         this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);

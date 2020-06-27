@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "stop_magicsuck",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.15,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "f0aeaaff-3fcd-46fd-adf7-501f32b9c2ed"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "5083b38e-5247-4ea0-9ccd-2aacfabeac97"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "01c54e7a-6258-4449-8f0b-c6ff7a53a2c1"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "01c54e7a-6258-4449-8f0b-c6ff7a53a2c1"
+            }
+          },
+          {
+            "frame": 0.13333333333333333,
+            "value": {
+              "__uuid__": "0e2143b1-3297-41c2-bd1b-63e2bbea8c76"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

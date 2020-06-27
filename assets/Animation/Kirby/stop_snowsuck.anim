@@ -3,14 +3,57 @@
   "_name": "stop_snowsuck",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0,
-  "sample": 60,
+  "_duration": 0.35,
+  "sample": 40,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
     "comps": {
       "cc.Sprite": {
-        "spriteFrame": []
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d2dde0f5-4044-4121-99d6-e1f8ed7f0377"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "c07034cf-03ce-4cd5-9c1f-4eb3606443d3"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "3a3278de-ce87-41cc-b0be-34411bb28d26"
+            }
+          },
+          {
+            "frame": 0.175,
+            "value": {
+              "__uuid__": "a01643e9-46b4-4d20-91b2-8f98472b33b0"
+            }
+          },
+          {
+            "frame": 0.225,
+            "value": {
+              "__uuid__": "05a9f079-3f4e-4561-bf69-0b3b6b57f862"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "df49c521-d140-4476-b027-7a39e2cc75af"
+            }
+          },
+          {
+            "frame": 0.325,
+            "value": {
+              "__uuid__": "df49c521-d140-4476-b027-7a39e2cc75af"
+            }
+          }
+        ]
       }
     }
   },

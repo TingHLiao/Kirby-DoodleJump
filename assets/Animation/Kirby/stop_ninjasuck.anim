@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "stop_ninjasuck",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.325,
+  "sample": 40,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "e9de6df0-a834-465f-8d8d-4090ef49b291"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "c05a4cdb-1e76-4328-bb92-0a16a01bcfc3"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "759fe6c8-9e27-4f76-baa2-dca335e939e9"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "34d3f967-ca7f-46b9-b2c8-57f6546b15db"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "34d3f967-ca7f-46b9-b2c8-57f6546b15db"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
