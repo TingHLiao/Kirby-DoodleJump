@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "snowball",
+    "_name": "bullet",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -27,10 +27,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -42,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 20,
-      "height": 20
+      "width": 17,
+      "height": 17
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -158,6 +161,16 @@
       "y": 0
     },
     "_radius": 3,
+    "_id": ""
+  },
+  {
+    "__type__": "a21a5+Yy95I1bPECIPohEtO",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {
