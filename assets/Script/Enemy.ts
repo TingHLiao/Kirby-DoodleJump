@@ -148,7 +148,7 @@ export default class Enemy extends cc.Component {
         this.node.addChild(newnode);
         newnode.position = cc.v2(14, 0);
         newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2((this.player.x- this.node.parent.x + offsetx), (this.player.y - this.node.parent.y + offsety));
-        newnode.parent = cc.find("Canvas");
+        newnode.parent = cc.find("Canvas/knife");
         this.anim.play("knight_enemy_attack");
         this.scheduleOnce(()=>{
             this.anim.play("knight_enemy");

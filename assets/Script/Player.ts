@@ -19,6 +19,9 @@ export default class player extends cc.Component {
     private animateState = null;
 
     private isDied = false;
+
+    private knife: cc.Node = null;
+
     //0:default 1:shield protect 2:rocket
     private mode = 0;
 
@@ -53,6 +56,7 @@ export default class player extends cc.Component {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
         this.platform = cc.find("Canvas/platform");
+        this.knife = cc.find("Canvas/knife");
         this.kirby_state = 0;
     }
 
@@ -64,10 +68,10 @@ export default class player extends cc.Component {
     }
 
     onKeyDown(event) {
-        if(event.keyCode == cc.macro.KEY.left) {
+        if(event.keyCode == cc.macro.KEY.a) {
             this.leftDown = true;
             this.rightDown = false;
-        } else if(event.keyCode == cc.macro.KEY.right) {
+        } else if(event.keyCode == cc.macro.KEY.d) {
             this.leftDown = false;
             this.rightDown = true;
         } 
@@ -115,9 +119,9 @@ export default class player extends cc.Component {
     }
     
     onKeyUp(event) {
-        if(event.keyCode == cc.macro.KEY.left)  
+        if(event.keyCode == cc.macro.KEY.a)  
             this.leftDown = false;
-        else if(event.keyCode == cc.macro.KEY.right)
+        else if(event.keyCode == cc.macro.KEY.d)
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
@@ -320,6 +324,7 @@ export default class player extends cc.Component {
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
         this.scheduleOnce(()=>{ 
             this.platforms.removeAllChildren();
+            this.knife.removeAllChildren();
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
         }, 0.3);
     }
