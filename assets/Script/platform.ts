@@ -111,16 +111,47 @@ export default class platform extends cc.Component {
         let posy = this.node.position.y;
         
         if(this.node.name == "normal_basic"){
-            
             let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
-
+            cc.log(posy)
             if(posy >= 1950 && posy <= 2000){
-                cc.log("instantiate america");
                 withitem = true;
-                var newnode = cc.instantiate(this.coinPrefab); // newnode is coin
+                var newnode = cc.instantiate(this.americaMonster); // newnode is america monster
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 25.7);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 3950 && posy <= 4000){
+                withitem = true;
+                var newnode = cc.instantiate(this.japanMonster); // newnode is japan monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 5950 && posy <= 6000){
+                withitem = true;
+                var newnode = cc.instantiate(this.germanyMonster); // newnode is germany monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 7550 && posy <= 7605){
+                withitem = true;
+                var newnode = cc.instantiate(this.greeceMonster); // newnode is greece monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 9500 && posy <= 9560){
+                withitem = true;
+                var newnode = cc.instantiate(this.italyMonster); // newnode is italy monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
             // platform with rocket
@@ -128,7 +159,7 @@ export default class platform extends cc.Component {
                 withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54); // 37.2 = half of platform's height + half of 0.6rocket's height
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
             // platform with coin

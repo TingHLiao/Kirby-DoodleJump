@@ -220,6 +220,7 @@ export default class GameMgr extends cc.Component {
 
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
+        cc.log(this.player.position.y);
         cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
         cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         if(s > this.highestScore){
