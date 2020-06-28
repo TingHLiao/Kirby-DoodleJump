@@ -10,7 +10,7 @@
 
 const {ccclass, property} = cc._decorator;
 
-import * as Buy_Kirby from "./Buy"
+import * as Buy from "./Buy"
 
 @ccclass
 export default class GameMgr extends cc.Component {
@@ -22,6 +22,8 @@ export default class GameMgr extends cc.Component {
     private mousedown : Boolean = false;
 
     private pause: Boolean = false;
+
+    private istwoP: Boolean = false;
 
     private floor = 0;
 
@@ -37,6 +39,15 @@ export default class GameMgr extends cc.Component {
     private last_platform_y : number = 0;
 
     private knife : cc.Node = null;
+
+    //counter for 2P
+    timer: cc.Node = null;
+    twoPscore: cc.Node = null;
+    c: number = 0;
+    remaintime: number = 0;
+    write: boolean = true;
+    read: boolean = true;
+    twoPshowscore: number = 0;
 
     // Get the node of platform
     platforms: cc.Node = null;
@@ -63,6 +74,15 @@ export default class GameMgr extends cc.Component {
     @property(cc.Node)
     gameoverPanel: cc.Node = null;
 
+    @property(cc.Node)
+    twoPgameoverPanel: cc.Node = null;
+
+    @property(cc.SpriteFrame)
+    winSprite: cc.SpriteFrame = null;
+
+    @property(cc.SpriteFrame)
+    loseSprite: cc.SpriteFrame = null;
+
     // @property(cc.Node)
     // Gameover : cc.Node = null;
 
@@ -78,6 +98,14 @@ export default class GameMgr extends cc.Component {
         this.last_platform_y = -280;
         this.count = -1000;
         this.knife = cc.find("Canvas/knife");
+        if(Buy.Global.twoP){
+            this.istwoP = true;
+            this.timer = cc.find("Canvas/Main Camera/Timer");
+            this.twoPscore = cc.find("Canvas/Main Camera/2Pscore");
+            this.timer.getComponent(cc.Label).string = "60";
+            this.remaintime = 60;
+            this.timer.active = true;
+        }
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
             this.ID = user.email.replace('@', '-').split('.').join('_');
@@ -160,6 +188,7 @@ export default class GameMgr extends cc.Component {
     }
 
     update (dt) {
+        this.counter();
         let height = parseInt(this.score.getComponent(cc.Label).string);
         if(this.player.y - this.camera.y > 100){
             height += Math.floor(3 + 3 * Math.random());
@@ -204,6 +233,7 @@ export default class GameMgr extends cc.Component {
             {
                 this.platforms.removeAllChildren();
                 if(this.knife.isValid)this.knife.destroy();
+                this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
                 this.scheduleOnce(()=>{
                     this.gameovershow();
                 }, 1)
@@ -214,14 +244,77 @@ export default class GameMgr extends cc.Component {
         }
     }
 
+    counter(){
+        if(!this.istwoP) return;
+        let s = parseInt(this.score.getComponent(cc.Label).string);
+        if(this.c == 60){
+            if(this.remaintime == 0){
+                this.gameovershow();
+            } else{
+                this.remaintime--;
+                this.timer.getComponent(cc.Label).string = this.remaintime.toString();
+
+                //stop reading if competitor isDie
+                if(this.read){
+                    //@ts-ignore
+                    firebase.database().ref(`users/${this.ID}/2P`).once('value', snapshot => {
+                        this.twoPshowscore = snapshot.val().score;
+                        if(snapshot.val().isDie)
+                            this.read = false;
+                    }).then(()=>{
+                        this.twoPscore.getChildByName("score").getComponent(cc.Label).string = this.twoPshowscore.toString();
+                    });
+                }
+
+                //stop writting if isDie
+                if(!this.player.getComponent("Player").isDie){
+                    //@ts-ignore
+                    firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
+                        score: s,
+                        isDie: false
+                    });
+                } else if(this.write){
+                    //@ts-ignore
+                    firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
+                        score: s,
+                        isDie: true
+                    });
+                    this.write = false;
+                }
+                this.c = 0;
+            }
+        } else{
+            this.c ++;
+        }
+        
+    }
+
     gameovershow(){
-        this.gameoverPanel.active = true;
+        if(Buy.Global.twoP){
+            if(this.remaintime != 0) return;
+            cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString).slice(-6);
+            cc.find("Canvas/Main Camera/2PGameOver/otherscore").getComponent(cc.Label).string = `${Buy.Global.competitorName}'s Score: `;
+            //lose
+            if(this.twoPshowscore > parseInt(this.score.getComponent(cc.Label).string)){
+                cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.winSprite;
+                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "WIN ! !"
+            } else{ //win
+                cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.loseSprite;
+                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "LOSE QQ"
+            }
+            this.twoPgameoverPanel.active = true;
+            Buy.Global.twoP = false;
+        } else{
+            this.gameoverPanel.active = true;
+        }
     }
 
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
         cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
         cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
+        cc.find("Canvas/Main Camera/2PGameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
+        cc.find("Canvas/Main Camera/2PGameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);    
         if(s > this.highestScore){
             //@ts-ignore
             firebase.database().ref(`users/${this.ID}/highest`).set({
