@@ -102,6 +102,7 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
+        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -378,7 +379,7 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-
+        cc.log(Buy.Global.Extra_life);
         if(Buy.Global.Extra_life > 0){    //have extra life!
             this.isReborn  = true;
             Buy.Global.Extra_life--;

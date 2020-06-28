@@ -74,6 +74,9 @@ export default class GameMgr extends cc.Component {
     @property(cc.Node)
     gameoverPanel: cc.Node = null;
 
+    @property({type: cc.AudioClip})
+    DieEffect: cc.AudioClip = null;
+
     @property(cc.Node)
     twoPgameoverPanel: cc.Node = null;
 
@@ -87,6 +90,7 @@ export default class GameMgr extends cc.Component {
     // Gameover : cc.Node = null;
 
     private backgroundSize = 256;
+    private EffectOn = false;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -192,6 +196,7 @@ export default class GameMgr extends cc.Component {
     update (dt) {
         this.counter();
         let height = parseInt(this.score.getComponent(cc.Label).string);
+        let Dead = this.player.getComponent("Player").isDied;
         if(this.player.y - this.camera.y > 100){
             height += Math.floor(3 + 3 * Math.random());
             this.score.getComponent(cc.Label).string = height + '';
@@ -229,10 +234,12 @@ export default class GameMgr extends cc.Component {
         if(this.player.y - this.camera.y > 100)
             this.camera.y = this.player.y - 100;
     
-        if(this.camera.y-300 > this.player.y)
+        if(this.camera.y-300 > this.player.y && !this.EffectOn && !Dead)
         {
             if(this.player.active)
-            {
+            {   
+                cc.audioEngine.playEffect(this.DieEffect, false);
+                this.EffectOn = true;
                 this.platforms.removeAllChildren();
                 if(this.knife.isValid)this.knife.destroy();
                 this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
@@ -333,6 +340,8 @@ export default class GameMgr extends cc.Component {
         firebase.database().ref(`users/${this.ID}/coin`).set({
             number: this.remaincoin + money
         });
+        Buy.Global.coin = this.remaincoin + money;
+        cc.log(Buy.Global.coin);
     }
 
     gamePause(){

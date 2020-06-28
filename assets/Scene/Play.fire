@@ -398,6 +398,9 @@
     "gameoverPanel": {
       "__id__": 25
     },
+    "DieEffect": {
+      "__uuid__": "76a4a34c-b37b-49b4-a5cb-3071ade77452"
+    },
     "twoPgameoverPanel": {
       "__id__": 49
     },
@@ -472,7 +475,7 @@
       "array": [
         0,
         0,
-        355.9364409554043,
+        209.57814771583418,
         0,
         0,
         0,
@@ -1093,7 +1096,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 31.64,
+      "width": 27.62,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1106,7 +1109,7 @@
       "ctor": "Float64Array",
       "array": [
         438.186,
-        299.151,
+        299.659,
         0,
         0,
         0,
@@ -1144,9 +1147,9 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "l I",
-    "_N$string": "l I",
-    "_fontSize": 40,
+    "_string": "| |",
+    "_N$string": "| |",
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
