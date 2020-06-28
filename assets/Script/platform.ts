@@ -113,7 +113,6 @@ export default class platform extends cc.Component {
         if(this.node.name == "normal_basic"){
             let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
-            cc.log(posy)
             if(posy >= 1950 && posy <= 2000){
                 withitem = true;
                 var newnode = cc.instantiate(this.americaMonster); // newnode is america monster

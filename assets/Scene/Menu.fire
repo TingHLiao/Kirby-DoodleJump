@@ -4187,7 +4187,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 437.03,
+      "width": 435.27,
       "height": 512.7
     },
     "_anchorPoint": {
@@ -4597,7 +4597,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_snow",
+    "handler": "buy_Kirby",
     "customEventData": ""
   },
   {
@@ -4949,7 +4949,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_ninja",
+    "handler": "buy_Kirby",
     "customEventData": ""
   },
   {
@@ -5301,7 +5301,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_magic",
+    "handler": "buy_Kirby",
     "customEventData": ""
   },
   {
@@ -5653,7 +5653,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_knight",
+    "handler": "buy_Kirby",
     "customEventData": ""
   },
   {
@@ -5829,7 +5829,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "life",
     "_objFlags": 0,
     "_parent": {
       "__id__": 120
@@ -6019,7 +6019,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_extralife",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -6343,7 +6343,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -29.859,
+        -27.318,
         -28.496,
         0,
         0,
@@ -6575,7 +6575,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "jump",
     "_objFlags": 0,
     "_parent": {
       "__id__": 135
@@ -6763,7 +6763,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_jump",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -6899,8 +6899,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -29.859,
-        -30.481,
+        -30.368,
+        -28.956,
         0,
         0,
         0,
@@ -7325,7 +7325,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "range",
     "_objFlags": 0,
     "_parent": {
       "__id__": 150
@@ -7513,7 +7513,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_range",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -7649,8 +7649,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -29.859,
-        -30.481,
+        -28.334,
+        -27.94,
         0,
         0,
         0,
@@ -8257,7 +8257,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "platform",
     "_objFlags": 0,
     "_parent": {
       "__id__": 169
@@ -8445,7 +8445,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_platform",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -9003,7 +9003,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "rocket",
     "_objFlags": 0,
     "_parent": {
       "__id__": 184
@@ -9191,7 +9191,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_rocket",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -9749,7 +9749,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "square1",
+    "_name": "shield",
     "_objFlags": 0,
     "_parent": {
       "__id__": 199
@@ -9937,7 +9937,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "but_shield",
+    "handler": "buy_ability",
     "customEventData": ""
   },
   {
@@ -10426,7 +10426,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 437.03,
+      "width": 435.27,
       "height": 512.7
     },
     "_resize": 1,
@@ -10460,8 +10460,8 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 45,
-    "_left": 25.7977,
-    "_right": 25.1723,
+    "_left": 26.871299999999994,
+    "_right": 25.858699999999995,
     "_top": 56.16320000000002,
     "_bottom": -158.8632000000001,
     "_verticalCenter": 0,
