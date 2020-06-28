@@ -50,7 +50,6 @@ export default class virus extends cc.Component {
         let t2 = (this.node.parent.position.x+480)/192;
         let moveright1 = cc.moveBy(t1, 480-this.node.parent.position.x, this.node.position.y);
         let moveleft1 = cc.moveBy(t2, -(this.node.parent.position.x+480), this.node.position.y);
-        cc.log(this.node.parent.position.x);
         let moverighta = cc.moveBy(1, 192, 60);
         let moverightb = cc.moveBy(1, 192, -60);
         let moverightc = cc.moveBy(1, -192, 60);
@@ -85,9 +84,17 @@ export default class virus extends cc.Component {
                     this.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8 || other.tag == 10){
+        } else if(other.tag == 8){
             other.node.destroy();
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
+            this.isDead = true;   
+            this.anim.play("virus_die");
+            this.scheduleOnce(()=>{
+                this.node.destroy();
+            }, 1)
+        }
+        else if(other.tag == 10){
+            this.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
             this.isDead = true;   
             this.anim.play("virus_die");
             this.scheduleOnce(()=>{

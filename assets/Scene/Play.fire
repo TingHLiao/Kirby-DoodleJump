@@ -978,7 +978,9 @@
     "bullet": {
       "__uuid__": "32ed9d04-67c5-4640-b930-a3c8e83fe725"
     },
-    "ninja_bullet": null,
+    "ninja_bullet": {
+      "__uuid__": "e4d8eff2-b9a8-4387-8ed1-d653a4f9c898"
+    },
     "magicbomb": {
       "__uuid__": "b140b058-2bc7-48c5-8c23-fa30fc1afa37"
     },
