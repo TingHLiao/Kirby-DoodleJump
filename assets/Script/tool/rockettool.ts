@@ -54,6 +54,7 @@ export default class RocketTool extends cc.Component {
             other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeQuadraticActionInOut()));
             self.node.active = false;
             this.scheduleOnce(function () {
+                cc.log("In destroy")
                 cc.director.getPhysicsManager().enabled = true;
                 this.player.getComponent("Player").setmode("unrocket");
             }, 2.5);

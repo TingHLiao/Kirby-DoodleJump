@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "virus_red2",
+    "_name": "move_ghost",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -30,13 +30,10 @@
       },
       {
         "__id__": 5
-      },
-      {
-        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -48,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 139.2,
-      "height": 140.1
+      "width": 112,
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -60,8 +57,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        289.09,
-        224.175,
+        400.365,
+        199.383,
         0,
         0,
         0,
@@ -101,10 +98,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "5db192c6-0c83-4a2b-8434-b258cc07d1eb"
+      "__uuid__": "5660d487-4128-4a87-b716-c0a27e6460e2"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -115,7 +112,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "ba936c20-63e2-497b-b53c-f16991083d5a"
+      "__uuid__": "bc4b5708-2756-40f5-a6cc-689595ae6b0c"
     },
     "_id": ""
   },
@@ -127,7 +124,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 1,
+    "_type": 0,
     "_allowSleep": false,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -145,47 +142,14 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Animation",
+    "__type__": "cc.PhysicsBoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_defaultClip": null,
-    "_clips": [
-      {
-        "__uuid__": "9fefe37d-c6f0-4c40-9c1a-59fc52a69835"
-      },
-      {
-        "__uuid__": "29892db0-dafb-4a2d-b168-9ca947f2eedc"
-      }
-    ],
-    "playOnLoad": false,
-    "_id": ""
-  },
-  {
-    "__type__": "4dfec21CdRCQ7ltv1Ntw281",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "StepEffect": {
-      "__uuid__": "dfdd1346-7bca-4270-b26c-c60149cb4b7f"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.PhysicsCircleCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "tag": 4,
+    "tag": 1,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -196,7 +160,57 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 44,
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 112,
+      "height": 30
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "7bb61aPfpxOJZPilmYBdRqQ",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "rocketPrefab": {
+      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
+    },
+    "virus_red1": {
+      "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
+    },
+    "virus_green1": {
+      "__uuid__": "5995e534-5216-460e-85ff-de0724915579"
+    },
+    "virus_red2": {
+      "__uuid__": "9500bfe8-a5f1-479f-85c3-f64949366ec4"
+    },
+    "trampoline": {
+      "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
+    },
+    "shield": {
+      "__uuid__": "512acee5-f123-4a69-93f7-d0659ee4d21d"
+    },
+    "NinjaEnemy": {
+      "__uuid__": "d302fe73-3358-4953-a2be-5f08610045d0"
+    },
+    "SnowmanEnemy": {
+      "__uuid__": "f6e38456-3d8d-4d96-9479-c233d387d24d"
+    },
+    "KnightEnemy": {
+      "__uuid__": "f13ed3e9-75e5-4281-9d6f-7e2485437322"
+    },
+    "BombEnemy": {
+      "__uuid__": "874f7b21-9fb6-4a53-af8e-0d53d27afe6b"
+    },
+    "coinPrefab": {
+      "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
+    },
+    "soundEffect": {
+      "__uuid__": "4d2ac333-16f4-480b-bffa-3d9049ad9e59"
+    },
     "_id": ""
   },
   {
@@ -205,9 +219,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "9500bfe8-a5f1-479f-85c3-f64949366ec4"
+      "__id__": 0
     },
-    "fileId": "f9k6vT1d9HqL1MA+LeT76B",
+    "fileId": "ddwevGqytJramZPJhIhiQ5",
     "sync": false
   }
 ]

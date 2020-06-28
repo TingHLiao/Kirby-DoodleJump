@@ -35,6 +35,7 @@ export default class virus extends cc.Component {
             this.virus_r1_move();
         }
         else if(this.node.name == "virus_red2"){
+            this.node.parent.zIndex = 1;
             this.anim.play("virus_red2");
             this.virus_r2_move();
         }
@@ -98,7 +99,7 @@ export default class virus extends cc.Component {
             }, 1)
         }
         else if(other.tag == 10){
-            this.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
+            this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             this.isDead = true;   
             this.anim.play("virus_die");
             this.scheduleOnce(()=>{

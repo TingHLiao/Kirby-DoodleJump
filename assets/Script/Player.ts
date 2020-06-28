@@ -96,7 +96,6 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
-        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -348,9 +347,6 @@ export default class player extends cc.Component {
     onEndContact(contact, self, other){
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
-                //other.node.stopAllActions();
-                //other.node.getComponent("Enemy").sucktrigger = false;
-                //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                 other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
                 other.scheduleOnce( function(){
                     other.node.destroy();
@@ -379,7 +375,6 @@ export default class player extends cc.Component {
         if(Buy.Global.Extra_life > 0){    //have extra life
             this.isReborn  = true;
             Buy.Global.Extra_life--;
-            cc.log(Buy.Global.Extra_life);
             this.anim.stop();
 
             if(this.kirby_state == 0){
@@ -507,7 +502,6 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    //cc.log(dir);
                     newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
@@ -552,7 +546,6 @@ export default class player extends cc.Component {
                 else
                     n.runAction(cc.moveBy(0.05, move));
             } else{
-                cc.log('d')
                 this.isThrowBack = false;
             }
         }
