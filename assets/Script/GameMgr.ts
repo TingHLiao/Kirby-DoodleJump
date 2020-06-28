@@ -58,6 +58,9 @@ export default class GameMgr extends cc.Component {
     @property(cc.Node)
     stopPanel: cc.Node = null;
 
+    @property(cc.Node)
+    gameoverPanel: cc.Node = null;
+
     // @property(cc.Node)
     // Gameover : cc.Node = null;
 
@@ -187,8 +190,14 @@ export default class GameMgr extends cc.Component {
         }
     }
 
+    gameovershow(){
+        this.gameoverPanel.active = true;
+    }
+
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
+        cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
+        cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         if(s > this.highestScore){
             //@ts-ignore
             firebase.database().ref(`users/${this.ID}/highest`).set({
@@ -218,5 +227,12 @@ export default class GameMgr extends cc.Component {
         this.scheduleOnce(()=>{
             cc.director.pause();
         }, 0.1);
+    }
+
+    playagain(){
+        cc.director.loadScene("Play");
+    }
+    backtomenu(){
+        cc.director.loadScene("Menu");
     }
 }

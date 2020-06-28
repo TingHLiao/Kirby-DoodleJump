@@ -418,7 +418,7 @@ export default class player extends cc.Component {
             },1);
         }
         else{
-            /*this.isDied = true;
+            this.isDied = true;
             switch(this.kirby_state){
                 case 0: {                 // normal
                     this.anim.stop('jump');
@@ -461,7 +461,10 @@ export default class player extends cc.Component {
                 this.bulletPool.removeAllChildren();
                 this.knife.removeAllChildren();
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -150);
-            }, 0.3);*/
+                this.scheduleOnce(()=>{
+                    this.gamemanager.gameovershow();
+                }, 1)
+            }, 0.3);
         }
        
     }
