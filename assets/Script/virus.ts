@@ -31,6 +31,10 @@ export default class virus extends cc.Component {
             this.anim.play("virus_red1");
             this.virus_r1_move();
         }
+        else if(this.node.name == "virus_red2"){
+            this.anim.play("virus_red2");
+            this.virus_r2_move();
+        }
     }
 
     //update (dt) {}
@@ -39,6 +43,33 @@ export default class virus extends cc.Component {
         let moveup = cc.moveBy(2, 0, 15);
         let movedown = cc.moveBy(2, 0, -15);
         this.node.runAction(cc.repeatForever(cc.sequence(moveup, movedown)));
+    }
+
+    private virus_r2_move(){
+        let t1 = (480-this.node.parent.position.x)/192; // 192 = 960/5
+        let t2 = (this.node.parent.position.x+480)/192;
+        let moveright1 = cc.moveBy(t1, 480-this.node.parent.position.x, this.node.position.y);
+        let moveleft1 = cc.moveBy(t2, -(this.node.parent.position.x+480), this.node.position.y);
+        cc.log(this.node.parent.position.x);
+        let moverighta = cc.moveBy(1, 192, 60);
+        let moverightb = cc.moveBy(1, 192, -60);
+        let moverightc = cc.moveBy(1, -192, 60);
+        let moverightd = cc.moveBy(1, -192, -60);
+        
+        if(Math.random() > 0.5){
+            this.node.runAction(moveleft1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(moverighta, moverightb, moverighta, moverightb, moverighta, moverightd, moverightc, moverightd, moverightc, moverightd)));
+            }, t2);
+            
+        }
+        else{
+            this.node.runAction(moveright1);
+            this.scheduleOnce(()=>{
+                this.node.runAction(cc.repeatForever(cc.sequence(moverightc, moverightd, moverightc, moverightd, moverightc, moverightb, moverighta, moverightb, moverighta, moverightb)));
+            }, t1);
+            
+        }
     }
 
     onBeginContact(contact, self, other){

@@ -27,6 +27,10 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     virus_green1: cc.Prefab = null;
 
+    // virus_red2
+    @property(cc.Prefab)
+    virus_red2: cc.Prefab = null;
+
     // Trampoline
     @property(cc.Prefab)
     trampoline: cc.Prefab = null;
@@ -122,6 +126,13 @@ export default class platform extends cc.Component {
             if(!withitem && Math.random() > 0.85 && this.score > 1000){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
+            }
+
+            if(!withitem && Math.random() > 0.85 /*&& this.score > 1000*/){
+                withitem = true;
+                let newnode = cc.instantiate(this.virus_red2); // newnode is the virus_g1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }

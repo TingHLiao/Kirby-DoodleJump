@@ -39,7 +39,7 @@ export default class magicbomb extends cc.Component {
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
                     this.node.destroy();
-                    other.node.destroy();
+                    if(other.node.isValid)other.node.destroy();
                 },0.27)
            }
            else{
@@ -47,7 +47,7 @@ export default class magicbomb extends cc.Component {
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
                     this.node.destroy();
-                    other.node.parent.destroy();
+                    if(other.node.isValid)other.node.parent.destroy();
                 },0.27)
            }
        }

@@ -148,19 +148,19 @@ export default class GameMgr extends cc.Component {
         if(this.camera.y - this.background.y >= this.backgroundSize)
             this.background.y += this.backgroundSize;
     
-        if(height >= this.count + 750){
+        if(height >= this.count + 550){
             //this.needmoreplatform = true;
-            if(height >= 750)
+            if(height >= 550)
                 this.generatePlatforms(100, 45);
-            else if(height >= 1750)
+            else if(height >= 1550)
                 this.generatePlatforms(100, 50);
-            else if(height >= 2750)
+            else if(height >= 2550)
                 this.generatePlatforms(100, 60);
-            else if(height >= 3750)
+            else if(height >= 3550)
                 this.generatePlatforms(100, 65);
-            else if(height >= 4750)
+            else if(height >= 4550)
                 this.generatePlatforms(100, 70);
-            else if(height >= 5750)
+            else if(height >= 5550)
                 this.generatePlatforms(100, 75);
             else if(height >= 6750)
                 this.generatePlatforms(100, 80);
