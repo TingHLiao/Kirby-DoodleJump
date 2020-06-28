@@ -41,6 +41,8 @@ export default class player extends cc.Component {
     private kirby_state = 0;
 
     private isReborn = false;
+    //avoid playing effect multiple time
+    private suckEffectID = null;
 
     // record money
     @property(cc.Node)
@@ -48,6 +50,9 @@ export default class player extends cc.Component {
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    SuckEffect: cc.AudioClip = null;
 
     platform: cc.Node;//
     bulletPool: cc.Node;
@@ -63,6 +68,13 @@ export default class player extends cc.Component {
 
     @property({type: cc.AudioClip})
     DieEffect: cc.AudioClip = null;
+
+    @property({type: cc.AudioClip})
+    SnowAttack: cc.AudioClip = null;
+    @property({type: cc.AudioClip})
+    NinjaAttack: cc.AudioClip = null;
+    @property({type: cc.AudioClip})
+    KnightAttack: cc.AudioClip = null;
 
     @property(GameMgr)
     gamemanager: GameMgr = null;
@@ -107,6 +119,8 @@ export default class player extends cc.Component {
             this.rightDown = true;
         } 
         if(event.keyCode == cc.macro.KEY.space){
+            if(!this.spaceDown)
+                this.suckEffectID = cc.audioEngine.playEffect(this.SuckEffect, false);
             this.spaceDown = true;
 
             switch(this.kirby_state){
@@ -163,6 +177,8 @@ export default class player extends cc.Component {
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
+            if(this.suckEffectID)
+                cc.audioEngine.pauseEffect(this.suckEffectID);
 
             switch(this.kirby_state){
                 case 0: {
@@ -467,6 +483,7 @@ export default class player extends cc.Component {
                 break;
             }
             case 1: {                 // snowman
+                cc.audioEngine.playEffect(this.SnowAttack, false);
                 let newnode = cc.instantiate(this.bullet);
                 this.bulletPool.addChild(newnode);
                 newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
@@ -481,6 +498,7 @@ export default class player extends cc.Component {
                 this.animateState = this.anim.play("ninja_die");
                 
                 if(!this.isThrow){
+                    cc.audioEngine.playEffect(this.NinjaAttack, false);
                     this.isThrow = true;
                     let newnode = cc.instantiate(this.ninja_bullet);
                     this.bulletPool.addChild(newnode);
@@ -505,6 +523,7 @@ export default class player extends cc.Component {
                 break;
             }
             case 4:{                   // knight
+                cc.audioEngine.playEffect(this.KnightAttack, false);
                 this.anim.play("knight_attack");
                 this.isKnifing = true;
                 this.scheduleOnce(()=>{

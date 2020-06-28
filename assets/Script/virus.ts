@@ -19,6 +19,9 @@ export default class virus extends cc.Component {
 
     private isDead: boolean = false;
 
+    @property({ type: cc.AudioClip })
+    StepEffect: cc.AudioClip = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -78,6 +81,7 @@ export default class virus extends cc.Component {
         }
         if(other.tag == 0){
             if(contact.getWorldManifold().normal.y == 1) {
+                cc.audioEngine.playEffect(this.StepEffect, false);
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
                 this.scheduleOnce(()=>{
