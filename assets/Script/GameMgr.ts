@@ -21,6 +21,8 @@ export default class GameMgr extends cc.Component {
 
     private mousedown : Boolean = false;
 
+    private pause: Boolean = false;
+
     private floor = 0;
 
     private count = 0;
@@ -52,6 +54,9 @@ export default class GameMgr extends cc.Component {
 
     @property(cc.Node)
     score : cc.Node = null;
+
+    @property(cc.Node)
+    stopPanel: cc.Node = null;
 
     // @property(cc.Node)
     // Gameover : cc.Node = null;
@@ -199,5 +204,19 @@ export default class GameMgr extends cc.Component {
         firebase.database().ref(`users/${this.ID}/coin`).set({
             number: this.remaincoin + money
         });
+    }
+
+    gamePause(){
+        if(this.pause){
+            this.pause = false;
+            this.stopPanel.active = false;
+            cc.director.resume();
+            return;
+        }
+        this.pause = true;
+        this.stopPanel.active = true;
+        this.scheduleOnce(()=>{
+            cc.director.pause();
+        }, 0.1);
     }
 }

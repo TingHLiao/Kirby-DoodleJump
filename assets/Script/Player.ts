@@ -447,7 +447,7 @@ export default class player extends cc.Component {
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
-        if(this.rocketOn)
+        if(this.rocketOn || (y > 275 && x > 380)) //click on stop button
             return;
         //can only attack maxbullet in window
         if(this.bulletPool.childrenCount >= this.maxbullet)
