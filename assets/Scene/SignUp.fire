@@ -3160,10 +3160,18 @@
     "password": {
       "__id__": 47
     },
-    "loading": null,
-    "label1": null,
-    "label2": null,
-    "label3": null,
+    "loading": {
+      "__id__": 56
+    },
+    "label1": {
+      "__id__": 62
+    },
+    "label2": {
+      "__id__": 64
+    },
+    "label3": {
+      "__id__": 66
+    },
     "_id": "61hhgiGldLQL45Y6YxnZbv"
   }
 ]

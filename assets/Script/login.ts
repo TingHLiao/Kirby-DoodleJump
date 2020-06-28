@@ -48,6 +48,7 @@ export class Login extends cc.Component {
             let user = firebase.auth().currentUser; 
             var ID = this.username.string.replace('@', '-').split('.').join('_');
             if(user){
+                //cc.log(user)
                 this.loading.active = true;
                 this.startAction();
                 //@ts-ignore

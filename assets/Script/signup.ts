@@ -64,7 +64,13 @@ export default class Register extends cc.Component {
                 },
                 coin: {
                     number: 0
-                }
+                },
+                Request: [{
+                    name: 'none'
+                }],
+                Reponse: [{
+                    name: 'none'
+                }]
             });
             //alert("Create Success!");
             Buy.Global.username = id;
