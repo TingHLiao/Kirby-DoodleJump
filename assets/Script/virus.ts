@@ -54,7 +54,7 @@ export default class virus extends cc.Component {
                     this.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8){
+        } else if(other.tag == 8 || other.tag == 10){
             other.node.destroy();
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             this.isDead = true;   
