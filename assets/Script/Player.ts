@@ -359,7 +359,6 @@ export default class player extends cc.Component {
         if(Buy.Global.Extra_life > 0){    //have extra life
             this.isReborn  = true;
             Buy.Global.Extra_life--;
-            cc.log(Buy.Global.Extra_life);
             this.anim.stop();
 
             if(this.kirby_state == 0){
@@ -482,7 +481,6 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    cc.log(dir);
                     newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
@@ -526,7 +524,6 @@ export default class player extends cc.Component {
                 else
                     n.runAction(cc.moveBy(0.05, move));
             } else{
-                cc.log('d')
                 this.isThrowBack = false;
             }
         }
