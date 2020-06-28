@@ -13,6 +13,9 @@ export module Global {
     export let Extra_life : number = 0;
     export let more_Rocket : number = 0;
     export let more_Shield : number = 0;
+    export let Extra_jump : number = 0;
+    export let platform : number = 0;
+    export let Extra_range : number = 0;
     export let username : string = "";
     export let coin : number = 0;
     export let highest : number = 0;

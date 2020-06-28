@@ -88,9 +88,10 @@ export default class player extends cc.Component {
     }
 
     start () {
+        let velocity = 1000 + 100 * Buy.Global.Extra_jump;
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
-        this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, 1000);
+        this.node.getComponent(cc.RigidBody).linearVelocity = cc. v2(0, velocity);
         if(this.kirby_state == 0) this.anim.play("jump");
         else if(this.kirby_state == 1) this.anim.play("snow_jump");
         else if(this.kirby_state == 2) this.anim.play("ninja_jump");
@@ -468,6 +469,7 @@ export default class player extends cc.Component {
             }
             case 1: {                 // snowman
                 let newnode = cc.instantiate(this.bullet);
+                newnode.scale = newnode.scale + 0.2 * Buy.Global.Extra_range;
                 this.bulletPool.addChild(newnode);
                 newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                 //direction vector for bullet
@@ -487,7 +489,7 @@ export default class player extends cc.Component {
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
                     cc.log(dir);
-                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
+                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400 + 40 * Buy.Global.Extra_range)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
                     }, 0.81);
@@ -496,6 +498,7 @@ export default class player extends cc.Component {
             }
             case 3: {                //magic
                 let newnode = cc.instantiate(this.magicbomb);
+                newnode.scale = newnode.scale + 0.2 * Buy.Global.Extra_range;
                 this.bulletPool.addChild(newnode);
                 newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                 //direction vector for bullet

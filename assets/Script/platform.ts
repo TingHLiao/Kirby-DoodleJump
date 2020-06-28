@@ -10,7 +10,7 @@
 
 const {ccclass, property} = cc._decorator;
 
-//import Player from "./Player";
+import * as Buy from "./Buy"
 
 @ccclass
 export default class platform extends cc.Component {
@@ -85,14 +85,18 @@ export default class platform extends cc.Component {
         this.scoreNode = cc.find("Canvas/Main Camera/score");
         this.score = parseInt(this.scoreNode.getComponent(cc.Label).string);
         this.anim = this.getComponent(cc.Animation);
+        this.jumpvelocity = this.jumpvelocity + (100 * Buy.Global.Extra_jump);
     }
 
 
     start () {
         this.animState = null;
-        //this.node.zIndex = 100;
+        let extraRocket = Math.pow(1.05, Buy.Global.more_Rocket);
+        let extraShield = Math.pow(1.05, Buy.Global.more_Shield);
+        
         if(this.node.name == "normal_basic"){
-            let withrocket = (Math.random()< 0.02) ? true : false;
+            
+            let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
             if(withrocket){
                 withitem = true;
@@ -179,7 +183,7 @@ export default class platform extends cc.Component {
         else if(this.node.name == "break_basic"){
             
         }
-        if(Math.random()>0.99 && this.node.name !== "move_basic"){
+        if(Math.random()< (0.01 * extraShield) && this.node.name !== "move_basic"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
