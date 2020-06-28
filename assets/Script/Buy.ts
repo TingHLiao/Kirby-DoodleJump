@@ -20,4 +20,5 @@ export module Global {
     export let userID : string = "";
     export let coin : number = 0;
     export let highest : number = 0;
+    export let twoP : boolean = false;
 }

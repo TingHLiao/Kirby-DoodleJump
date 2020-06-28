@@ -1,3 +1,4 @@
+import * as Buy from "./Buy"
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -25,11 +26,27 @@ export default class Invite extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
+    @property(cc.Node)
+    waiting: cc.Node = null;
+
+    @property(cc.Node)
+    reponse: cc.Node = null;
+
+    @property(cc.Node)
+    label1: cc.Node = null;
+    @property(cc.Node)
+    label2: cc.Node = null;
+    @property(cc.Node)
+    label3: cc.Node = null;
+
     private User = null;
     private Users = null;
     private Name : string = "";
     private ID : string = "";
     private isShow : Boolean = false;
+    private getreponse : Boolean = true;
+    private readytoplay : Boolean = false;
+    private click : Boolean = false;
 
     //the one i want to invite
     private inviteName: string = "";
@@ -49,6 +66,7 @@ export default class Invite extends cc.Component {
                 this.Name = snapshot.val().name;
             })
             this.BeInvited();
+            this.ReponseChecking();
         });
     }
 
@@ -58,24 +76,26 @@ export default class Invite extends cc.Component {
 
     }
 
-    update (dt) {}
+    update (dt) {
+        if(this.readytoplay){
+            Buy.Global.twoP = true;
+            this.readytoplay = false;
+            this.scheduleOnce(()=>{
+                cc.director.loadScene("Play");
+            }, 2)
+        }
+    }
 
     showAllUser(){
         if(this.isShow){
             this.InvitePanel.active = false;
-            this.storebutton.interactable = true;
-            this.instrbutton.interactable = true;
-            this.leaderbutton.interactable = true;
-            this.cover.runAction(cc.fadeTo(0.2, 255));
+            this.uncover();
             this.isShow = false;
             this.content.removeAllChildren();
             return;
         }
         this.InvitePanel.active = true;
-        this.storebutton.interactable = false;
-        this.instrbutton.interactable = false;
-        this.leaderbutton.interactable = false;
-        this.cover.runAction(cc.fadeTo(0.2, 128));
+        this.getcover();
         this.isShow = true;
         this.Users.once('value').then(snapshot => {
             snapshot.forEach(element => {
@@ -98,11 +118,25 @@ export default class Invite extends cc.Component {
     Invite(event, inviteID: string){
         if(this.isShow){
             this.InvitePanel.active = false;
-            this.storebutton.interactable = true;
-            this.instrbutton.interactable = true;
-            this.leaderbutton.interactable = true;
-            this.cover.runAction(cc.fadeTo(0.2, 255));
-            this.isShow = false;
+            this.getreponse = false;
+            this.waiting.active = true;
+            this.startAction();
+            this.User.child(inviteID).once('value', snapshot => {
+                this.inviteName = snapshot.val().name;
+            })
+            this.scheduleOnce(()=>{
+                if(!this.getreponse){
+                    this.reponse.getComponent(cc.Label).string = `Sorry ${this.inviteName} doesn't\nwant to play with youQQ`;
+                    this.getreponse = true;
+                    this.waiting.active = false;
+                    this.reponse.active = true;
+                    this.scheduleOnce(()=>{
+                        this.reponse.active = false;
+                        this.uncover();
+                        this.isShow = false;
+                    }, 2)
+                }
+            }, 10)
             this.content.removeAllChildren();
         }
         this.Users.child(inviteID + '/Request').push({
@@ -111,7 +145,45 @@ export default class Invite extends cc.Component {
         })
     }
     ReponseChecking(){
+        let first_count = 0;
+        let second_count = 0;
+        let mes = "";
+        this.User.child('Reponse').once('value').then(snapshot => {
+            snapshot.forEach(element => {
+                first_count += 1;
+                let name = element.val().name;
+                if(name != "none"){
+                    this.User.child(`Reponse/${element.key}`).remove();
+                }
+            })
 
+            this.User.child('Reponse').on('child_added', element => {
+                second_count += 1;
+                if (second_count > first_count) {
+                    this.inviteName = element.val().name;
+                    if(this.inviteName != "none"){
+                        mes = element.val().message;
+                        this.User.child(`Reponse/${element.key}`).remove();
+                        if(!this.getreponse){
+                            this.getreponse = true;
+                            if(mes == "NO")
+                                this.reponse.getComponent(cc.Label).string = `Sorry ${this.inviteName} doesn't\nwant to play with youQQ`;
+                            else{
+                                this.readytoplay = true;
+                                this.reponse.getComponent(cc.Label).string = `${this.inviteName} takes your challenge!`;
+                            }
+                            this.waiting.active = false;
+                            this.reponse.active = true;
+                            this.scheduleOnce(()=>{
+                                this.reponse.active = false;
+                                if(!this.readytoplay)this.uncover();
+                                this.isShow = false;
+                            }, 2)
+                        }
+                    }
+                }
+            })
+        })
     }
 
     BeInvited(){
@@ -135,6 +207,14 @@ export default class Invite extends cc.Component {
                         this.User.child(`Request/${element.key}`).remove();
                         this.BeInvitedPanel.getChildByName("name").getComponent(cc.Label).string = this.beinvitedNmae;
                         this.BeInvitedPanel.active = true;
+                        this.click = false;
+                        this.getcover();
+                        this.scheduleOnce(()=>{
+                            if(!this.click){
+                                this.BeInvitedPanel.active = false;
+                                this.uncover();
+                            }
+                        },10)
                     }
                 }
             })
@@ -142,19 +222,40 @@ export default class Invite extends cc.Component {
     }
 
     Agree(){
+        this.click = true;
         this.BeInvitedPanel.active = false;
         this.Users.child(this.beinvitedID + '/Reponse').push({
             message: 'OK',
             name: this.Name,
             id: this.ID
         })
+        this.readytoplay = true;
     }
     Reject(){
+        this.click = true;
         this.BeInvitedPanel.active = false;
+        this.uncover();
         this.Users.child(this.beinvitedID + '/Reponse').push({
             message: 'NO',
             name: this.Name,
             id: this.ID
         })
+    }
+    startAction(){
+        this.label1.runAction(cc.repeatForever(cc.sequence(cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.3), cc.delayTime(2.2))));
+        this.label2.runAction(cc.repeatForever(cc.sequence(cc.delayTime(1.1), cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.4), cc.delayTime(1.1))));
+        this.label3.runAction(cc.repeatForever(cc.sequence(cc.delayTime(2.2), cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.3))));
+    }
+    getcover(){
+        this.storebutton.interactable = false;
+        this.instrbutton.interactable = false;
+        this.leaderbutton.interactable = false;
+        this.cover.runAction(cc.fadeTo(0.2, 128));
+    }
+    uncover(){
+        this.storebutton.interactable = true;
+        this.instrbutton.interactable = true;
+        this.leaderbutton.interactable = true;
+        this.cover.runAction(cc.fadeTo(0.2, 255));
     }
 }
