@@ -39,9 +39,27 @@ export default class Stage extends cc.Component {
     @property(cc.Prefab)
     player: cc.Prefab = null;
 
+    @property(cc.Node)
+    choose: cc.Node = null;
+
     private show: boolean = false;
     private storeshow: boolean = false;
     private instrshow: boolean = false;
+    private jump_limit: number = 0;
+    private range_limit: number = 0;
+
+    //private buttons: cc.Node[] = [];
+
+    // private button_snow : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/snow_kirby/snow_kirby");
+    // private button_ninja : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/ninja_kirby/ninja_kirby");
+    // private button_magic : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/magic_kirby/magic_kirby");
+    // private button_knight : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/knight_kirby/knight_kirby");
+    // private button_life : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/life/square1");
+    // private button_jump : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/jump/square1");
+    // private button_range : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/range/square1");
+    // private button_platform : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/platform/square1");
+    // private button_rocket : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/rocket/square1");
+    // private button_shield : cc.Node = cc.find("Canvas/store_page/scrollview/view/content/shield/square1");
 
     nameText: cc.Label;
     highestText: cc.Label;
@@ -169,30 +187,58 @@ export default class Stage extends cc.Component {
 
     buy_snow(){
         Buy.Global.Buy_Kirby = 1;
+        Buy.Global.coin -= 5;
     }
 
     buy_ninja(){
         Buy.Global.Buy_Kirby = 2;
+        Buy.Global.coin -= 10;
     }
 
     buy_magic(){
         Buy.Global.Buy_Kirby = 3;
+        Buy.Global.coin -= 20;
     }
 
     buy_knight(){
         Buy.Global.Buy_Kirby = 4;
+        Buy.Global.coin -= 100;
     }
 
     buy_extralife(){
         Buy.Global.Extra_life++;
+        Buy.Global.coin -= 5;
     }
 
     buy_rocket(){
         Buy.Global.more_Rocket++;
+        Buy.Global.coin -= 5;
     }
 
     buy_shield(){
         Buy.Global.more_Shield++;
+        Buy.Global.coin -= 5;
+    }
+
+    buy_platform(){
+        Buy.Global.platform++;
+        Buy.Global.coin -= 5;
+    }
+
+    buy_jump(){
+        if(this.jump_limit < 5){
+            this.jump_limit++;
+            Buy.Global.Extra_jump++;
+            Buy.Global.coin -= 5;
+        }
+    }
+
+    buy_range(){
+        if(this.range_limit < 5){
+            this.range_limit++;
+            Buy.Global.Extra_range++;
+            Buy.Global.coin -= 5;
+        } 
     }
 
     updatemoney(){

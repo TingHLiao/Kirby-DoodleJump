@@ -10,6 +10,8 @@
 
 const {ccclass, property} = cc._decorator;
 
+import * as Buy from "./Buy"
+
 @ccclass
 export default class Enemy extends cc.Component {
 
@@ -248,7 +250,7 @@ export default class Enemy extends cc.Component {
         let diffy = this.node.parent.y - this.player.y;
         let dist = Math.sqrt(diffx*diffx + diffy*diffy);
         //cc.log(diffx, diffx1, dist1);
-        if(dist < 100){
+        if(dist < 100 + 20 * Buy.Global.Extra_range){
             if(this.player.getComponent("Player").isKnifing){
                 this.node.destroy();
             }
