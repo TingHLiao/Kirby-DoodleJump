@@ -226,7 +226,7 @@ export default class Enemy extends cc.Component {
                     self.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8){
+        } else if(other.tag == 8 || other.tag == 10){
             self.node.destroy();
         }
     }
