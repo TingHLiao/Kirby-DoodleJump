@@ -17,6 +17,7 @@ export module Global {
     export let platform : number = 0;
     export let Extra_range : number = 0;
     export let username : string = "";
+    export let userID : string = "";
     export let coin : number = 0;
     export let highest : number = 0;
     export let twoP : boolean = false;

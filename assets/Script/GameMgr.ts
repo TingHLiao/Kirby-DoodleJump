@@ -165,16 +165,17 @@ export default class GameMgr extends cc.Component {
     {
         let rand = Math.random();
         let height = parseInt(this.score.getComponent(cc.Label).string);
+        let extra = Math.pow(1.05, Buy.Global.platform);
 
         //0: normal, 1: moveable, 2: time, 3: break
-        let prob1 = [6, 1, 0.5, 1];
-        let prob2 = [5.5, 1.5, 0.5, 1];
-        let prob3 = [5, 1.5, 0.5, 1.5];
-        let prob4 = [4.5, 1.5, 1.5, 1.5];
-        let prob5 = [4, 2, 1.5, 1.5];
-        let prob6 = [3.5, 2, 2, 1.5];
-        let prob7 = [3, 2, 2.5, 1.5];
-        let prob8 = [2.5, 2.5, 2.5, 1.5];
+        let prob1 = [6 * extra , 1, 0.5, 1];
+        let prob2 = [5.5 * extra, 1.5, 0.5, 1];
+        let prob3 = [5 * extra, 1.5, 0.5, 1.5];
+        let prob4 = [4.5 * extra, 1.5, 1.5, 1.5];
+        let prob5 = [4 * extra, 2, 1.5, 1.5];
+        let prob6 = [3.5 * extra, 2, 2, 1.5];
+        let prob7 = [3 * extra, 2, 2.5, 1.5];
+        let prob8 = [2.5 * extra, 2.5, 2.5, 1.5];
         let prob = (height >= 1500) ? (height >= 2500) ? (height >= 3500) ? (height > 4500) ? (height>=5500) ? (height >= 6500) ? (height >=7500) ? prob8 : prob7 : prob6: prob5 : prob4 : prob3 : prob2 : prob1;
         let sum = prob.reduce((a,b)=>a+b);
         for(let i = 1; i < prob.length; i++)
@@ -311,6 +312,7 @@ export default class GameMgr extends cc.Component {
 
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
+        cc.log(this.player.position.y);
         cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
         cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         cc.find("Canvas/Main Camera/2PGameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';

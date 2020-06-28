@@ -468,8 +468,8 @@ export default class player extends cc.Component {
                     this.gamemanager.gameovershow();
                 }, 1)
             }, 0.3);
-        }
-       
+            this.reset();
+        } 
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
@@ -545,6 +545,16 @@ export default class player extends cc.Component {
                 break;
             }
         }
+    }
+
+    private reset(){
+        Buy.Global.Buy_Kirby = 0;
+        Buy.Global.Extra_jump = 0;
+        Buy.Global.Extra_life = 0;
+        Buy.Global.Extra_range = 0;
+        Buy.Global.more_Rocket = 0;
+        Buy.Global.more_Shield = 0;
+        Buy.Global.platform = 0;
     }
 
     ninja_bullet_back(){
