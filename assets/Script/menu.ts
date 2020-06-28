@@ -73,16 +73,16 @@ export default class Stage extends cc.Component {
             firebase.auth().onAuthStateChanged(user => {
                 this.ID = user.email.replace('@', '-').split('.').join('_');
                 //@ts-ignore
-                firebase.database().ref(`users/${ID}`).once('value', snapshot => {
+                firebase.database().ref(`users/${this.ID}`).once('value', snapshot => {
                     this.nameText.string = Buy.Global.username = snapshot.val().name;
                 });
                 //@ts-ignore
-                firebase.database().ref(`users/${ID}/highest`).once('value', snapshot => {
+                firebase.database().ref(`users/${this.ID}/highest`).once('value', snapshot => {
                     this.highestText.string = (Array(6).join("0") + snapshot.val().score.toString()).slice(-6);
                     Buy.Global.highest = parseInt(this.highestText.string);
                 });
                 //@ts-ignore
-                firebase.database().ref(`users/${ID}/coin`).once('value', snapshot => {
+                firebase.database().ref(`users/${this.ID}/coin`).once('value', snapshot => {
                     this.coinText.string = snapshot.val().number.toString() + '$';
                     Buy.Global.coin = parseInt(this.coinText.string);
                 });
@@ -269,7 +269,7 @@ export default class Stage extends cc.Component {
             }
         }
         this.updatemoney();
-        cc.log(Buy.Global.coin);
+        //cc.log(Buy.Global.coin);
     }
 
     updatemoney(){
@@ -280,8 +280,8 @@ export default class Stage extends cc.Component {
                 this.buttons[i].zIndex = 100;
             }
         }
-        if(parseInt(this.coinText.string) == Buy.Global.coin)   // not sure
-            return;
+        // if(parseInt(this.coinText.string) == Buy.Global.coin)   // not sure
+        //     return;
         this.coinText.string = Buy.Global.coin.toString() + "$";
         
         //@ts-ignore
