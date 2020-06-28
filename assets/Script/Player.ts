@@ -360,7 +360,7 @@ export default class player extends cc.Component {
 
     private gameover(){
 
-        if(Buy.Global.Extra_life > 0){    //have extra life
+        if(Buy.Global.Extra_life > 0){    //have extra life!
             this.isReborn  = true;
             Buy.Global.Extra_life--;
             cc.log(Buy.Global.Extra_life);
