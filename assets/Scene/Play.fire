@@ -1242,6 +1242,9 @@
     "soundEffect": {
       "__uuid__": "8f7a1e36-61a0-4238-94b2-560257dd3582"
     },
+    "SuckEffect": {
+      "__uuid__": "ec2ac363-2082-4e3c-81bf-25c13df941ef"
+    },
     "platforms": {
       "__id__": 5
     },
@@ -1253,6 +1256,15 @@
     },
     "DieEffect": {
       "__uuid__": "76a4a34c-b37b-49b4-a5cb-3071ade77452"
+    },
+    "SnowAttack": {
+      "__uuid__": "5dad0c08-56be-434f-8045-79c2323272ff"
+    },
+    "NinjaAttack": {
+      "__uuid__": "4731b0de-726a-453f-b5a9-b091629d3219"
+    },
+    "KnightAttack": {
+      "__uuid__": "228106cb-55ec-4597-9be5-f4b9d7afc31b"
     },
     "gamemanager": {
       "__id__": 7

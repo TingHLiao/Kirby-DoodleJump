@@ -172,6 +172,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "StepEffect": {
+      "__uuid__": "dfdd1346-7bca-4270-b26c-c60149cb4b7f"
+    },
     "_id": ""
   },
   {
