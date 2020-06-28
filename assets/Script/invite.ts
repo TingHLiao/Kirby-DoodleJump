@@ -51,7 +51,7 @@ export default class Invite extends cc.Component {
     //the one i want to invite
     private inviteName: string = "";
     //the one who invite me
-    private beinvitedNmae: string = "";
+    private beinvitedName: string = "";
     private beinvitedID: string = "";
 
     onLoad () {
@@ -148,6 +148,7 @@ export default class Invite extends cc.Component {
         let first_count = 0;
         let second_count = 0;
         let mes = "";
+        let id = "";
         this.User.child('Reponse').once('value').then(snapshot => {
             snapshot.forEach(element => {
                 first_count += 1;
@@ -163,6 +164,7 @@ export default class Invite extends cc.Component {
                     this.inviteName = element.val().name;
                     if(this.inviteName != "none"){
                         mes = element.val().message;
+                        id = element.val().id;
                         this.User.child(`Reponse/${element.key}`).remove();
                         if(!this.getreponse){
                             this.getreponse = true;
@@ -170,6 +172,8 @@ export default class Invite extends cc.Component {
                                 this.reponse.getComponent(cc.Label).string = `Sorry ${this.inviteName} doesn't\nwant to play with youQQ`;
                             else{
                                 this.readytoplay = true;
+                                Buy.Global.competitorID = id;
+                                Buy.Global.competitorName = this.inviteName;
                                 this.reponse.getComponent(cc.Label).string = `${this.inviteName} takes your challenge!`;
                             }
                             this.waiting.active = false;
@@ -201,11 +205,11 @@ export default class Invite extends cc.Component {
             this.User.child('Request').on('child_added', element => {
                 second_count += 1;
                 if (second_count > first_count) {
-                    this.beinvitedNmae = element.val().name;
+                    this.beinvitedName = element.val().name;
                     this.beinvitedID = element.val().id;
-                    if(this.beinvitedNmae != "none"){
+                    if(this.beinvitedName != "none"){
                         this.User.child(`Request/${element.key}`).remove();
-                        this.BeInvitedPanel.getChildByName("name").getComponent(cc.Label).string = this.beinvitedNmae;
+                        this.BeInvitedPanel.getChildByName("name").getComponent(cc.Label).string = this.beinvitedName;
                         this.BeInvitedPanel.active = true;
                         this.click = false;
                         this.getcover();
@@ -230,6 +234,8 @@ export default class Invite extends cc.Component {
             id: this.ID
         })
         this.readytoplay = true;
+        Buy.Global.competitorID = this.beinvitedID;
+        Buy.Global.competitorName = this.beinvitedName;
     }
     Reject(){
         this.click = true;

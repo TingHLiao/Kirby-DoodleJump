@@ -59,6 +59,21 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     coinPrefab: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    americaMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    italyMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    japanMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    greeceMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    germanyMonster: cc.Prefab = null;
+
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
 
@@ -93,13 +108,53 @@ export default class platform extends cc.Component {
         this.animState = null;
         let extraRocket = Math.pow(1.05, Buy.Global.more_Rocket);
         let extraShield = Math.pow(1.05, Buy.Global.more_Shield);
+        let posy = this.node.position.y;
         
         if(this.node.name == "normal_basic"){
-            
             let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
+            if(posy >= 1950 && posy <= 2000){
+                withitem = true;
+                var newnode = cc.instantiate(this.americaMonster); // newnode is america monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 3950 && posy <= 4000){
+                withitem = true;
+                var newnode = cc.instantiate(this.japanMonster); // newnode is japan monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 5950 && posy <= 6000){
+                withitem = true;
+                var newnode = cc.instantiate(this.germanyMonster); // newnode is germany monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 7550 && posy <= 7605){
+                withitem = true;
+                var newnode = cc.instantiate(this.greeceMonster); // newnode is greece monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 9500 && posy <= 9560){
+                withitem = true;
+                var newnode = cc.instantiate(this.italyMonster); // newnode is italy monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
             // platform with rocket
-            if(withrocket){
+            if(withrocket && !withitem){
                 withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
                 this.node.addChild(newnode);

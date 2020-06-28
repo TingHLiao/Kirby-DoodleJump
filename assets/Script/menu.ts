@@ -215,7 +215,6 @@ export default class Stage extends cc.Component {
             }
         }
         this.updatemoney();
-        cc.log(Buy.Global.coin);
     }
 
     buy_ability(event){
@@ -269,7 +268,6 @@ export default class Stage extends cc.Component {
             }
         }
         this.updatemoney();
-        //cc.log(Buy.Global.coin);
     }
 
     updatemoney(){
@@ -287,8 +285,6 @@ export default class Stage extends cc.Component {
         //@ts-ignore
         firebase.database().ref(`users/${this.ID}/coin`).set({
             number: Buy.Global.coin
-        }).then(()=>{
-            cc.log("save");
         });
     }
 

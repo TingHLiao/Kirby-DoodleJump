@@ -21,4 +21,6 @@ export module Global {
     export let coin : number = 0;
     export let highest : number = 0;
     export let twoP : boolean = false;
+    export let competitorID : string = "";
+    export let competitorName : string = "";
 }
