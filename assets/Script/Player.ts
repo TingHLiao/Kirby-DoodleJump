@@ -40,7 +40,7 @@ export default class player extends cc.Component {
     // 0: normal, 1: snow, 2:ninja
     private kirby_state = 0;
 
-    //private BuySth = 0;
+    private isReborn = false;
 
     // record money
     @property(cc.Node)
@@ -84,6 +84,7 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
+        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -222,7 +223,7 @@ export default class player extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
-        if(self.tag == 0){
+        if(self.tag == 0 && !this.isReborn){
 
             if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) cc.audioEngine.playEffect(this.soundEffect, false);
 
@@ -249,13 +250,12 @@ export default class player extends cc.Component {
                     contact.disabled = true; 
                     return;
                 }
-                if((!this.spaceDown && other.tag == 5) || other.tag == 4){
+                if((!this.spaceDown && other.tag == 5) || other.tag == 4){   //collide with enemy and die
                     if(contact.getWorldManifold().normal.y == 1 || contact.getWorldManifold().normal.x != 0){ // enemy and doesn't contact from top
                         this.gameover();
                     }
                 }
-                if(other.tag == 6){ 
-                    this.isDied = true;
+                if(other.tag == 6){     //collide with enemy bullets
                     other.node.destroy();
                     this.gameover();
                 }  
@@ -359,50 +359,95 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        /*this.isDied = true;
-        switch(this.kirby_state){
-            case 0: {                 // normal
-                this.anim.stop('jump');
-                this.animateState = this.anim.play("die");
-                break;
+
+        if(Buy.Global.Extra_life > 0){
+            this.isReborn  = true;
+            Buy.Global.Extra_life--;
+            cc.log(Buy.Global.Extra_life);
+            this.anim.stop();
+
+            if(this.kirby_state == 0){
+                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+                this.node.runAction(cc.blink(1, 6));
             }
-            case 1: {                 // snowman
-                this.anim.stop('snow_jump');
-                this.animateState = this.anim.play("snowman_die");
-                break;
-            }
-            case 2: {                 // ninja
-                this.anim.stop('ninja_jump');
-                this.animateState = this.anim.play("ninja_die");
-                break;
-            }
-            case 3: {                //magic
-                this.anim.stop('magic_jump');
-                this.animateState = this.anim.play("magic_die");
-                break;
-            }
-            case 4:{
-                this.anim.stop('knight_jump');
-                this.animateState = this.anim.play("knight_die");
-                break; 
-            }
-            default: {
-                this.anim.stop('jump');
-                this.animateState = this.anim.play("die");
-                break;
-            }
+            else{
+                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+                
+                if(this.kirby_state == 1){
+                    this.animateState = this.anim.play("changetosnow");  
+                    this.animateState.wrapMode = cc.WrapMode.Reverse;
+                    this.animateState.speed = 0.7;
+                }
+                else if(this.kirby_state == 2){
+                    this.animateState = this.anim.play("changetoninja");  
+                    this.animateState.wrapMode = cc.WrapMode.Reverse;
+                    this.animateState.speed = 0.7;
+                }
+                else if(this.kirby_state == 3){
+                    this.animateState = this.anim.play("changetomagic");  
+                    this.animateState.wrapMode = cc.WrapMode.Reverse;
+                    this.animateState.speed = 0.7;
+                }
+                else if(this.kirby_state == 4){
+                    this.animateState = this.anim.play("changetoknight");  
+                    this.animateState.wrapMode = cc.WrapMode.Reverse;
+                    this.animateState.speed = 0.7;
+                }
+            } 
+            this.scheduleOnce(()=>{
+                this.isReborn = false;
+                this.kirby_state = 0;     // back to normal
+                this.anim.stop();
+                this.animateState = this.anim.play("jump");
+            },1);
         }
-        this.node.getComponent(cc.RigidBody).enabledContactListener = false;
-        //get money and score to database, handle by GameMgr
-        this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
-        this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
-        this.scheduleOnce(()=>{ 
-            cc.audioEngine.playEffect(this.DieEffect, false);
-            this.platforms.removeAllChildren();
-            this.bulletPool.removeAllChildren();
-            this.knife.removeAllChildren();
-            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 150);
-        }, 0.3);*/
+        else{
+            /*this.isDied = true;
+            switch(this.kirby_state){
+                case 0: {                 // normal
+                    this.anim.stop('jump');
+                    this.animateState = this.anim.play("die");
+                    break;
+                }
+                case 1: {                 // snowman
+                    this.anim.stop('snow_jump');
+                    this.animateState = this.anim.play("snowman_die");
+                    break;
+                }
+                case 2: {                 // ninja
+                    this.anim.stop('ninja_jump');
+                    this.animateState = this.anim.play("ninja_die");
+                    break;
+                }
+                case 3: {                //magic
+                    this.anim.stop('magic_jump');
+                    this.animateState = this.anim.play("magic_die");
+                    break;
+                }
+                case 4:{
+                    this.anim.stop('knight_jump');
+                    this.animateState = this.anim.play("knight_die");
+                    break; 
+                }
+                default: {
+                    this.anim.stop('jump');
+                    this.animateState = this.anim.play("die");
+                    break;
+                }
+            }
+            this.node.getComponent(cc.RigidBody).enabledContactListener = false;
+            //get money and score to database, handle by GameMgr
+            this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
+            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
+            this.scheduleOnce(()=>{ 
+                cc.audioEngine.playEffect(this.DieEffect, false);
+                this.platforms.removeAllChildren();
+                this.bulletPool.removeAllChildren();
+                this.knife.removeAllChildren();
+                this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -150);
+            }, 0.3);*/
+        }
+       
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
@@ -441,11 +486,11 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    //cc.log(dir);
-                    newnode.runAction(cc.moveBy(0.7, dir.divSelf(dir.mag()).mulSelf(400)));
+                    cc.log(dir);
+                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
-                    }, 0.71);
+                    }, 0.81);
                 }
                 break;
             }
@@ -481,10 +526,11 @@ export default class player extends cc.Component {
             if(this.bulletPool.childrenCount!=0 && n.isValid){
                 let move = this.node.position.sub(n.position).divSelf(15);
                 if(move.mag() < 50)
-                    n.runAction(cc.moveBy(0.001, move.mulSelf(3)));
+                    n.runAction(cc.moveBy(0.001, move));
                 else
                     n.runAction(cc.moveBy(0.05, move));
             } else{
+                cc.log('d')
                 this.isThrowBack = false;
             }
         }

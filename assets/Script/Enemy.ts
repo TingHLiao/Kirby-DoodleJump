@@ -25,6 +25,8 @@ export default class Enemy extends cc.Component {
 
     private sucktrigger: boolean = false;
 
+    private playerbomb : boolean = false;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
@@ -224,7 +226,7 @@ export default class Enemy extends cc.Component {
                     self.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8 || other.tag == 10){ //snow kirby and ninja kirby bullet
+        } else if(other.tag == 8){
             self.node.destroy();
         }
     }
@@ -255,14 +257,18 @@ export default class Enemy extends cc.Component {
             }
         }
         else if(this.node.name == "bomb_enemy"){
-            if(this.isbomb && dist < 89){
+            if(this.playerbomb && dist < 89){
                 this.cnt++;
-                if(this.cnt > 15) {
+                if(this.cnt > 15 && !this.player.getComponent("Player").isReborn) {
+                    cc.log("inin");
                     this.player.getComponent("Player").setdie();
                 }
             }
             if(dist < 150 && !this.isbomb && !this.spacedown){
                 this.isbomb = true;
+                this.scheduleOnce(()=>{
+                    this.playerbomb = true;
+                }, 1);
                 this.bomb_attack();
             }
         }

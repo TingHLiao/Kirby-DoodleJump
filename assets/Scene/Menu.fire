@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        420.8883462392372,
+        354.20439014783545,
         0,
         0,
         0,
@@ -7941,7 +7941,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "but_shield",
+    "handler": "buy_shield",
     "customEventData": ""
   },
   {
@@ -10358,7 +10358,6 @@
       "__id__": 2
     },
     "_enabled": true,
-    "user": null,
     "leaderbutton": {
       "__id__": 26
     },

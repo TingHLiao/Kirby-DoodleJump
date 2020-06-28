@@ -10,7 +10,10 @@
 
 export module Global {
     export let Buy_Kirby : number = 0;
-    export let username: string = "";
-    export let coin: Number = 0;
-    export let highest: Number = 0; 
+    export let Extra_life : number = 0;
+    export let more_Rocket : number = 0;
+    export let more_Shield : number = 0;
+    export let username : string = "";
+    export let coin : number = 0;
+    export let highest : number = 0;
 }

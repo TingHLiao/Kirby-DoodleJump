@@ -46,8 +46,6 @@ export default class Stage extends cc.Component {
     nameText: cc.Label;
     highestText: cc.Label;
     coinText: cc.Label;
-    ID: cc.Label;
-    money: Number;
 
     onLoad () {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
@@ -56,30 +54,23 @@ export default class Stage extends cc.Component {
         //this.kirby_state = 0;   //normal
         Buy.Global.Buy_Kirby = 0;
         
-        if(Buy.Global.username != ""){
-            this.nameText.string = Buy.Global.username;
-            this.highestText.string = (Array(6).join("0") + Buy.Global.highest.toString()).slice(-6);
-            this.coinText.string = (Array(6).join("0") + Buy.Global.coin.toString()).slice(-6);
-        } else{
+        //@ts-ignore
+        firebase.auth().onAuthStateChanged(user => {
+            var ID = user.email.replace('@', '-').split('.').join('_');
             //@ts-ignore
-            firebase.auth().onAuthStateChanged(user => {
-                this.ID = user.email.replace('@', '-').split('.').join('_');
-                //@ts-ignore
-                firebase.database().ref(`users/${ID}`).once('value', snapshot => {
-                    this.nameText.string = Buy.Global.username = snapshot.val().name;
-                });
-                //@ts-ignore
-                firebase.database().ref(`users/${ID}/highest`).once('value', snapshot => {
-                    this.highestText.string = (Array(6).join("0") + snapshot.val().score.toString()).slice(-6);
-                    Buy.Global.highest = parseInt(this.highestText.string);
-                });
-                //@ts-ignore
-                firebase.database().ref(`users/${ID}/coin`).once('value', snapshot => {
-                    this.coinText.string = snapshot.val().number.toString() + '$';
-                    Buy.Global.coin = parseInt(this.coinText.string);
-                });
+            firebase.database().ref(`users/${ID}`).once('value', snapshot => {
+                this.nameText.string = snapshot.val().name;
             });
-        }
+            //@ts-ignore
+            firebase.database().ref(`users/${ID}/highest`).once('value', snapshot => {
+                this.highestText.string = (Array(6).join("0") + snapshot.val().score.toString()).slice(-6);
+            });
+            //@ts-ignore
+            firebase.database().ref(`users/${ID}/coin`).once('value', snapshot => {
+                this.coinText.string = snapshot.val().number.toString() + '$';
+                let m = parseInt(this.coinText.string);
+            });
+        });
     }
 
     start () {
@@ -119,7 +110,7 @@ export default class Stage extends cc.Component {
                 result.push([element.val().name, element.val().score]);
             })
         }).then(()=>{
-            //cc.log(result)
+            cc.log(result)
             result.reverse().forEach(data =>{
                 rank++;
                 if(rank == 1){
@@ -150,7 +141,6 @@ export default class Stage extends cc.Component {
 
     onStoreClick(){
         if(this.storeshow){
-            this.updatemoney();
             this.boardPanel_store.active = false;
             this.leaderbutton.interactable = true;
             this.instrbutton.interactable = true;
@@ -184,23 +174,15 @@ export default class Stage extends cc.Component {
     }
 
     buy_extralife(){
-
+        Buy.Global.Extra_life++;
     }
 
     buy_rocket(){
-
+        Buy.Global.more_Rocket++;
     }
 
-    but_shield(){
-
-    }
-
-    updatemoney(){
-        this.coinText.string = (Array(6).join("0") + Buy.Global.coin.toString()).slice(-6);
-        //@ts-ignore
-        firebase.database().ref(`users/${this.ID}/coin`).set({
-            number: Buy.Global.coin
-        });
+    buy_shield(){
+        Buy.Global.more_Shield++;
     }
 
     onInstrClick(){
