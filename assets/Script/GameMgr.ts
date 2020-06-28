@@ -110,6 +110,7 @@ export default class GameMgr extends cc.Component {
             this.timer.getComponent(cc.Label).string = "60";
             this.remaintime = 60;
             cc.find("Canvas/Main Camera/Timer").active = true;
+            this.twoPscore.active = true;
         }
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
