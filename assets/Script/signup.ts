@@ -1,3 +1,4 @@
+import * as Buy from "./Buy"
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -10,6 +11,16 @@ export default class Register extends cc.Component {
 
     @property(cc.EditBox)
     password: cc.EditBox = null;
+
+    @property(cc.Node)
+    loading: cc.Node = null;
+
+    @property(cc.Node)
+    label1: cc.Node = null;
+    @property(cc.Node)
+    label2: cc.Node = null;
+    @property(cc.Node)
+    label3: cc.Node = null;
 
     onLoad () {
         cc.director.getCollisionManager().enabled = true;
@@ -26,6 +37,12 @@ export default class Register extends cc.Component {
         }
     }
 
+    startAction(){
+        this.label1.runAction(cc.repeatForever(cc.sequence(cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.3), cc.delayTime(2.2))));
+        this.label2.runAction(cc.repeatForever(cc.sequence(cc.delayTime(1.1), cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.4), cc.delayTime(1.1))));
+        this.label3.runAction(cc.repeatForever(cc.sequence(cc.delayTime(2.2), cc.fadeIn(0.3), cc.delayTime(0.5), cc.fadeOut(0.3))));
+    }
+
     register(){
         if(!this.onlyLetters(this.user.string)){
             alert("Username allow number and alphabet only!");
@@ -33,6 +50,8 @@ export default class Register extends cc.Component {
         }
         //@ts-ignore
         firebase.auth().createUserWithEmailAndPassword(this.email.string, this.password.string).then( ()=>{
+            this.loading.active = true;
+            this.startAction();
             //@ts-ignore
             let loginUser = firebase.auth().currentUser;
             let path = loginUser.email.replace('@', '-').split('.').join('_');
@@ -48,9 +67,12 @@ export default class Register extends cc.Component {
                 }
             });
             //alert("Create Success!");
-            setTimeout(() => {
+            Buy.Global.username = id;
+            Buy.Global.highest = 0;
+            Buy.Global.coin = 0;
+            this.schedule(function(){
                 cc.director.loadScene("Menu");
-            }, 1000);
+            }, 4);
         })
         .catch((error) => {
             alert(error.message);

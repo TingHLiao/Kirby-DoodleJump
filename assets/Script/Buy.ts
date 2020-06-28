@@ -10,4 +10,7 @@
 
 export module Global {
     export let Buy_Kirby : number = 0;
+    export let username: string = "";
+    export let coin: Number = 0;
+    export let highest: Number = 0; 
 }
