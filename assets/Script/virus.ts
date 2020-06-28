@@ -22,6 +22,9 @@ export default class virus extends cc.Component {
     @property({ type: cc.AudioClip })
     StepEffect: cc.AudioClip = null;
 
+    @property({ type: cc.AudioClip })
+    BombEffect: cc.AudioClip = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -91,6 +94,7 @@ export default class virus extends cc.Component {
             }
         } else if(other.tag == 8){
             other.node.destroy();
+            cc.audioEngine.playEffect(this.BombEffect, false);
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             this.isDead = true;   
             this.anim.play("virus_die");
@@ -99,6 +103,7 @@ export default class virus extends cc.Component {
             }, 1)
         }
         else if(other.tag == 10){
+            cc.audioEngine.playEffect(this.BombEffect, false);
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             this.isDead = true;   
             this.anim.play("virus_die");

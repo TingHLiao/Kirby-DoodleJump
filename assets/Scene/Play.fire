@@ -452,7 +452,7 @@
       "array": [
         0,
         0,
-        355.9364409554043,
+        420.8883462392372,
         0,
         0,
         0,
@@ -1244,6 +1244,9 @@
     },
     "SuckEffect": {
       "__uuid__": "ec2ac363-2082-4e3c-81bf-25c13df941ef"
+    },
+    "LoseonelifeEffect": {
+      "__uuid__": "3e7cdefa-cf9d-4d26-b26d-c6ea3cb57bcf"
     },
     "platforms": {
       "__id__": 5

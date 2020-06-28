@@ -54,6 +54,12 @@ export default class player extends cc.Component {
     @property({ type: cc.AudioClip })
     SuckEffect: cc.AudioClip = null;
 
+    @property({ type: cc.AudioClip })
+    LoseonelifeEffect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    DieEffect: cc.AudioClip = null;
+
     platform: cc.Node;//
     bulletPool: cc.Node;
 
@@ -67,12 +73,11 @@ export default class player extends cc.Component {
     CoinEffect: cc.AudioClip = null;
 
     @property({type: cc.AudioClip})
-    DieEffect: cc.AudioClip = null;
+    SnowAttack: cc.AudioClip = null;
 
     @property({type: cc.AudioClip})
-    SnowAttack: cc.AudioClip = null;
-    @property({type: cc.AudioClip})
     NinjaAttack: cc.AudioClip = null;
+
     @property({type: cc.AudioClip})
     KnightAttack: cc.AudioClip = null;
 
@@ -376,6 +381,7 @@ export default class player extends cc.Component {
             this.isReborn  = true;
             Buy.Global.Extra_life--;
             this.anim.stop();
+            cc.audioEngine.playEffect(this.LoseonelifeEffect, false);
 
             if(this.kirby_state == 0){
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
