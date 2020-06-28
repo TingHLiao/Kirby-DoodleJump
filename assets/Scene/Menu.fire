@@ -13912,11 +13912,21 @@
     "content": {
       "__id__": 268
     },
-    "waiting": null,
-    "reponse": null,
-    "label1": null,
-    "label2": null,
-    "label3": null,
+    "waiting": {
+      "__id__": 279
+    },
+    "reponse": {
+      "__id__": 289
+    },
+    "label1": {
+      "__id__": 282
+    },
+    "label2": {
+      "__id__": 284
+    },
+    "label3": {
+      "__id__": 286
+    },
     "_id": "14qKZasxVLIb01nPvs4pTz"
   }
 ]

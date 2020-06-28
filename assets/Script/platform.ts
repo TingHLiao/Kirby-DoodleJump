@@ -59,6 +59,21 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     coinPrefab: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    americaMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    italyMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    japanMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    greeceMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    germanyMonster: cc.Prefab = null;
+
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
 
@@ -93,17 +108,27 @@ export default class platform extends cc.Component {
         this.animState = null;
         let extraRocket = Math.pow(1.05, Buy.Global.more_Rocket);
         let extraShield = Math.pow(1.05, Buy.Global.more_Shield);
+        let posy = this.node.position.y;
         
         if(this.node.name == "normal_basic"){
             
             let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
+
+            if(posy >= 1950 && posy <= 2000){
+                cc.log("instantiate america");
+                withitem = true;
+                var newnode = cc.instantiate(this.coinPrefab); // newnode is coin
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 25.7);
+            }
+
             // platform with rocket
-            if(withrocket){
+            if(withrocket && !withitem){
                 withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
                 this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
             // platform with coin

@@ -160,6 +160,21 @@
     "coinPrefab": {
       "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
     },
+    "americaMonster": {
+      "__uuid__": "8861095e-4287-4e30-9ac6-660fe6fc8e99"
+    },
+    "italyMonster": {
+      "__uuid__": "ff95e366-2c8b-4072-8452-d7f5aa8b1e68"
+    },
+    "japanMonster": {
+      "__uuid__": "7686297e-2955-4206-8b05-0f798905bca2"
+    },
+    "greeceMonster": {
+      "__uuid__": "b2beb5d7-058c-443c-8c04-8bcc312e95e2"
+    },
+    "germanyMonster": {
+      "__uuid__": "768e5c7d-2c34-43b4-9185-28b8e8044b35"
+    },
     "soundEffect": {
       "__uuid__": "c6b68753-0664-4e79-b2ab-d71e73a0d015"
     },
