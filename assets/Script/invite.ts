@@ -1,3 +1,4 @@
+import * as Buy from "./Buy"
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -44,6 +45,8 @@ export default class Invite extends cc.Component {
     private ID : string = "";
     private isShow : Boolean = false;
     private getreponse : Boolean = true;
+    private readytoplay : Boolean = false;
+    private click : Boolean = false;
 
     //the one i want to invite
     private inviteName: string = "";
@@ -63,6 +66,7 @@ export default class Invite extends cc.Component {
                 this.Name = snapshot.val().name;
             })
             this.BeInvited();
+            this.ReponseChecking();
         });
     }
 
@@ -72,7 +76,15 @@ export default class Invite extends cc.Component {
 
     }
 
-    update (dt) {}
+    update (dt) {
+        if(this.readytoplay){
+            Buy.Global.twoP = true;
+            this.readytoplay = false;
+            this.scheduleOnce(()=>{
+                cc.director.loadScene("Play");
+            }, 2)
+        }
+    }
 
     showAllUser(){
         if(this.isShow){
@@ -109,9 +121,12 @@ export default class Invite extends cc.Component {
             this.getreponse = false;
             this.waiting.active = true;
             this.startAction();
+            this.User.child(inviteID).once('value', snapshot => {
+                this.inviteName = snapshot.val().name;
+            })
             this.scheduleOnce(()=>{
                 if(!this.getreponse){
-                    this.reponse.getComponent(cc.Label).string = `Sorry ${this.beinvitedNmae} doesn't\nwant to play with youQQ`;
+                    this.reponse.getComponent(cc.Label).string = `Sorry ${this.inviteName} doesn't\nwant to play with youQQ`;
                     this.getreponse = true;
                     this.waiting.active = false;
                     this.reponse.active = true;
@@ -119,9 +134,9 @@ export default class Invite extends cc.Component {
                         this.reponse.active = false;
                         this.uncover();
                         this.isShow = false;
-                    }, 1)
+                    }, 2)
                 }
-            }, 3)
+            }, 10)
             this.content.removeAllChildren();
         }
         this.Users.child(inviteID + '/Request').push({
@@ -145,23 +160,25 @@ export default class Invite extends cc.Component {
             this.User.child('Reponse').on('child_added', element => {
                 second_count += 1;
                 if (second_count > first_count) {
-                    this.beinvitedNmae = element.val().name;
-                    if(this.beinvitedNmae != "none"){
+                    this.inviteName = element.val().name;
+                    if(this.inviteName != "none"){
                         mes = element.val().message;
                         this.User.child(`Reponse/${element.key}`).remove();
                         if(!this.getreponse){
                             this.getreponse = true;
                             if(mes == "NO")
-                                this.reponse.getComponent(cc.Label).string = `Sorry ${this.beinvitedNmae} doesn't\nwant to play with youQQ`;
-                            else
-                                this.reponse.getComponent(cc.Label).string = `${this.beinvitedNmae} takes your challenge!`;
+                                this.reponse.getComponent(cc.Label).string = `Sorry ${this.inviteName} doesn't\nwant to play with youQQ`;
+                            else{
+                                this.readytoplay = true;
+                                this.reponse.getComponent(cc.Label).string = `${this.inviteName} takes your challenge!`;
+                            }
                             this.waiting.active = false;
                             this.reponse.active = true;
                             this.scheduleOnce(()=>{
                                 this.reponse.active = false;
-                                this.uncover();
+                                if(!this.readytoplay)this.uncover();
                                 this.isShow = false;
-                            }, 1)
+                            }, 2)
                         }
                     }
                 }
@@ -190,7 +207,14 @@ export default class Invite extends cc.Component {
                         this.User.child(`Request/${element.key}`).remove();
                         this.BeInvitedPanel.getChildByName("name").getComponent(cc.Label).string = this.beinvitedNmae;
                         this.BeInvitedPanel.active = true;
+                        this.click = false;
                         this.getcover();
+                        this.scheduleOnce(()=>{
+                            if(!this.click){
+                                this.BeInvitedPanel.active = false;
+                                this.uncover();
+                            }
+                        },10)
                     }
                 }
             })
@@ -198,15 +222,17 @@ export default class Invite extends cc.Component {
     }
 
     Agree(){
+        this.click = true;
         this.BeInvitedPanel.active = false;
-        this.uncover();
         this.Users.child(this.beinvitedID + '/Reponse').push({
             message: 'OK',
             name: this.Name,
             id: this.ID
         })
+        this.readytoplay = true;
     }
     Reject(){
+        this.click = true;
         this.BeInvitedPanel.active = false;
         this.uncover();
         this.Users.child(this.beinvitedID + '/Reponse').push({
