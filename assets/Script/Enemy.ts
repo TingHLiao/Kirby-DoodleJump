@@ -260,7 +260,6 @@ export default class Enemy extends cc.Component {
             if(this.playerbomb && dist < 89){
                 this.cnt++;
                 if(this.cnt > 15 && !this.player.getComponent("Player").isReborn) {
-                    cc.log("inin");
                     this.player.getComponent("Player").setdie();
                 }
             }

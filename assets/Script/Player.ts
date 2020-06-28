@@ -84,7 +84,6 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
-        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -332,9 +331,6 @@ export default class player extends cc.Component {
     onEndContact(contact, self, other){
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
-                //other.node.stopAllActions();
-                //other.node.getComponent("Enemy").sucktrigger = false;
-                //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                 other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
                 other.scheduleOnce( function(){
                     other.node.destroy();
