@@ -21,6 +21,8 @@ export default class GameMgr extends cc.Component {
 
     private mousedown : Boolean = false;
 
+    private pause: Boolean = false;
+
     private floor = 0;
 
     private count = 0;
@@ -31,6 +33,8 @@ export default class GameMgr extends cc.Component {
     private highestScore: number = 0;
 
     private remaincoin: number = 0;
+
+    private last_platform_y : number = 0;
 
     private knife : cc.Node = null;
 
@@ -53,6 +57,12 @@ export default class GameMgr extends cc.Component {
     @property(cc.Node)
     score : cc.Node = null;
 
+    @property(cc.Node)
+    stopPanel: cc.Node = null;
+
+    @property(cc.Node)
+    gameoverPanel: cc.Node = null;
+
     // @property(cc.Node)
     // Gameover : cc.Node = null;
 
@@ -65,6 +75,7 @@ export default class GameMgr extends cc.Component {
         this.physicManager.enabled = true;
         this.platforms = cc.find("Canvas/platform");
         this.floor = 0;
+        this.last_platform_y = -280;
         this.count = -1000;
         this.knife = cc.find("Canvas/knife");
         //@ts-ignore
@@ -112,7 +123,8 @@ export default class GameMgr extends cc.Component {
                 let randIdx = this.randomChoosePlatform();
                 let platform = cc.instantiate(this.platformPrefabs[randIdx]);
                 platform.parent = this.platforms;
-                platform.position = cc.v2((i < 5)?(Math.random()>0.5)? Math.random()*75: Math.random()*-75: (Math.random()>0.5)? Math.random()*400: Math.random()*-400, i*stepsize-280-(stepsize-40)*100 + Math.random()*5);
+                platform.position = cc.v2((i < 5)?(Math.random()>0.5)? Math.random()*75: Math.random()*-75: (Math.random()>0.5)? Math.random()*400: Math.random()*-400, this.last_platform_y + stepsize + (5*Math.random()));
+                this.last_platform_y = platform.position.y;
             }
             this.floor += num;
             this.count += 1000;
@@ -124,9 +136,18 @@ export default class GameMgr extends cc.Component {
     randomChoosePlatform()
     {
         let rand = Math.random();
+        let height = parseInt(this.score.getComponent(cc.Label).string);
 
         //0: normal, 1: moveable, 2: time, 3: break
-        let prob = [6, 1, 0.5, 1];
+        let prob1 = [6, 1, 0.5, 1];
+        let prob2 = [5.5, 1.5, 0.5, 1];
+        let prob3 = [5, 1.5, 0.5, 1.5];
+        let prob4 = [4.5, 1.5, 1.5, 1.5];
+        let prob5 = [4, 2, 1.5, 1.5];
+        let prob6 = [3.5, 2, 2, 1.5];
+        let prob7 = [3, 2, 2.5, 1.5];
+        let prob8 = [2.5, 2.5, 2.5, 1.5];
+        let prob = (height >= 1500) ? (height >= 2500) ? (height >= 3500) ? (height > 4500) ? (height>=5500) ? (height >= 6500) ? (height >=7500) ? prob8 : prob7 : prob6: prob5 : prob4 : prob3 : prob2 : prob1;
         let sum = prob.reduce((a,b)=>a+b);
         for(let i = 1; i < prob.length; i++)
             prob[i] += prob[i-1];
@@ -150,20 +171,28 @@ export default class GameMgr extends cc.Component {
     
         if(height >= this.count + 550){
             //this.needmoreplatform = true;
-            if(height >= 550)
-                this.generatePlatforms(100, 45);
-            else if(height >= 1550)
-                this.generatePlatforms(100, 50);
-            else if(height >= 2550)
-                this.generatePlatforms(100, 60);
-            else if(height >= 3550)
-                this.generatePlatforms(100, 65);
-            else if(height >= 4550)
-                this.generatePlatforms(100, 70);
-            else if(height >= 5550)
-                this.generatePlatforms(100, 75);
-            else if(height >= 6750)
+            if(height >= 6750){
                 this.generatePlatforms(100, 80);
+            }
+            else if(height >= 5550){
+                this.generatePlatforms(100, 75);
+            }
+            else if(height >= 4550){
+                this.generatePlatforms(100, 70);
+            }
+            else if(height >= 3550){
+                this.generatePlatforms(100, 65);
+            }
+            else if(height >= 2550){
+                this.generatePlatforms(100, 60);
+            }
+            else if(height >= 1550){
+                this.generatePlatforms(100, 50);
+            }
+            else if(height >= 550){
+                this.generatePlatforms(100, 45);
+            }
+                
         }
 
         if(this.player.y - this.camera.y > 100)
@@ -182,8 +211,14 @@ export default class GameMgr extends cc.Component {
         }
     }
 
+    gameovershow(){
+        this.gameoverPanel.active = true;
+    }
+
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
+        cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
+        cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         if(s > this.highestScore){
             //@ts-ignore
             firebase.database().ref(`users/${this.ID}/highest`).set({
@@ -199,5 +234,26 @@ export default class GameMgr extends cc.Component {
         firebase.database().ref(`users/${this.ID}/coin`).set({
             number: this.remaincoin + money
         });
+    }
+
+    gamePause(){
+        if(this.pause){
+            this.pause = false;
+            this.stopPanel.active = false;
+            cc.director.resume();
+            return;
+        }
+        this.pause = true;
+        this.stopPanel.active = true;
+        this.scheduleOnce(()=>{
+            cc.director.pause();
+        }, 0.1);
+    }
+
+    playagain(){
+        cc.director.loadScene("Play");
+    }
+    backtomenu(){
+        cc.director.loadScene("Menu");
     }
 }

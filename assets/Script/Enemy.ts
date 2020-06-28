@@ -29,6 +29,9 @@ export default class Enemy extends cc.Component {
 
     private playerbomb : boolean = false;
 
+    @property({ type: cc.AudioClip })
+    StepEffect: cc.AudioClip = null;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
@@ -221,6 +224,7 @@ export default class Enemy extends cc.Component {
     onBeginContact(contact, self, other){
         if(other.tag == 0 && !this.player.getComponent("Player").isKnifing){
             if(contact.getWorldManifold().normal.y == 1) {
+                cc.audioEngine.playEffect(this.StepEffect, false);
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 self.node.stopAllActions();
                 self.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
@@ -228,7 +232,7 @@ export default class Enemy extends cc.Component {
                     self.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8){
+        } else if(other.tag == 8 || other.tag == 10){
             self.node.destroy();
         }
     }
@@ -262,7 +266,6 @@ export default class Enemy extends cc.Component {
             if(this.playerbomb && dist < 89){
                 this.cnt++;
                 if(this.cnt > 15 && !this.player.getComponent("Player").isReborn) {
-                    cc.log("inin");
                     this.player.getComponent("Player").setdie();
                 }
             }

@@ -197,6 +197,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "BombEffect": {
+      "__uuid__": "d3c4bc09-d8b1-466d-9101-d7d42e7c91e4"
+    },
     "_id": ""
   },
   {

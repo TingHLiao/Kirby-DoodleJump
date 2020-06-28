@@ -41,6 +41,8 @@ export default class player extends cc.Component {
     private kirby_state = 0;
 
     private isReborn = false;
+    //avoid playing effect multiple time
+    private suckEffectID = null;
 
     // record money
     @property(cc.Node)
@@ -48,6 +50,15 @@ export default class player extends cc.Component {
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    SuckEffect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    LoseonelifeEffect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    DieEffect: cc.AudioClip = null;
 
     platform: cc.Node;//
     bulletPool: cc.Node;
@@ -62,7 +73,13 @@ export default class player extends cc.Component {
     CoinEffect: cc.AudioClip = null;
 
     @property({type: cc.AudioClip})
-    DieEffect: cc.AudioClip = null;
+    SnowAttack: cc.AudioClip = null;
+
+    @property({type: cc.AudioClip})
+    NinjaAttack: cc.AudioClip = null;
+
+    @property({type: cc.AudioClip})
+    KnightAttack: cc.AudioClip = null;
 
     @property(GameMgr)
     gamemanager: GameMgr = null;
@@ -84,7 +101,6 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
-        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -108,6 +124,8 @@ export default class player extends cc.Component {
             this.rightDown = true;
         } 
         if(event.keyCode == cc.macro.KEY.space){
+            if(!this.spaceDown)
+                this.suckEffectID = cc.audioEngine.playEffect(this.SuckEffect, false);
             this.spaceDown = true;
 
             switch(this.kirby_state){
@@ -164,6 +182,8 @@ export default class player extends cc.Component {
             this.rightDown = false;
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
+            if(this.suckEffectID)
+                cc.audioEngine.pauseEffect(this.suckEffectID);
 
             switch(this.kirby_state){
                 case 0: {
@@ -333,9 +353,6 @@ export default class player extends cc.Component {
     onEndContact(contact, self, other){
         if(self.tag == 3 && other.tag == 5 && !this.rocketOn){
             if(other.node.isValid && other.node.getComponent("Enemy").sucktrigger){
-                //other.node.stopAllActions();
-                //other.node.getComponent("Enemy").sucktrigger = false;
-                //other.node.getComponent(cc.PhysicsBoxCollider).enabled = false;
                 other.node.runAction(cc.moveBy(1.5, cc.v2(0, -800)));
                 other.scheduleOnce( function(){
                     other.node.destroy();
@@ -364,8 +381,8 @@ export default class player extends cc.Component {
         if(Buy.Global.Extra_life > 0){    //have extra life!
             this.isReborn  = true;
             Buy.Global.Extra_life--;
-            cc.log(Buy.Global.Extra_life);
             this.anim.stop();
+            cc.audioEngine.playEffect(this.LoseonelifeEffect, false);
 
             if(this.kirby_state == 0){
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
@@ -403,7 +420,7 @@ export default class player extends cc.Component {
             },1);
         }
         else{
-            /*this.isDied = true;
+            this.isDied = true;
             switch(this.kirby_state){
                 case 0: {                 // normal
                     this.anim.stop('jump');
@@ -446,13 +463,16 @@ export default class player extends cc.Component {
                 this.bulletPool.removeAllChildren();
                 this.knife.removeAllChildren();
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -150);
-            }, 0.3);*/
+                this.scheduleOnce(()=>{
+                    this.gamemanager.gameovershow();
+                }, 1)
+            }, 0.3);
         }
        
     }
 
     private attack(x: number, y: number, playerpos: cc.Vec2){
-        if(this.rocketOn)
+        if(this.rocketOn || (y > 275 && x > 380)) //click on stop button
             return;
         //can only attack maxbullet in window
         if(this.bulletPool.childrenCount >= this.maxbullet)
@@ -468,6 +488,7 @@ export default class player extends cc.Component {
                 break;
             }
             case 1: {                 // snowman
+                cc.audioEngine.playEffect(this.SnowAttack, false);
                 let newnode = cc.instantiate(this.bullet);
                 newnode.scale = newnode.scale + 0.2 * Buy.Global.Extra_range;
                 this.bulletPool.addChild(newnode);
@@ -483,6 +504,7 @@ export default class player extends cc.Component {
                 this.animateState = this.anim.play("ninja_die");
                 
                 if(!this.isThrow){
+                    cc.audioEngine.playEffect(this.NinjaAttack, false);
                     this.isThrow = true;
                     let newnode = cc.instantiate(this.ninja_bullet);
                     this.bulletPool.addChild(newnode);
@@ -508,6 +530,7 @@ export default class player extends cc.Component {
                 break;
             }
             case 4:{                   // knight
+                cc.audioEngine.playEffect(this.KnightAttack, false);
                 this.anim.play("knight_attack");
                 this.isKnifing = true;
                 this.scheduleOnce(()=>{
@@ -533,7 +556,6 @@ export default class player extends cc.Component {
                 else
                     n.runAction(cc.moveBy(0.05, move));
             } else{
-                cc.log('d')
                 this.isThrowBack = false;
             }
         }

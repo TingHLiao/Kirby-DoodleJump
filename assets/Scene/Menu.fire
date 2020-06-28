@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        354.20439014783545,
+        420.8883462392372,
         0,
         0,
         0,
@@ -9087,7 +9087,7 @@
     },
     "component": "",
     "_componentId": "8c33bjDJRdHwIWhSkObt14M",
-    "handler": "buy_shield",
+    "handler": "but_shield",
     "customEventData": ""
   },
   {

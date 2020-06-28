@@ -77,7 +77,7 @@ export default class Stage extends cc.Component {
         if(Buy.Global.username != ""){
             this.nameText.string = Buy.Global.username;
             this.highestText.string = (Array(6).join("0") + Buy.Global.highest.toString()).slice(-6);
-            this.coinText.string = (Array(6).join("0") + Buy.Global.coin.toString()).slice(-6);
+            this.coinText.string = Buy.Global.coin.toString() + '$';
         } else{
             //@ts-ignore
             firebase.auth().onAuthStateChanged(user => {

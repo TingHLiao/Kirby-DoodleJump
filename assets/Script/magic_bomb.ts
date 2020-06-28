@@ -17,6 +17,9 @@ export default class magicbomb extends cc.Component {
 
     private camera : cc.Node = null;
 
+    @property({type:cc.AudioClip})
+    BombEffect: cc.AudioClip = null;
+
     onLoad () {
         this.anim = this.getComponent(cc.Animation);
         this.camera = cc.find("Canvas/Main Camera");
@@ -36,6 +39,7 @@ export default class magicbomb extends cc.Component {
         if((other.tag == 1 || other.tag == 4 || other.tag == 5) && contact.getWorldManifold().normal.y == -1){
            if(other.tag == 1){
                 this.anim.play("bomb_explode");
+                cc.audioEngine.playEffect(this.BombEffect, false);
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
                     this.node.destroy();
@@ -44,6 +48,7 @@ export default class magicbomb extends cc.Component {
            }
            else{
                 this.anim.play("bomb_explode");
+                cc.audioEngine.playEffect(this.BombEffect, false);
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
                     this.node.destroy();

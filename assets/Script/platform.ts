@@ -98,6 +98,7 @@ export default class platform extends cc.Component {
             
             let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
             let withitem = false;
+            // platform with rocket
             if(withrocket){
                 withitem = true;
                 let newnode = cc.instantiate(this.rocketPrefab); // newnode is the rocket
@@ -105,71 +106,71 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.2); // 37.2 = half of platform's height + half of 0.6rocket's height
                 newnode.scale = 0.6;
             }
-
+            // platform with coin
             if(!withitem && Math.random()>0.8){
                 withitem = true;
                 var newnode = cc.instantiate(this.coinPrefab); // newnode is coin
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 25.7);
             }
-
-            if(!withitem && Math.random()>0.95){
+            // platform with virus_red2
+            if(this.score > 6500 && !withitem && Math.random() > 0.9){
                 withitem = true;
-                var newnode = cc.instantiate(this.trampoline); // newnode is trampoline
-                this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
-            }
-
-            if(!withitem && Math.random() > 0.9 && this.score > 500){
-                withitem = true;
-                let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
-                this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 38.35);
-            }
-
-            if(!withitem && Math.random() > 0.85 && this.score > 1000){
-                withitem = true;
-                let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
+                let newnode = cc.instantiate(this.virus_red2); // newnode is the virus_red2
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
-
-            if(!withitem && Math.random() > 0.85 /*&& this.score > 1000*/){
+            // platform with Bomb_enemy
+            if(this.score > 4500 && !withitem && Math.random() > 0.8){
                 withitem = true;
-                let newnode = cc.instantiate(this.virus_red2); // newnode is the virus_g1
-                this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
-            }
-
-            if(!withitem && Math.random() > 0.95 && this.score > 1500){
-                withitem = true;
-                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
-                this.node.addChild(newnode);
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 30.025);
-            }
-
-            if(!withitem && Math.random() > 0.95 && this.score > 2500){
-                withitem = true;
-                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
+                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 33.5);
             }
-
-            if(!withitem && Math.random() > 0.9 && this.score > 3500){
+            // platform with knight_enemy
+            if(/*this.score > 3500 &&*/ !withitem && Math.random() > 0.9){
                 withitem = true;
                 let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Knight_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
             }
-
-            if(!withitem && Math.random() > 0.8 /*&& this.score > 4500*/){
+            // platform with snowman_enemy
+            if(this.score > 2500 && !withitem && Math.random() > 0.85){
                 withitem = true;
-                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
+                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 33.5);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
+            }
+            // platform with ninja_enemy
+            if(this.score > 1500 && !withitem && Math.random() > 0.95){
+                withitem = true;
+                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 30.025);
+            }
+            // platform with virus_red1
+            if(this.score > 500 && !withitem && Math.random() > 0.9){
+                withitem = true;
+                let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 38.35);
+            }
+            // platform with virus_g1
+            if(this.score > 1000 && !withitem && Math.random() > 0.9){
+                withitem = true;
+                let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
+            }
+            // platform with trampoline
+            if(!withitem && Math.random()>0.95){
+                withitem = true;
+                var newnode = cc.instantiate(this.trampoline); // newnode is trampoline
+                this.node.addChild(newnode);
+                newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
         }
         else if(this.node.name == "move_basic"){
@@ -228,8 +229,10 @@ export default class platform extends cc.Component {
     }
     
     update (dt) {
-        if(this.camera.position.y - this.node.position.y > 2500 && this.node.isValid) {
-            this.node.destroy();
+        if(this.camera.position.y - this.node.position.y > 320 && this.node.isValid) {
+            this.scheduleOnce(()=>{
+                this.node.destroy();
+            }, 2.55)
         }
     }
 
