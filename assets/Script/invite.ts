@@ -38,7 +38,6 @@ export default class Invite extends cc.Component {
     private beinvitedID: string = "";
 
     onLoad () {
-        cc.log('onload')
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
             this.ID = user.email.replace('@', '-').split('.').join('_');
