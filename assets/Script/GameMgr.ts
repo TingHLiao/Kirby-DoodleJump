@@ -106,6 +106,7 @@ export default class GameMgr extends cc.Component {
             this.istwoP = true;
             this.timer = cc.find("Canvas/Main Camera/Timer/counter");
             this.twoPscore = cc.find("Canvas/Main Camera/2Pscore");
+            this.twoPscore.active =  true;
             this.timer.getComponent(cc.Label).string = "60";
             this.remaintime = 60;
             cc.find("Canvas/Main Camera/Timer").active = true;
@@ -300,7 +301,7 @@ export default class GameMgr extends cc.Component {
     gameovershow(){
         if(Buy.Global.twoP){
             if(this.remaintime != 0) return;
-            cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString).slice(-6);
+            cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString()).slice(-6);
             cc.find("Canvas/Main Camera/2PGameOver/otherscore").getComponent(cc.Label).string = `${Buy.Global.competitorName}'s Score: `;
             //lose
             if(this.twoPshowscore > parseInt(this.score.getComponent(cc.Label).string)){
