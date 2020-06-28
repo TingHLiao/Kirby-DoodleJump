@@ -300,16 +300,16 @@ export default class GameMgr extends cc.Component {
 
     gameovershow(){
         if(Buy.Global.twoP){
-            if(this.remaintime != 0) return;
+            if(this.remaintime != 0 && this.read) return;
             cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString()).slice(-6);
             cc.find("Canvas/Main Camera/2PGameOver/otherscore").getComponent(cc.Label).string = `${Buy.Global.competitorName}'s Score: `;
             //lose
             if(this.twoPshowscore > parseInt(this.score.getComponent(cc.Label).string)){
-                cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.winSprite;
-                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "WIN ! !"
-            } else{ //win
                 cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.loseSprite;
-                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "LOSE QQ"
+                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "LOSE QQ";
+            } else{ //win
+                cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.winSprite;
+                cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "WIN ! !";
             }
             this.twoPgameoverPanel.active = true;
             Buy.Global.twoP = false;
