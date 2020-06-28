@@ -46,10 +46,13 @@ export default class magicbomb extends cc.Component {
                 this.anim.play("bomb_explode");
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
                 this.scheduleOnce(()=>{
-                    if(other.node.isValid)other.node.parent.destroy();
                     this.node.destroy();
+                    if(other.node.isValid)other.node.parent.destroy();
                 },0.27)
            }
+       }
+       else{
+           contact.disabled = true;
        }
     }
 }
