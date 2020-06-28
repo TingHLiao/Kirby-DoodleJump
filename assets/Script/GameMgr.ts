@@ -205,6 +205,9 @@ export default class GameMgr extends cc.Component {
                 this.platforms.removeAllChildren();
                 if(this.knife.isValid)this.knife.destroy();
                 this.scheduleOnce(()=>{
+                    this.gameovershow();
+                }, 1)
+                this.scheduleOnce(()=>{
                     this.player.active = false;
                 }, 0.6);
             }

@@ -103,8 +103,8 @@ export default class virus extends cc.Component {
             }, 1)
         }
         else if(other.tag == 10){
-            cc.audioEngine.playEffect(this.BombEffect, false);
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
+            cc.audioEngine.playEffect(this.BombEffect, false);
             this.isDead = true;   
             this.anim.play("virus_die");
             this.scheduleOnce(()=>{

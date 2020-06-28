@@ -247,8 +247,7 @@ export default class Enemy extends cc.Component {
         let diffx = this.node.parent.x - this.player.x;
         let diffy = this.node.parent.y - this.player.y;
         let dist = Math.sqrt(diffx*diffx + diffy*diffy);
-        
-        // check whether knight kirby is waving its knife
+        //cc.log(diffx, diffx1, dist1);
         if(dist < 100){
             if(this.player.getComponent("Player").isKnifing){
                 this.node.destroy();
