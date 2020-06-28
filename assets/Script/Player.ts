@@ -441,11 +441,11 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    cc.log(dir);
-                    newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400)));
+                    //cc.log(dir);
+                    newnode.runAction(cc.moveBy(0.7, dir.divSelf(dir.mag()).mulSelf(400)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
-                    }, 0.81);
+                    }, 0.71);
                 }
                 break;
             }
@@ -481,11 +481,10 @@ export default class player extends cc.Component {
             if(this.bulletPool.childrenCount!=0 && n.isValid){
                 let move = this.node.position.sub(n.position).divSelf(15);
                 if(move.mag() < 50)
-                    n.runAction(cc.moveBy(0.001, move));
+                    n.runAction(cc.moveBy(0.001, move.mulSelf(3)));
                 else
                     n.runAction(cc.moveBy(0.05, move));
             } else{
-                cc.log('d')
                 this.isThrowBack = false;
             }
         }
