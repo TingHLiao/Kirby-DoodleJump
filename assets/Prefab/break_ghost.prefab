@@ -196,7 +196,7 @@
     },
     "_enabled": true,
     "rocketPrefab": {
-      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
+      "__uuid__": "1a92b29d-04a0-4e16-8ce6-330c64ab4555"
     },
     "virus_red1": {
       "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
@@ -269,7 +269,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "5db3d797-4970-4d1f-99b2-9171de96d01b"
     },
     "fileId": "caZHbBud1Hiqf+lk+aqYYG",
     "sync": false

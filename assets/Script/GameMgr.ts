@@ -126,7 +126,7 @@ export default class GameMgr extends cc.Component {
             this.twoPscore = cc.find("Canvas/Main Camera/2Pscore");
             this.twoPscore.active =  true;
             this.timer.getComponent(cc.Label).string = "60";
-            this.remaintime = 10;
+            this.remaintime = 60;
             cc.find("Canvas/Main Camera/Timer").active = true;
             this.twoPscore.active = true;
         }
@@ -360,15 +360,17 @@ export default class GameMgr extends cc.Component {
             let action = cc.spawn(cc.moveBy(0.9, 0, -50), cc.fadeIn(0.9));
             cc.find("Canvas/Main Camera/2PGameOver/label").runAction(cc.blink(1.5, 7));
             this.scheduleOnce(()=>{
-                cc.find("Canvas/Main Camera/2PGameOver/coin").runAction(action);
                 cc.find("Canvas/Main Camera/2PGameOver/score").runAction(action);
             }, 1.5);
             this.scheduleOnce(()=>{
+                cc.find("Canvas/Main Camera/2PGameOver/coin").runAction(action);
+            }, 2.45);
+            this.scheduleOnce(()=>{
                 cc.find("Canvas/Main Camera/2PGameOver/otherscore").runAction(action);
-            },2.45);
+            },3.4);
             this.scheduleOnce(()=>{
                 cc.find("Canvas/Main Camera/2PGameOver/sprite").runAction(cc.fadeTo(0.7, 230));
-            }, 3.4);
+            }, 4.55);
             
         } else{
             this.gameoverPanel.active = true;
