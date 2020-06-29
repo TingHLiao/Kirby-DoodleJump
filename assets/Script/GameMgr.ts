@@ -276,13 +276,22 @@ export default class GameMgr extends cc.Component {
     }
 
     counter(){
-        if(!this.istwoP || (this.read||this.write)) return;
+        if(!this.istwoP || !(this.read||this.write)) return;
         let s = parseInt(this.score.getComponent(cc.Label).string);
         if(this.c == 60){
             if(this.remaintime == 0){
+                this.player.getComponent("Player").gameover();
+                //@ts-ignore
+                firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
+                    score: s,
+                    isDie: true
+                });
+                //@ts-ignore
+                firebase.database().ref(`users/${this.ID}/2P`).once('value', snapshot => {
+                    this.twoPshowscore = snapshot.val().score;
+                })
                 this.read = false;
                 this.write = false;
-                this.player.getComponent("Player").gameover();
                 this.remaintime --;
             } else if(this.remaintime > 0){
                 this.remaintime--;
