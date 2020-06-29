@@ -391,7 +391,7 @@ export default class GameMgr extends cc.Component {
             case 0: {
                 cc.director.loadScene("Play");
                 var basicid = cc.audioEngine.playMusic(this.basic_bgm, true);
-                cc.audioEngine.setVolume(basicid, 0.7);
+                cc.audioEngine.setVolume(basicid, 0.5);
                 break;
             }
             case 1: {

@@ -221,7 +221,10 @@ export default class Enemy extends cc.Component {
     bomb_attack(){
         this.scheduleOnce(()=>{
             this.anim.play("bomb_enemy_attack");
-            cc.audioEngine.playEffect(this.DieEffect, false);
+            this.scheduleOnce(()=>{
+                cc.audioEngine.playEffect(this.DieEffect, false);
+            }, 0.25);
+            
             this.scheduleOnce(()=>{
                 this.node.parent.destroy();
             },0.8)

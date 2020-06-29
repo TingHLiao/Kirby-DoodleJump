@@ -39,6 +39,9 @@ export default class Invite extends cc.Component {
     @property(cc.Node)
     label3: cc.Node = null;
 
+    @property({type: cc.AudioClip})
+    clickEffect: cc.AudioClip = null;
+
     private User = null;
     private Users = null;
     private Name : string = "";
@@ -53,8 +56,10 @@ export default class Invite extends cc.Component {
     //the one who invite me
     private beinvitedName: string = "";
     private beinvitedID: string = "";
+    private twoPbutton: cc.Button = null;
 
     onLoad () {
+        this.twoPbutton = cc.find('Canvas/2P').getComponent(cc.Button);
         //@ts-ignore
         firebase.auth().onAuthStateChanged(user => {
             this.ID = user.email.replace('@', '-').split('.').join('_');
@@ -87,6 +92,7 @@ export default class Invite extends cc.Component {
     }
 
     showAllUser(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         if(this.isShow){
             this.InvitePanel.active = false;
             this.uncover();
@@ -117,11 +123,13 @@ export default class Invite extends cc.Component {
 
     Invite(event, inviteID: string){
         if(this.isShow){
+            cc.audioEngine.playEffect(this.clickEffect, false);
+            this.twoPbutton.interactable = false;
             this.InvitePanel.active = false;
             this.getreponse = false;
             this.waiting.active = true;
             this.startAction();
-            this.User.child(inviteID).once('value', snapshot => {
+            this.Users.child(`${inviteID}`).once('value', snapshot => {
                 this.inviteName = snapshot.val().name;
             })
             this.scheduleOnce(()=>{
@@ -131,6 +139,7 @@ export default class Invite extends cc.Component {
                     this.waiting.active = false;
                     this.reponse.active = true;
                     this.scheduleOnce(()=>{
+                        this.twoPbutton.interactable = true;
                         this.reponse.active = false;
                         this.uncover();
                         this.isShow = false;
@@ -198,6 +207,7 @@ export default class Invite extends cc.Component {
             snapshot.forEach(element => {
                 first_count += 1;
                 this.beinvitedName = element.val().name;
+                this.beinvitedID = element.val().id;
                 if(this.beinvitedName != "none"){
                     let time = parseInt(element.val().time);
                     this.User.child(`Request/${element.key}`).remove();
@@ -241,6 +251,7 @@ export default class Invite extends cc.Component {
     }
 
     Agree(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         this.click = true;
         this.BeInvitedPanel.active = false;
         this.Users.child(this.beinvitedID + '/Reponse').push({
@@ -253,6 +264,7 @@ export default class Invite extends cc.Component {
         Buy.Global.competitorName = this.beinvitedName;
     }
     Reject(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         this.click = true;
         this.BeInvitedPanel.active = false;
         this.uncover();
@@ -283,11 +295,14 @@ export default class Invite extends cc.Component {
         let date = new Date();
         let h = date.getHours();
         let m = date.getMinutes();
-        let hstring, mstring;
+        let s = date.getSeconds();
+        let hstring, mstring, sstring;
         if (h < 10)  hstring = '0' + h;
         else hstring = h.toString();
         if (m < 10)  mstring = '0' + m;
         else mstring = m.toString();
-        return hstring + mstring;
+        if (s < 10)  sstring = '0' + s;
+        else sstring = s.toString();
+        return hstring + mstring + sstring;
       }
 }

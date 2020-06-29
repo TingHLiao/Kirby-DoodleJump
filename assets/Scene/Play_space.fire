@@ -529,9 +529,9 @@
     "_opacity": 244,
     "_color": {
       "__type__": "cc.Color",
-      "r": 113,
-      "g": 130,
-      "b": 199,
+      "r": 76,
+      "g": 86,
+      "b": 158,
       "a": 255
     },
     "_contentSize": {
@@ -1855,9 +1855,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 74,
-      "g": 90,
-      "b": 114,
+      "r": 16,
+      "g": 40,
+      "b": 77,
       "a": 255
     },
     "_contentSize": {
@@ -3057,7 +3057,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 255,
+    "_opacity": 200,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -3397,9 +3397,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 74,
-      "g": 90,
-      "b": 114,
+      "r": 16,
+      "g": 40,
+      "b": 77,
       "a": 255
     },
     "_contentSize": {
@@ -4289,7 +4289,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 0,
+    "_opacity": 230,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -4362,7 +4362,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 225.52,
-      "height": 50.4
+      "height": 75.6
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -4415,7 +4415,7 @@
     "_string": "Win ! !",
     "_N$string": "Win ! !",
     "_fontSize": 70,
-    "_lineHeight": 40,
+    "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
       "__uuid__": "5dc753b5-a770-4af5-ab7b-e543fa51ccb4"
