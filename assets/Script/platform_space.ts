@@ -130,7 +130,7 @@ export default class platform extends cc.Component {
             let withitem = false;
             if(posy >= 3950 && posy <= 4000){
                 withitem = true;
-                var newnode = cc.instantiate(this.americaMonster); // newnode is america monster
+                var newnode = cc.instantiate(this.greeceMonster); // newnode is america monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -138,7 +138,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 6950 && posy <= 7000){
                 withitem = true;
-                var newnode = cc.instantiate(this.baxiMonster); // newnode is baxi monster
+                var newnode = cc.instantiate(this.japanMonster); // newnode is baxi monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -146,7 +146,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 9950 && posy <= 10000){
                 withitem = true;
-                var newnode = cc.instantiate(this.grapeMonster); // newnode is grape monster
+                var newnode = cc.instantiate(this.germanyMonster); // newnode is grape monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -154,7 +154,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 12550 && posy <= 12605){
                 withitem = true;
-                var newnode = cc.instantiate(this.russiaMonster); // newnode is russia monster
+                var newnode = cc.instantiate(this.englishMonster); // newnode is russia monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -162,7 +162,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 15000 && posy <= 15060){
                 withitem = true;
-                var newnode = cc.instantiate(this.italyMonster); // newnode is italy monster
+                var newnode = cc.instantiate(this.spanishMonster); // newnode is italy monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -170,7 +170,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 17650 && posy <= 17710){
                 withitem = true;
-                var newnode = cc.instantiate(this.spanishMonster); // newnode is spanish monster
+                var newnode = cc.instantiate(this.italyMonster); // newnode is spanish monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -178,7 +178,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 20000 && posy <= 20060){
                 withitem = true;
-                var newnode = cc.instantiate(this.englishMonster); // newnode is greece monster
+                var newnode = cc.instantiate(this.russiaMonster); // newnode is greece monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -186,7 +186,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 23500 && posy <= 23570){
                 withitem = true;
-                var newnode = cc.instantiate(this.germanyMonster); // newnode is germany monster
+                var newnode = cc.instantiate(this.grapeMonster); // newnode is germany monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -194,7 +194,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 26550 && posy <= 26620){
                 withitem = true;
-                var newnode = cc.instantiate(this.japanMonster); // newnode is japan monster
+                var newnode = cc.instantiate(this.baxiMonster); // newnode is japan monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -233,7 +233,7 @@ export default class platform extends cc.Component {
             // platform with Bomb_enemy
             if(this.score > 4500 && !withitem && Math.random() > 0.8){
                 withitem = true;
-                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
+                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 33.5);
@@ -241,7 +241,7 @@ export default class platform extends cc.Component {
             // platform with knight_enemy
             if(this.score > 3500 && !withitem && Math.random() > 0.9){
                 withitem = true;
-                let newnode = cc.instantiate(this.KnightEnemy);  // newnode is the Knight_enemy
+                let newnode = cc.instantiate(this.NinjaEnemy);  // newnode is the Knight_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
@@ -249,7 +249,7 @@ export default class platform extends cc.Component {
             // platform with snowman_enemy
             if(this.score > 2500 && !withitem && Math.random() > 0.85){
                 withitem = true;
-                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Snowman_enemy
+                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
@@ -257,19 +257,19 @@ export default class platform extends cc.Component {
             // platform with ninja_enemy
             if(this.score > 1500 && !withitem && Math.random() > 0.95){
                 withitem = true;
-                let newnode = cc.instantiate(this.NinjaEnemy); // newnode is the Ninja_enemy
+                let newnode = cc.instantiate(this.KnightEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 30.025);
             }
             // platform with virus_red1
-            if(this.score > 500 && !withitem && Math.random() > 0.9){
+            if(this.score > 4000 && !withitem && Math.random() > 0.9){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red1); // newnode is the virus_red1
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 38.35);
             }
             // platform with virus_g1
-            if(this.score > 1000 && !withitem && Math.random() > 0.9){
+            if(this.score > 3000 && !withitem && Math.random() > 0.9){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_green1); // newnode is the virus_g1
                 this.node.addChild(newnode);
