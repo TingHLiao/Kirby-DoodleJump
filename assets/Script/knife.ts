@@ -38,10 +38,13 @@ export default class knife extends cc.Component {
     }
 
     update (dt) {
-        if((this.node.x > this.startx + 240 || this.node.x < this.startx - 240 || this.node.y - this.starty > 160 || this.node.y - this.starty < -160) && !this.NeedDestroy){
-            this.NeedDestroy = true;
-            this.des();
+        if(this.node.isValid){
+            if((this.node.x > this.startx + 240 || this.node.x < this.startx - 240 || this.node.y - this.starty > 160 || this.node.y - this.starty < -160) && !this.NeedDestroy){
+                this.NeedDestroy = true;
+                this.des();
+            }
         }
+        
     }
 
     des(){

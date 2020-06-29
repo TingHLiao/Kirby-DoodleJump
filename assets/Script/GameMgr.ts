@@ -171,17 +171,17 @@ export default class GameMgr extends cc.Component {
     {
         let rand = Math.random();
         let height = parseInt(this.score.getComponent(cc.Label).string);
-        let extra = Math.pow(1.05, Buy.Global.platform);
+        let extra = 0.02 * Buy.Global.platform;
 
         //0: normal, 1: moveable, 2: time, 3: break
-        let prob1 = [6 * extra , 1, 0.5, 1];
-        let prob2 = [5.5 * extra, 1.5, 0.5, 1];
-        let prob3 = [5 * extra, 1.5, 0.5, 1.5];
-        let prob4 = [4.5 * extra, 1.5, 1.5, 1.5];
-        let prob5 = [4 * extra, 2, 1.5, 1.5];
-        let prob6 = [3.5 * extra, 2, 2, 1.5];
-        let prob7 = [3 * extra, 2, 2.5, 1.5];
-        let prob8 = [2.5 * extra, 2.5, 2.5, 1.5];
+        let prob1 = [6 + extra , 1, 0.5, 1];
+        let prob2 = [5.5 + extra, 1.5, 0.5, 1];
+        let prob3 = [5 + extra, 1.5, 0.5, 1.5];
+        let prob4 = [4.5 + extra, 1.5, 1.5, 1.5];
+        let prob5 = [4 + extra, 2, 1.5, 1.5];
+        let prob6 = [3.5 + extra, 2, 2, 1.5];
+        let prob7 = [3 + extra, 2, 2.5, 1.5];
+        let prob8 = [2.5 + extra, 2.5, 2.5, 1.5];
         let prob = (height >= 1500) ? (height >= 2500) ? (height >= 3500) ? (height > 4500) ? (height>=5500) ? (height >= 6500) ? (height >=7500) ? prob8 : prob7 : prob6: prob5 : prob4 : prob3 : prob2 : prob1;
         let sum = prob.reduce((a,b)=>a+b);
         for(let i = 1; i < prob.length; i++)
@@ -242,7 +242,7 @@ export default class GameMgr extends cc.Component {
                 cc.audioEngine.playEffect(this.DieEffect, false);
                 this.EffectOn = true;
                 this.platforms.removeAllChildren();
-                if(this.knife.isValid)this.knife.destroy();
+                if(this.knife.isValid) this.knife.destroy();
                 this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
                 this.scheduleOnce(()=>{
                     this.gameovershow();
@@ -342,7 +342,19 @@ export default class GameMgr extends cc.Component {
             number: this.remaincoin + money
         });
         Buy.Global.coin = this.remaincoin + money;
-        cc.log(Buy.Global.coin);
+        this.reset();
+        //cc.log(Buy.Global.coin);
+    }
+
+    reset(){
+        cc.log("reset");
+        Buy.Global.Buy_Kirby = 0;
+        Buy.Global.Extra_jump = 0;
+        Buy.Global.Extra_life = 0;
+        Buy.Global.Extra_range = 0;
+        Buy.Global.more_Rocket = 0;
+        Buy.Global.more_Shield = 0;
+        Buy.Global.platform = 0;
     }
 
     gamePause(){

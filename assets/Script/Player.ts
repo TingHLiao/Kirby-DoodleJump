@@ -82,6 +82,9 @@ export default class player extends cc.Component {
     @property({type: cc.AudioClip})
     Loseonelife: cc.AudioClip = null;
 
+    @property({type: cc.AudioClip})
+    beHitEffect: cc.AudioClip = null;
+
     @property(GameMgr)
     gamemanager: GameMgr = null;
 
@@ -102,7 +105,6 @@ export default class player extends cc.Component {
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
         this.kirby_state = Buy.Global.Buy_Kirby;
-        cc.log(Buy.Global.Extra_life);
     }
 
     start () {
@@ -280,6 +282,7 @@ export default class player extends cc.Component {
                 }
                 if(other.tag == 6){     //collide with enemy bullets
                     other.node.destroy();
+                    cc.audioEngine.playEffect(this.beHitEffect, false);    //check again
                     this.gameover();
                 }  
             }
@@ -379,7 +382,6 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        cc.log(Buy.Global.Extra_life);
         if(Buy.Global.Extra_life > 0){    //have extra life!
             this.isReborn  = true;
             Buy.Global.Extra_life--;
@@ -469,7 +471,7 @@ export default class player extends cc.Component {
                     this.gamemanager.gameovershow();
                 }, 1)
             }, 0.3);
-            this.reset();
+            
         } 
     }
 
@@ -546,16 +548,6 @@ export default class player extends cc.Component {
                 break;
             }
         }
-    }
-
-    private reset(){
-        Buy.Global.Buy_Kirby = 0;
-        Buy.Global.Extra_jump = 0;
-        Buy.Global.Extra_life = 0;
-        Buy.Global.Extra_range = 0;
-        Buy.Global.more_Rocket = 0;
-        Buy.Global.more_Shield = 0;
-        Buy.Global.platform = 0;
     }
 
     ninja_bullet_back(){

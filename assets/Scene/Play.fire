@@ -3778,6 +3778,9 @@
     "Loseonelife": {
       "__uuid__": "3e7cdefa-cf9d-4d26-b26d-c6ea3cb57bcf"
     },
+    "beHitEffect": {
+      "__uuid__": "428775fd-4b08-4fb8-b222-da204db0c258"
+    },
     "gamemanager": {
       "__id__": 7
     },
