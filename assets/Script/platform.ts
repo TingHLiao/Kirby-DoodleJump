@@ -168,7 +168,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
-            if(posy >= 17550 && posy <= 17610){
+            if(posy >= 17650 && posy <= 17710){
                 withitem = true;
                 var newnode = cc.instantiate(this.spanishMonster); // newnode is spanish monster
                 this.node.addChild(newnode);
