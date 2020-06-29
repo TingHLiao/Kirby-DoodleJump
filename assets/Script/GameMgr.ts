@@ -380,7 +380,22 @@ export default class GameMgr extends cc.Component {
     }
 
     playagain(){
-        cc.director.loadScene("Play");
+        switch(Buy.Global.select){
+            case 0: {
+                cc.director.loadScene("Play");
+                break;
+            }
+            case 1: {
+                cc.director.loadScene("Play_space");
+                break;
+            }
+            case 2: {
+                cc.director.loadScene("Play_ghost");
+            }
+            default: {
+                break;
+            }
+        }
     }
     backtomenu(){
         cc.director.loadScene("Menu");

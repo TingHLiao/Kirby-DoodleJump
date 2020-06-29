@@ -115,16 +115,22 @@ export default class Stage extends cc.Component {
 
     start () {
         cc.director.preloadScene("Play");
+        cc.director.preloadScene("Play_space");
+        cc.director.preloadScene("Play_ghost");
     }
     //write firebase
     playorigin(){
         cc.director.loadScene("Play");
+        Buy.Global.select = 0;
     }
     playspace(){
-        //cc.director.loadScene("Play");
+        cc.director.loadScene("Play_space");
+        Buy.Global.select = 1;
+        cc.log("in");
     }
     playghost(){
-        //cc.director.loadScene("Play");
+        cc.director.loadScene("Play_ghost");
+        Buy.Global.select = 2;
     }
 
     showboard(){

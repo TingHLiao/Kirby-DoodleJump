@@ -23,4 +23,5 @@ export module Global {
     export let twoP : boolean = false;
     export let competitorID : string = "";
     export let competitorName : string = "";
+    export let select : number = 0;
 }
