@@ -15,6 +15,10 @@ export default class player extends cc.Component {
 
     private goldjump : boolean = false; // gold thumb helping
 
+    private glodthumbDown2: boolean = false; // check whether press gold thumb
+
+    private goldjump2 : boolean = false; // gold thumb helping
+
     private rocketOn: boolean = false;
 
     private playerSpeed: number = 0;
@@ -144,6 +148,7 @@ export default class player extends cc.Component {
             this.rightDown = true;
         } 
         if(event.keyCode == cc.macro.KEY.f) this.glodthumbDown = true;
+        if(event.keyCode == cc.macro.KEY.w) this.glodthumbDown2 = true;
         if(event.keyCode == cc.macro.KEY.space){
             if(!this.spaceDown)
                 this.suckEffectID = cc.audioEngine.playEffect(this.SuckEffect, false);
@@ -204,6 +209,10 @@ export default class player extends cc.Component {
         if(event.keyCode == cc.macro.KEY.f) {
             this.glodthumbDown = false;
             this.goldjump = false;
+        }
+        if(event.keyCode == cc.macro.KEY.w) {
+            this.glodthumbDown2 = false;
+            this.goldjump2 = false;
         }
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
@@ -294,12 +303,43 @@ export default class player extends cc.Component {
                 }
             }
         }
+
+        if(!this.goldjump2 && this.glodthumbDown2){
+            this.goldjump = true;
+            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+            this.mode = 1;
+            switch(this.kirby_state){
+                case 0 :{
+                    this.anim.play("jump");
+                    break;
+                }
+                case 1 :{
+                    this.anim.play("snow_jump");
+                    break;
+                }
+                case 2 :{
+                    this.anim.play("ninja_jump");
+                    break;
+                }
+                case 3 :{
+                    this.anim.play("magic_jump");
+                    break;
+                }
+                case 4 :{
+                    this.anim.play("knight_jump");
+                    break;
+                }
+            }
+        }
     }
 
     onBeginContact(contact, self, other){
         if(self.tag == 0 && !this.isReborn){
 
-            if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) cc.audioEngine.playEffect(this.soundEffect, false);
+            if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) {
+                var jumpid = cc.audioEngine.playEffect(this.soundEffect, false);
+                cc.audioEngine.setVolume(jumpid, 0.6);
+            }
 
             if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
                 if(other.tag == 5 && this.spaceDown){
@@ -339,7 +379,8 @@ export default class player extends cc.Component {
                 let num = parseInt(this.money.getComponent(cc.Label).string);
                 num += 1;
                 this.money.getComponent(cc.Label).string = num + '';
-                cc.audioEngine.playEffect(this.CoinEffect, false);
+                var coinid = cc.audioEngine.playEffect(this.CoinEffect, false);
+                cc.audioEngine.setVolume(coinid, 0.5);
                 contact.disabled = true;
                 other.node.destroy();
             }

@@ -57,8 +57,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        230.441,
-        189.345,
+        175,
+        110,
         0,
         0,
         0,
@@ -168,7 +168,7 @@
     "_id": ""
   },
   {
-    "__type__": "7bb61aPfpxOJZPilmYBdRqQ",
+    "__type__": "d4c7dVoooxF7KOd6/NMJ3LA",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -208,8 +208,38 @@
     "coinPrefab": {
       "__uuid__": "4fac109c-d886-43e6-81b8-49dab6f88c01"
     },
+    "americaMonster": {
+      "__uuid__": "8861095e-4287-4e30-9ac6-660fe6fc8e99"
+    },
+    "italyMonster": {
+      "__uuid__": "ff95e366-2c8b-4072-8452-d7f5aa8b1e68"
+    },
+    "japanMonster": {
+      "__uuid__": "7686297e-2955-4206-8b05-0f798905bca2"
+    },
+    "greeceMonster": {
+      "__uuid__": "b2beb5d7-058c-443c-8c04-8bcc312e95e2"
+    },
+    "germanyMonster": {
+      "__uuid__": "768e5c7d-2c34-43b4-9185-28b8e8044b35"
+    },
+    "baxiMonster": {
+      "__uuid__": "428afdc7-43cc-4971-83de-d0374f86eabf"
+    },
+    "grapeMonster": {
+      "__uuid__": "e6dd9edf-37fb-4f40-8665-b611afcdd7e7"
+    },
+    "spanishMonster": {
+      "__uuid__": "9771e643-7b20-4498-8a99-97d19341c6f7"
+    },
+    "russiaMonster": {
+      "__uuid__": "64de1e4f-8ffd-468c-9f98-fcb5089d9f20"
+    },
+    "englishMonster": {
+      "__uuid__": "79793f59-30c1-4529-a37f-124df0676864"
+    },
     "soundEffect": {
-      "__uuid__": "4d2ac333-16f4-480b-bffa-3d9049ad9e59"
+      "__uuid__": "c6b68753-0664-4e79-b2ab-d71e73a0d015"
     },
     "_id": ""
   },
@@ -221,7 +251,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "29le75PwFGcZ42OzlmCwZQ",
+    "fileId": "2dRqe+FMZLIqY8fWtEzDvU",
     "sync": false
   }
 ]

@@ -125,7 +125,7 @@ export default class platform extends cc.Component {
         let extraShield = 0.01 * Buy.Global.more_Shield;
         let posy = this.node.position.y;
         
-        if(this.node.name == "normal_basic"){
+        if(this.node.name == "normal_space"){
             let withrocket = (Math.random() < (0.02 + extraRocket)) ? true : false;
             let withitem = false;
             if(posy >= 3950 && posy <= 4000){
@@ -283,18 +283,18 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
         }
-        else if(this.node.name == "move_basic"){
+        else if(this.node.name == "move_space"){
             let dir = (Math.random() > 0.5) ? "v" : "h"; // choose to move vertical or horizontal
             if(dir == 'v') this.platformmove_v();
             else this.platformmove_h();
         }
-        else if(this.node.name == "time_basic"){
+        else if(this.node.name == "time_space"){
 
         }
-        else if(this.node.name == "break_basic"){
+        else if(this.node.name == "break_space"){
             
         }
-        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_basic"){
+        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_space"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
@@ -351,24 +351,24 @@ export default class platform extends cc.Component {
             contact.disabled = true;
         }
         else{
-            if(this.node.name == "normal_basic" && other.tag == 0) this.cnt_jump++;
+            if(this.node.name == "normal_space" && other.tag == 0) this.cnt_jump++;
 
             if(this.cnt_jump == 5 && other.tag == 0){
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
-            if(self.node.name == "break_basic" && other.tag == 0){
+            if(self.node.name == "break_space" && other.tag == 0){
                 contact.disabled = true;
                 var breakid = cc.audioEngine.playEffect(this.soundEffect, false);
                 cc.audioEngine.setVolume(breakid, 0.3);
-                this.anim.play("basic_break");
+                this.anim.play("break_space");
                 this.scheduleOnce(function(){
                     this.node.destroy();
                   }, 0.3)
             }
-            else if(self.node.name == "time_basic" && other.tag == 0){
-                if(this.animState == null || this.animState.name != "basic_time") this.animState = this.anim.play("basic_time");
+            else if(self.node.name == "time_space" && other.tag == 0){
+                if(this.animState == null || this.animState.name != "time_space") this.animState = this.anim.play("time_space");
                 this.scheduleOnce(function(){
                     var bombid = cc.audioEngine.playEffect(this.soundEffect, false);
                     cc.audioEngine.setVolume(bombid, 0.3);

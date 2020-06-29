@@ -21,7 +21,7 @@ export default class RocketTool extends cc.Component {
             contact.disabled = true;
             if(this.player.getComponent("Player").isDied) return;
             var rocketid = cc.audioEngine.playEffect(this.soundEffect, false);
-            cc.audioEngine.setVolume(rocketid, 0.25)
+            cc.audioEngine.setVolume(rocketid, 0.35)
             this.player.getComponent("Player").setmode("rocket");
             
             let state = this.player.getComponent("Player").get_state();
