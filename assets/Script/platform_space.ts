@@ -224,7 +224,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 25.7);
             }
             // platform with virus_red2
-            if(this.score > 6500 && !withitem && Math.random() > 0.9){
+            if(this.score > 3500 && !withitem && Math.random() > 0.8){
                 withitem = true;
                 let newnode = cc.instantiate(this.virus_red2); // newnode is the virus_red2
                 this.node.addChild(newnode);
