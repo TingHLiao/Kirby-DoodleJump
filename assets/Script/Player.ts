@@ -516,7 +516,8 @@ export default class player extends cc.Component {
             this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
             this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
             this.scheduleOnce(()=>{ 
-                cc.audioEngine.playEffect(this.DieEffect, false);
+                var dieid = cc.audioEngine.playEffect(this.DieEffect, false);
+                cc.audioEngine.setVolume(dieid, 0.25);
                 this.platforms.removeAllChildren();
                 this.bulletPool.removeAllChildren();
                 this.knife.removeAllChildren();
