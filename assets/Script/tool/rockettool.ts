@@ -20,7 +20,8 @@ export default class RocketTool extends cc.Component {
         if(other.tag === 0){
             contact.disabled = true;
             if(this.player.getComponent("Player").isDied) return;
-            cc.audioEngine.playEffect(this.soundEffect, false);
+            var rocketid = cc.audioEngine.playEffect(this.soundEffect, false);
+            cc.audioEngine.setVolume(rocketid, 0.25)
             this.player.getComponent("Player").setmode("rocket");
             
             let state = this.player.getComponent("Player").get_state();
@@ -55,7 +56,6 @@ export default class RocketTool extends cc.Component {
             other.node.runAction(cc.moveBy(2.5, cc.v2(0, 2000)).easing(cc.easeQuadraticActionInOut()));
             self.node.active = false;
             this.scheduleOnce(function () {
-                cc.log("In destroy")
                 cc.director.getPhysicsManager().enabled = true;
                 this.player.getComponent("Player").setmode("unrocket");
             }, 2.5);
