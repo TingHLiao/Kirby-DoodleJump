@@ -42,4 +42,11 @@ export default class Menu extends cc.Component {
     onBeginContact(contact, self, other){
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 1000);
     }
+
+    login(){
+        cc.director.loadScene("Login");
+    }
+    signup(){
+        cc.director.loadScene("SignUp");
+    }
 }
