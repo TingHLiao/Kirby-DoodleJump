@@ -11,6 +11,10 @@ export default class player extends cc.Component {
 
     private spaceDown: boolean = false; //get enemy
 
+    private glodthumbDown: boolean = false; // check whether press gold thumb
+
+    private goldjump : boolean = false; // gold thumb helping
+
     private rocketOn: boolean = false;
 
     private playerSpeed: number = 0;
@@ -97,6 +101,8 @@ export default class player extends cc.Component {
     @property(cc.Prefab)
     magicbomb: cc.Prefab = null;
 
+    private jumpvelocity : number = 1000;
+
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -127,6 +133,7 @@ export default class player extends cc.Component {
             this.leftDown = false;
             this.rightDown = true;
         } 
+        if(event.keyCode == cc.macro.KEY.f) this.glodthumbDown = true;
         if(event.keyCode == cc.macro.KEY.space){
             if(!this.spaceDown)
                 this.suckEffectID = cc.audioEngine.playEffect(this.SuckEffect, false);
@@ -184,6 +191,10 @@ export default class player extends cc.Component {
             this.leftDown = false;
         else if(event.keyCode == cc.macro.KEY.d)
             this.rightDown = false;
+        if(event.keyCode == cc.macro.KEY.f) {
+            this.glodthumbDown = false;
+            this.goldjump = false;
+        }
         if(event.keyCode == cc.macro.KEY.space){
             this.spaceDown = false;
             if(this.suckEffectID)
@@ -244,6 +255,34 @@ export default class player extends cc.Component {
         }
         else if(this.node.x + 11.5 >= 480 && this.rightDown){
             this.node.x = -491.5;
+        }
+
+        if(!this.goldjump && this.glodthumbDown){
+            this.goldjump = true;
+            this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
+            this.mode = 0;
+            switch(this.kirby_state){
+                case 0 :{
+                    this.anim.play("jump");
+                    break;
+                }
+                case 1 :{
+                    this.anim.play("snow_jump");
+                    break;
+                }
+                case 2 :{
+                    this.anim.play("ninja_jump");
+                    break;
+                }
+                case 3 :{
+                    this.anim.play("magic_jump");
+                    break;
+                }
+                case 4 :{
+                    this.anim.play("knight_jump");
+                    break;
+                }
+            }
         }
     }
 

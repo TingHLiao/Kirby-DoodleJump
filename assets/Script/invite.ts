@@ -141,7 +141,8 @@ export default class Invite extends cc.Component {
         }
         this.Users.child(inviteID + '/Request').push({
             name: this.Name,
-            id: this.ID
+            id: this.ID,
+            time: this.getTime()
         })
     }
     ReponseChecking(){
@@ -198,7 +199,21 @@ export default class Invite extends cc.Component {
                 first_count += 1;
                 let name = element.val().name;
                 if(name != "none"){
+                    let time = parseInt(element.val().time);
                     this.User.child(`Request/${element.key}`).remove();
+                    let downtime = parseInt(this.getTime()) - time;
+                    if(downtime < 9){
+                        this.BeInvitedPanel.getChildByName("name").getComponent(cc.Label).string = this.beinvitedName;
+                        this.BeInvitedPanel.active = true;
+                        this.click = false;
+                        this.getcover();
+                        this.scheduleOnce(()=>{
+                            if(!this.click){
+                                this.BeInvitedPanel.active = false;
+                                this.uncover();
+                            }
+                        },downtime-0.5)
+                    }
                 }
             })
 
@@ -264,4 +279,15 @@ export default class Invite extends cc.Component {
         this.leaderbutton.interactable = true;
         this.cover.runAction(cc.fadeTo(0.2, 255));
     }
+    getTime() {
+        let date = new Date();
+        let h = date.getHours();
+        let m = date.getMinutes();
+        let hstring, mstring;
+        if (h < 10)  hstring = '0' + h;
+        else hstring = h.toString();
+        if (m < 10)  mstring = '0' + m;
+        else mstring = m.toString();
+        return hstring + mstring;
+      }
 }

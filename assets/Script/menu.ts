@@ -12,6 +12,8 @@ export default class Stage extends cc.Component {
     storebutton: cc.Button = null;
     @property(cc.Button)
     instrbutton: cc.Button = null;
+    @property(cc.Button)
+    twoPbutton: cc.Button = null;
 
     @property(cc.Node)
     cover: cc.Node = null; //stop
@@ -113,6 +115,7 @@ export default class Stage extends cc.Component {
             this.boardPanel.active = false;
             this.storebutton.interactable = true;
             this.instrbutton.interactable = true;
+            this.twoPbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.show = false;
             this.content.removeAllChildren();
@@ -122,6 +125,7 @@ export default class Stage extends cc.Component {
         //cc.find("Canvas").getComponent("leader").leader();
         this.storebutton.interactable = false;
         this.instrbutton.interactable = false;
+        this.twoPbutton.interactable = false;
         this.show = true;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel.active = true;
@@ -173,6 +177,7 @@ export default class Stage extends cc.Component {
             this.boardPanel_store.active = false;
             this.leaderbutton.interactable = true;
             this.instrbutton.interactable = true;
+            this.twoPbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.storeshow = false;
             return;
@@ -182,6 +187,7 @@ export default class Stage extends cc.Component {
         this.storeshow = true;
         this.leaderbutton.interactable = false;
         this.instrbutton.interactable = false;
+        this.twoPbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_store.active = true;
         this.boardPanel_store.runAction(cc.fadeIn(0.2));  
@@ -291,6 +297,7 @@ export default class Stage extends cc.Component {
             this.boardPanel_instr.active = false;
             this.leaderbutton.interactable = true;
             this.storebutton.interactable = true;
+            this.twoPbutton.interactable = true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.instrshow = false;
             return;
@@ -298,6 +305,7 @@ export default class Stage extends cc.Component {
         this.instrshow = true;
         this.leaderbutton.interactable = false;
         this.storebutton.interactable = false;
+        this.twoPbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_instr.active = true;
         this.boardPanel_instr.runAction(cc.fadeIn(0.2));

@@ -404,8 +404,12 @@
     "twoPgameoverPanel": {
       "__id__": 49
     },
-    "winSprite": null,
-    "loseSprite": null,
+    "winSprite": {
+      "__uuid__": "1f9d5641-c0d7-4bd7-822b-e7b3df4904aa"
+    },
+    "loseSprite": {
+      "__uuid__": "bdb1abca-a71e-4f76-bd6f-d9b30c33e953"
+    },
     "_id": "d1NDRsbpJJardQCqD6ElDB"
   },
   {
@@ -475,7 +479,7 @@
       "array": [
         0,
         0,
-        209.57814771583418,
+        355.0704155516199,
         0,
         0,
         0,
@@ -3155,7 +3159,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 255,
+    "_opacity": 230,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -3165,8 +3169,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 36
+      "width": 246,
+      "height": 229
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3178,7 +3182,7 @@
       "ctor": "Float64Array",
       "array": [
         234.619,
-        -37.953,
+        -13.801,
         0,
         0,
         0,
@@ -3220,14 +3224,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 226,
+      "g": 197,
+      "b": 145,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 128.87,
+      "width": 225.52,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3239,8 +3243,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        -72.456,
+        6.901,
+        -101.783,
         0,
         0,
         0,
@@ -3280,7 +3284,7 @@
     "_useOriginalSize": false,
     "_string": "Win ! !",
     "_N$string": "Win ! !",
-    "_fontSize": 40,
+    "_fontSize": 70,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
@@ -3312,10 +3316,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+      "__uuid__": "1f9d5641-c0d7-4bd7-822b-e7b3df4904aa"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
