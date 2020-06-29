@@ -553,7 +553,6 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    cc.log(dir);
                     newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400 + 40 * Buy.Global.Extra_range)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;

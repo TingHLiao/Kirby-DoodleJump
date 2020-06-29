@@ -19,6 +19,7 @@ export default class RocketTool extends cc.Component {
     onBeginContact(contact, self, other) {
         if(other.tag === 0){
             contact.disabled = true;
+            if(this.player.getComponent("Player").isDied) return;
             cc.audioEngine.playEffect(this.soundEffect, false);
             this.player.getComponent("Player").setmode("rocket");
             
