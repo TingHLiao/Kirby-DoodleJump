@@ -239,7 +239,8 @@ export default class GameMgr extends cc.Component {
         {
             if(this.player.active)
             {   
-                cc.audioEngine.playEffect(this.DieEffect, false);
+                var dieid = cc.audioEngine.playEffect(this.DieEffect, false);
+                cc.audioEngine.setVolume(dieid, 0.25);
                 this.EffectOn = true;
                 this.platforms.removeAllChildren();
                 if(this.knife.isValid)this.knife.destroy();

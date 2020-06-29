@@ -7,6 +7,9 @@ export default class Menu extends cc.Component {
     private pos = 1;
     private left: boolean = false;
     private right: boolean = false;
+
+    @property({type: cc.AudioClip})
+    clickEffect: cc.AudioClip = null;
     
 
     onLoad () {
@@ -32,8 +35,10 @@ export default class Menu extends cc.Component {
             this.pos += 1;
         } else if(event.keyCode == cc.macro.KEY.enter){
             if(this.pos == 0){
+                cc.audioEngine.playEffect(this.clickEffect, false);
                 cc.director.loadScene("Login");
             } else if(this.pos == 2){
+                cc.audioEngine.playEffect(this.clickEffect, false);
                 cc.director.loadScene("SignUp");
             }
         }
