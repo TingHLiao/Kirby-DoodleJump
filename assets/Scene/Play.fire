@@ -416,9 +416,20 @@
     "basic_bgm": {
       "__uuid__": "be2beebf-2d8f-483e-a821-aab8e6809d94"
     },
-    "space_bgm": null,
+    "space_bgm": {
+      "__uuid__": "811ca2e1-4d96-48b9-9cb9-b74ff2072542"
+    },
     "ghost_bgm": {
       "__uuid__": "64724d75-a158-4ed8-a800-d6bb39deaae3"
+    },
+    "lose1_effect": {
+      "__uuid__": "cb418529-541e-49f4-b2ba-7826fb18bc64"
+    },
+    "lose2_effect": {
+      "__uuid__": "cd981829-5ad8-4adc-afe0-df474738bf9f"
+    },
+    "win_effect": {
+      "__uuid__": "6d77c71b-7423-400c-ac20-c7c2e3087680"
     },
     "_id": "d1NDRsbpJJardQCqD6ElDB"
   },
@@ -495,7 +506,7 @@
       "array": [
         0,
         0,
-        338.61593287971556,
+        354.20439014783545,
         0,
         0,
         0,

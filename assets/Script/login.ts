@@ -52,6 +52,7 @@ export class Login extends cc.Component {
                 //cc.log(user)
                 this.loading.active = true;
                 this.startAction();
+                cc.audioEngine.stopAll();
                 //@ts-ignore
                 firebase.database().ref(`users/${ID}`).once('value', snapshot => {
                     Buy.Global.username = snapshot.val().name;

@@ -95,6 +95,15 @@ export default class GameMgr extends cc.Component {
     @property({ type: cc.AudioClip })
     ghost_bgm: cc.AudioClip = null;
 
+    @property({ type: cc.AudioClip })
+    lose1_effect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    lose2_effect: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    win_effect: cc.AudioClip = null;
+
     // @property(cc.Node)
     // Gameover : cc.Node = null;
 
@@ -117,7 +126,7 @@ export default class GameMgr extends cc.Component {
             this.twoPscore = cc.find("Canvas/Main Camera/2Pscore");
             this.twoPscore.active =  true;
             this.timer.getComponent(cc.Label).string = "60";
-            this.remaintime = 60;
+            this.remaintime = 10;
             cc.find("Canvas/Main Camera/Timer").active = true;
             this.twoPscore.active = true;
         }
@@ -271,8 +280,16 @@ export default class GameMgr extends cc.Component {
         let s = parseInt(this.score.getComponent(cc.Label).string);
         if(this.c == 60){
             if(this.remaintime == 0){
-                this.gameovershow();
-            } else{
+                /*this.player.active = false;
+                this.read = false;
+                this.write = false;
+                this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
+                this.scheduleOnce(()=>{
+                    this.gameovershow();
+                }, 0.5)*/
+                this.player.getComponent("Player").gameover();
+                this.remaintime --;
+            } else if(this.remaintime > 0){
                 this.remaintime--;
                 this.timer.getComponent(cc.Label).string = this.remaintime.toString();
 
@@ -315,18 +332,21 @@ export default class GameMgr extends cc.Component {
     }
 
     gameovershow(){
+        cc.audioEngine.stopAll();
         if(Buy.Global.twoP){
-            if(this.remaintime != 0 && this.read) return;
-
+            if(this.remaintime > 0 && this.read) return;
+            cc.find("Canvas/Main Camera/2PGameOver/label").runAction(cc.blink(1.5, 7));
             cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString()).slice(-6);
             cc.find("Canvas/Main Camera/2PGameOver/otherscore").getComponent(cc.Label).string = `${Buy.Global.competitorName}'s Score: `;
             //lose
             if(this.twoPshowscore > parseInt(this.score.getComponent(cc.Label).string)){
                 cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.loseSprite;
                 cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "LOSE QQ";
+                cc.audioEngine.playEffect(this.lose2_effect, false);
             } else{ //win
                 cc.find("Canvas/Main Camera/2PGameOver/sprite").getComponent(cc.Sprite).spriteFrame = this.winSprite;
                 cc.find("Canvas/Main Camera/2PGameOver/sprite/label").getComponent(cc.Label).string = "WIN ! !";
+                cc.audioEngine.playEffect(this.win_effect, false);
             }
             this.twoPgameoverPanel.active = true;
             Buy.Global.twoP = false;
@@ -334,6 +354,7 @@ export default class GameMgr extends cc.Component {
         } else{
             this.gameoverPanel.active = true;
             cc.find("Canvas/Main Camera/GameOver/label").runAction(cc.blink(1.5, 7));
+            cc.audioEngine.playEffect(this.lose1_effect, false);
         }
     }
 
@@ -387,6 +408,7 @@ export default class GameMgr extends cc.Component {
     }
 
     playagain(){
+        cc.audioEngine.stopAll();
         switch(Buy.Global.select){
             case 0: {
                 cc.director.loadScene("Play");
@@ -395,6 +417,8 @@ export default class GameMgr extends cc.Component {
                 break;
             }
             case 1: {
+                var spaceid = cc.audioEngine.playMusic(this.space_bgm, true);
+                cc.audioEngine.setVolume(spaceid, 0.5);
                 cc.director.loadScene("Play_space");
                 break;
             }
@@ -410,5 +434,6 @@ export default class GameMgr extends cc.Component {
     }
     backtomenu(){
         cc.director.loadScene("Menu");
+        cc.audioEngine.stopAll();
     }
 }

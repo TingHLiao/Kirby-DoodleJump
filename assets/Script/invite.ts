@@ -42,6 +42,9 @@ export default class Invite extends cc.Component {
     @property({type: cc.AudioClip})
     clickEffect: cc.AudioClip = null;
 
+    @property({type: cc.AudioClip})
+    bgm: cc.AudioClip = null;
+
     private User = null;
     private Users = null;
     private Name : string = "";
@@ -86,6 +89,7 @@ export default class Invite extends cc.Component {
             Buy.Global.twoP = true;
             this.readytoplay = false;
             this.scheduleOnce(()=>{
+                cc.audioEngine.playMusic(this.bgm, true);
                 cc.director.loadScene("Play");
             }, 2)
         }

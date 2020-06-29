@@ -207,7 +207,7 @@
       "array": [
         0,
         0,
-        338.61593287971556,
+        354.20439014783545,
         0,
         0,
         0,
@@ -19444,11 +19444,15 @@
     "player": {
       "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
     },
-    "clickEffect": null,
+    "clickEffect": {
+      "__uuid__": "36d7da7e-f516-4e09-8c74-9e5040f509c1"
+    },
     "basic_bgm": {
       "__uuid__": "be2beebf-2d8f-483e-a821-aab8e6809d94"
     },
-    "space_bgm": null,
+    "space_bgm": {
+      "__uuid__": "811ca2e1-4d96-48b9-9cb9-b74ff2072542"
+    },
     "ghost_bgm": {
       "__uuid__": "64724d75-a158-4ed8-a800-d6bb39deaae3"
     },
@@ -19501,7 +19505,12 @@
     "label3": {
       "__id__": 400
     },
-    "clickEffect": null,
+    "clickEffect": {
+      "__uuid__": "36d7da7e-f516-4e09-8c74-9e5040f509c1"
+    },
+    "bgm": {
+      "__uuid__": "be2beebf-2d8f-483e-a821-aab8e6809d94"
+    },
     "_id": "14qKZasxVLIb01nPvs4pTz"
   }
 ]

@@ -49,6 +49,7 @@ export default class Stage extends cc.Component {
     @property({type: cc.AudioClip})
     clickEffect: cc.AudioClip = null;
 
+
     private show: boolean = false;
     private storeshow: boolean = false;
     private instrshow: boolean = false;
@@ -134,6 +135,7 @@ export default class Stage extends cc.Component {
         cc.director.preloadScene("Play");
         cc.director.preloadScene("Play_space");
         cc.director.preloadScene("Play_ghost");
+        cc.audioEngine.playMusic(this.basic_bgm, true);
     }
     //write firebase
     playorigin(){
@@ -146,6 +148,8 @@ export default class Stage extends cc.Component {
     playspace(){
         cc.audioEngine.playEffect(this.clickEffect, false);
         cc.director.loadScene("Play_space");
+        var spaceid = cc.audioEngine.playMusic(this.space_bgm, true);
+        cc.audioEngine.setVolume(spaceid, 0.5);
         Buy.Global.select = 1;
     }
     playghost(){
