@@ -361,7 +361,7 @@ export default class platform extends cc.Component {
             if(self.node.name == "break_basic" && other.tag == 0){
                 contact.disabled = true;
                 var breakid = cc.audioEngine.playEffect(this.soundEffect, false);
-                cc.audioEngine.setVolume(breakid, 0.2);
+                cc.audioEngine.setVolume(breakid, 0.3);
                 this.anim.play("basic_break");
                 this.scheduleOnce(function(){
                     this.node.destroy();
@@ -371,7 +371,7 @@ export default class platform extends cc.Component {
                 if(this.animState == null || this.animState.name != "basic_time") this.animState = this.anim.play("basic_time");
                 this.scheduleOnce(function(){
                     var bombid = cc.audioEngine.playEffect(this.soundEffect, false);
-                    cc.audioEngine.setVolume(bombid, 0.2);
+                    cc.audioEngine.setVolume(bombid, 0.3);
                     this.node.destroy();
                   }, 1.3)
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
