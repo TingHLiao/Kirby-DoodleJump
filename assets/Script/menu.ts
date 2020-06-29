@@ -45,18 +45,16 @@ export default class Stage extends cc.Component {
     private show: boolean = false;
     private storeshow: boolean = false;
     private instrshow: boolean = false;
-    private jump_limit: number = 0;
-    private range_limit: number = 0;
-    private buttons: cc.Node[] = [];
 
     nameText: cc.Label;
     highestText: cc.Label;
     coinText: cc.Label;
     ID: string;
     money: Number;
+    buttons: cc.Node[] = [];
     price: number[] = [];
-    // 0: jump; 1: range; 2: platform; 3: rocket; 4: shield
     limits: number[] = [];
+    // 0: jump; 1: range; 2: platform; 3: rocket; 4: shield
 
     onLoad () {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
@@ -197,28 +195,30 @@ export default class Stage extends cc.Component {
         switch(event.target.name){
             case 'snow_kirby': {
                 Buy.Global.Buy_Kirby = 1;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[0];
                 break;
             }
             case 'ninja_kirby': {
                 Buy.Global.Buy_Kirby = 2;
-                Buy.Global.coin -= 10;
+                Buy.Global.coin -= this.price[1];
                 break;
             }
             case 'magic_kirby': {
                 Buy.Global.Buy_Kirby = 3;
-                Buy.Global.coin -= 20;
+                Buy.Global.coin -= this.price[2];
                 break;
             }
             case 'knight_kirby': {
                 Buy.Global.Buy_Kirby = 4;
-                Buy.Global.coin -= 100;
+                Buy.Global.coin -= this.price[3];
                 break;
             }
             default: {
                 break;
             }
         }
+        event.target.getComponent(cc.Button).interactable = false;
+        event.target.opacity = 130;
         this.updatemoney();
     }
 
@@ -226,37 +226,37 @@ export default class Stage extends cc.Component {
         switch(event.target.name){
             case 'life': {
                 Buy.Global.Extra_life++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[4];
                 break;
             }
             case 'jump': {
                 this.limits[0]++;
                 Buy.Global.Extra_jump++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[5];
                 break;
             }
             case 'range': {
                 this.limits[1]++;
                 Buy.Global.Extra_range++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[6];
                 break;
             }
             case 'platform': {
                 this.limits[2]++;
                 Buy.Global.platform++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[7];
                 break;
             }
             case 'rocket': {
                 this.limits[3]++;
                 Buy.Global.more_Rocket++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[8];
                 break;
             }
             case 'shield': {
                 this.limits[4]++;
                 Buy.Global.more_Shield++;
-                Buy.Global.coin -= 5;
+                Buy.Global.coin -= this.price[9];
                 break;
             }
             default: {
@@ -321,7 +321,7 @@ export default class Stage extends cc.Component {
         Buy.Global.more_Rocket = 0;
         Buy.Global.more_Shield = 0;
         Buy.Global.platform = 0;
-        this.price = [5, 10, 20, 100, 5, 5, 5, 5, 5, 5];
+        this.price = [5, 10, 20, 100, 5, 5, 5, 5, 5, 5];  // can change
         this.limits = [0, 0, 0, 0, 0];
     }
 }
