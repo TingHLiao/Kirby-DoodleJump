@@ -207,7 +207,7 @@
       "array": [
         0,
         0,
-        354.20439014783545,
+        356.80246635918877,
         0,
         0,
         0,
@@ -5951,7 +5951,7 @@
     "node": {
       "__id__": 120
     },
-    "_enabled": true,
+    "_enabled": false,
     "_materials": [
       {
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
@@ -6082,7 +6082,7 @@
     "node": {
       "__id__": 122
     },
-    "_enabled": false,
+    "_enabled": true,
     "_normalMaterial": null,
     "_grayMaterial": null,
     "duration": 0.1,
@@ -6164,7 +6164,7 @@
     "node": {
       "__id__": 119
     },
-    "_enabled": false,
+    "_enabled": true,
     "_materials": [
       {
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
