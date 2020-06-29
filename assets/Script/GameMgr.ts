@@ -204,7 +204,7 @@ export default class GameMgr extends cc.Component {
             this.camera.y = this.player.y - 100;
         }
         if(this.camera.y - this.background.y >= this.backgroundSize)
-            this.background.y += this.backgroundSize;
+           this.background.y += this.backgroundSize;
     
         if(height >= this.count + 550){
             //this.needmoreplatform = true;

@@ -201,8 +201,15 @@
     "StepEffect": {
       "__uuid__": "dfdd1346-7bca-4270-b26c-c60149cb4b7f"
     },
-    "snowball": null,
-    "knife": null,
+    "DieEffect": {
+      "__uuid__": "773ed9e0-d1d1-497a-9c01-55704d5f9516"
+    },
+    "snowball": {
+      "__uuid__": "79e4dcfd-b7e2-47a6-a600-526291e41ec6"
+    },
+    "knife": {
+      "__uuid__": "77054c4c-5b56-44ee-8aed-8ec067e15a4e"
+    },
     "_id": ""
   },
   {
