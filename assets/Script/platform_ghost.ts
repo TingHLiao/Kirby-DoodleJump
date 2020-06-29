@@ -247,7 +247,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
             }
             // platform with ninja_enemy
-            if(this.score > 1500 && !withitem && Math.random() > 0.95){
+            if(this.score > 1500 && !withitem && Math.random() > 0.7){
                 withitem = true;
                 let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
@@ -344,7 +344,7 @@ export default class platform extends cc.Component {
         }
         else{
             if(this.node.name == "normal_ghost" && other.tag == 0) this.cnt_jump++;
-            
+
             if(this.cnt_jump == 5 && other.tag == 0){
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
@@ -353,7 +353,7 @@ export default class platform extends cc.Component {
             if(self.node.name == "break_ghost" && other.tag == 0){
                 contact.disabled = true;
                 var breakid = cc.audioEngine.playEffect(this.soundEffect, false);
-                cc.audioEngine.setVolume(breakid, 0.3);
+                cc.audioEngine.setVolume(breakid, 0.5);
                 this.anim.play("break_ghost");
                 this.scheduleOnce(function(){
                     this.node.destroy();
@@ -363,7 +363,7 @@ export default class platform extends cc.Component {
                 if(this.animState == null || this.animState.name != "time_ghost") this.animState = this.anim.play("time_ghost");
                 this.scheduleOnce(function(){
                     var bombid = cc.audioEngine.playEffect(this.soundEffect, false);
-                    cc.audioEngine.setVolume(bombid, 0.3);
+                    cc.audioEngine.setVolume(bombid, 0.5);
                     this.node.destroy();
                   }, 1.3)
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);

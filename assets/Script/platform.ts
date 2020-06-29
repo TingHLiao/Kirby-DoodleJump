@@ -231,7 +231,7 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 50.025);
             }
             // platform with Bomb_enemy
-            if(this.score > 4500 && !withitem && Math.random() > 0.8){
+            if(this.score > 4500 && !withitem && Math.random() > 0.7){
                 withitem = true;
                 let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);
@@ -371,7 +371,7 @@ export default class platform extends cc.Component {
                 if(this.animState == null || this.animState.name != "basic_time") this.animState = this.anim.play("basic_time");
                 this.scheduleOnce(function(){
                     var bombid = cc.audioEngine.playEffect(this.soundEffect, false);
-                    cc.audioEngine.setVolume(bombid, 0.3);
+                    cc.audioEngine.setVolume(bombid, 0.5);
                     this.node.destroy();
                   }, 1.3)
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);

@@ -64,6 +64,15 @@ export default class Stage extends cc.Component {
     spacePanel: cc.Node = null;
     ghostPanel: cc.Node = null;
 
+    @property({ type: cc.AudioClip })
+    basic_bgm: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    space_bgm: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    ghost_bgm: cc.AudioClip = null;
+
 
     onLoad () {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
@@ -121,6 +130,7 @@ export default class Stage extends cc.Component {
     //write firebase
     playorigin(){
         cc.director.loadScene("Play");
+        cc.audioEngine.playMusic(this.basic_bgm, true);
         Buy.Global.select = 0;
     }
     playspace(){
@@ -129,6 +139,7 @@ export default class Stage extends cc.Component {
         cc.log("in");
     }
     playghost(){
+        cc.audioEngine.playMusic(this.ghost_bgm, true);
         cc.director.loadScene("Play_ghost");
         Buy.Global.select = 2;
     }

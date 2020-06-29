@@ -338,7 +338,7 @@ export default class player extends cc.Component {
 
             if(other.tag == 1 && other.node.name != "break_basic" && contact.getWorldManifold().normal.y == -1) {
                 var jumpid = cc.audioEngine.playEffect(this.soundEffect, false);
-                cc.audioEngine.setVolume(jumpid, 0.6);
+                cc.audioEngine.setVolume(jumpid, 1.2);
             }
 
             if(other.tag == 4 || other.tag == 5 || other.tag == 6 ){
@@ -380,7 +380,7 @@ export default class player extends cc.Component {
                 num += 1;
                 this.money.getComponent(cc.Label).string = num + '';
                 var coinid = cc.audioEngine.playEffect(this.CoinEffect, false);
-                cc.audioEngine.setVolume(coinid, 0.5);
+                cc.audioEngine.setVolume(coinid, 1);
                 contact.disabled = true;
                 other.node.destroy();
             }

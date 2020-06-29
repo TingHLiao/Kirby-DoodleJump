@@ -86,6 +86,15 @@ export default class GameMgr extends cc.Component {
     @property(cc.SpriteFrame)
     loseSprite: cc.SpriteFrame = null;
 
+    @property({ type: cc.AudioClip })
+    basic_bgm: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    space_bgm: cc.AudioClip = null;
+
+    @property({ type: cc.AudioClip })
+    ghost_bgm: cc.AudioClip = null;
+
     // @property(cc.Node)
     // Gameover : cc.Node = null;
 
@@ -381,6 +390,8 @@ export default class GameMgr extends cc.Component {
         switch(Buy.Global.select){
             case 0: {
                 cc.director.loadScene("Play");
+                var basicid = cc.audioEngine.playMusic(this.basic_bgm, true);
+                cc.audioEngine.setVolume(basicid, 0.7);
                 break;
             }
             case 1: {
@@ -389,6 +400,8 @@ export default class GameMgr extends cc.Component {
             }
             case 2: {
                 cc.director.loadScene("Play_ghost");
+                var ghostid = cc.audioEngine.playMusic(this.ghost_bgm, true);
+                cc.audioEngine.setVolume(ghostid, 0.5);
             }
             default: {
                 break;

@@ -8,11 +8,15 @@ export default class Start extends cc.Component {
 
     fadeAction: cc.Action = null;
 
+    @property({ type: cc.AudioClip })
+    bgm: cc.AudioClip = null;
+
     onLoad() {
         this.fadeAction = this.setAction();
     }
 
     start () {
+        cc.audioEngine.playMusic(this.bgm, true);
         this.schedule(function (){
             this.label.runAction(this.fadeAction);
         },2.7);

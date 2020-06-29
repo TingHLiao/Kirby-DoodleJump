@@ -207,7 +207,7 @@
       "array": [
         0,
         0,
-        345.54413610999103,
+        338.61593287971556,
         0,
         0,
         0,
@@ -19443,6 +19443,13 @@
     },
     "player": {
       "__uuid__": "9dd1b8ac-fc97-4cb1-8728-68649c2bd273"
+    },
+    "basic_bgm": {
+      "__uuid__": "be2beebf-2d8f-483e-a821-aab8e6809d94"
+    },
+    "space_bgm": null,
+    "ghost_bgm": {
+      "__uuid__": "64724d75-a158-4ed8-a800-d6bb39deaae3"
     },
     "_id": "6cYA+pnoJAJ6UyVB2zaGnL"
   },

@@ -413,6 +413,13 @@
     "loseSprite": {
       "__uuid__": "bdb1abca-a71e-4f76-bd6f-d9b30c33e953"
     },
+    "basic_bgm": {
+      "__uuid__": "be2beebf-2d8f-483e-a821-aab8e6809d94"
+    },
+    "space_bgm": null,
+    "ghost_bgm": {
+      "__uuid__": "64724d75-a158-4ed8-a800-d6bb39deaae3"
+    },
     "_id": "d1NDRsbpJJardQCqD6ElDB"
   },
   {
@@ -488,7 +495,7 @@
       "array": [
         0,
         0,
-        354.20439014783545,
+        338.61593287971556,
         0,
         0,
         0,
