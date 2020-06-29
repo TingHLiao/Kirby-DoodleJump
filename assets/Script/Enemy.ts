@@ -42,6 +42,7 @@ export default class Enemy extends cc.Component {
     knife: cc.Prefab = null;
 
     player: cc.Node = null;
+    money: cc.Node = null;
 
     private cnt : number = 0;
 
@@ -51,6 +52,7 @@ export default class Enemy extends cc.Component {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
         this.player = cc.find("Canvas/player");
+        this.money = cc.find("Canvas/Main Camera/money");
     }
 
     start () {
@@ -219,6 +221,7 @@ export default class Enemy extends cc.Component {
     bomb_attack(){
         this.scheduleOnce(()=>{
             this.anim.play("bomb_enemy_attack");
+            cc.audioEngine.playEffect(this.DieEffect, false);
             this.scheduleOnce(()=>{
                 this.node.parent.destroy();
             },0.8)
@@ -226,9 +229,33 @@ export default class Enemy extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
+        let num = parseInt(this.money.getComponent(cc.Label).string);
+        switch(self.node.name){
+            case "snowman_enemy":{
+                num+=2;
+                break;
+            }
+            case "ninja_enemy":{
+                num+=1;
+                break;
+            }
+            case "bomb_enemy":{
+                num+=4;
+                break;
+            }
+            case "knight_enemy":{
+                num+=5;
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
         if(other.tag == 0 && !this.player.getComponent("Player").isKnifing){
             if(contact.getWorldManifold().normal.y == 1) {
-                cc.audioEngine.playEffect(this.StepEffect, false);
+                this.money.getComponent(cc.Label).string = num + '';
+                cc.audioEngine.playEffect(this.StepEffect, false); 
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 self.node.stopAllActions();
                 self.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
@@ -236,7 +263,8 @@ export default class Enemy extends cc.Component {
                     self.node.destroy();
                 }, 1)
             }
-        } else if(other.tag == 8 || other.tag == 10){
+        } else if(other.tag == 8 || other.tag == 10){   // hit by kirby's bullets
+            this.money.getComponent(cc.Label).string = num + '';
             cc.audioEngine.playEffect(this.DieEffect, false);
             self.node.destroy();
         }

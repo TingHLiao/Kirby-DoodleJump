@@ -19,17 +19,19 @@ export default class virus extends cc.Component {
 
     private isDead: boolean = false;
 
+    money: cc.Node = null;
+
     @property({ type: cc.AudioClip })
     StepEffect: cc.AudioClip = null;
 
     @property({ type: cc.AudioClip })
     BombEffect: cc.AudioClip = null;
 
-    // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;   
         this.anim = this.getComponent(cc.Animation);
+        this.money = cc.find("Canvas/Main Camera/money");
     }
 
     start () {
@@ -79,12 +81,17 @@ export default class virus extends cc.Component {
     }
 
     onBeginContact(contact, self, other){
-        if(this.isDead){
-            contact.disable = true;
-            return;
-        }
+        let num = parseInt(this.money.getComponent(cc.Label).string);
+        if(self.node.name == "virus_red1" || self.node.name == "virus_g1")
+            num+=5;
+        else if(self.node.name == "virus_red2")
+            num+=10;
+        else   //country monster
+            num+=15;
+
         if(other.tag == 0){
             if(contact.getWorldManifold().normal.y == 1) {
+                this.money.getComponent(cc.Label).string = num + '';
                 cc.audioEngine.playEffect(this.StepEffect, false);
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -500);
@@ -94,6 +101,7 @@ export default class virus extends cc.Component {
             }
         } else if(other.tag == 8){
             other.node.destroy();
+            this.money.getComponent(cc.Label).string = num + '';
             cc.audioEngine.playEffect(this.BombEffect, false);
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             this.isDead = true;   
@@ -103,6 +111,7 @@ export default class virus extends cc.Component {
             }, 1)
         }
         else if(other.tag == 10){
+            this.money.getComponent(cc.Label).string = num + '';
             this.node.getComponent(cc.PhysicsCircleCollider).enabled = false;
             cc.audioEngine.playEffect(this.BombEffect, false);
             this.isDead = true;   
