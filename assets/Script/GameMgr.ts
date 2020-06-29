@@ -280,7 +280,7 @@ export default class GameMgr extends cc.Component {
         let s = parseInt(this.score.getComponent(cc.Label).string);
         if(this.c == 60){
             if(this.remaintime == 0){
-                this.player.getComponent("Player").gameover();
+                if(!this.player.getComponent("Player").isDied) this.player.getComponent("Player").gameover();
                 //@ts-ignore
                 firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
                     score: s,
@@ -290,6 +290,7 @@ export default class GameMgr extends cc.Component {
                 firebase.database().ref(`users/${this.ID}/2P`).once('value', snapshot => {
                     this.twoPshowscore = snapshot.val().score;
                 })
+                if(!this.write) this.gameovershow();
                 this.read = false;
                 this.write = false;
                 this.remaintime --;
