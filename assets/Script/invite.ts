@@ -207,6 +207,7 @@ export default class Invite extends cc.Component {
             snapshot.forEach(element => {
                 first_count += 1;
                 this.beinvitedName = element.val().name;
+                this.beinvitedID = element.val().id;
                 if(this.beinvitedName != "none"){
                     let time = parseInt(element.val().time);
                     this.User.child(`Request/${element.key}`).remove();
