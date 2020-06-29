@@ -257,6 +257,7 @@ export default class GameMgr extends cc.Component {
         {
             if(this.player.active)
             {   
+                cc.audioEngine.stopAll();
                 var dieid = cc.audioEngine.playEffect(this.DieEffect, false);
                 cc.audioEngine.setVolume(dieid, 0.25);
                 this.EffectOn = true;
@@ -350,10 +351,33 @@ export default class GameMgr extends cc.Component {
             }
             this.twoPgameoverPanel.active = true;
             Buy.Global.twoP = false;
+
+            let action = cc.spawn(cc.moveBy(0.9, 0, -50), cc.fadeIn(0.9));
+            cc.find("Canvas/Main Camera/2PGameOver/label").runAction(cc.blink(1.5, 7));
+            this.scheduleOnce(()=>{
+                cc.find("Canvas/Main Camera/2PGameOver/coin").runAction(action);
+                cc.find("Canvas/Main Camera/2PGameOver/score").runAction(action);
+            }, 1.5);
+            this.scheduleOnce(()=>{
+                cc.find("Canvas/Main Camera/2PGameOver/otherscore").runAction(action);
+            },2.45);
+            this.scheduleOnce(()=>{
+                cc.find("Canvas/Main Camera/2PGameOver/sprite").runAction(cc.fadeTo(0.7, 230));
+            }, 3.4);
             
         } else{
             this.gameoverPanel.active = true;
-            cc.find("Canvas/Main Camera/GameOver/label").runAction(cc.blink(1.5, 7));
+            this.scheduleOnce(()=>{
+                cc.find("Canvas/Main Camera/GameOver/label").runAction(cc.blink(1.5, 7));
+                let action = cc.spawn(cc.moveBy(0.9, 0, -50), cc.fadeIn(0.9));
+                this.scheduleOnce(()=>{
+                    cc.find("Canvas/Main Camera/GameOver/Score").runAction(action);
+                }, 1.5);
+                this.scheduleOnce(()=>{
+                    cc.find("Canvas/Main Camera/GameOver/Coin").runAction(action);
+                }, 2.45);
+            }, 0.01);
+            
             cc.audioEngine.playEffect(this.lose1_effect, false);
         }
     }
