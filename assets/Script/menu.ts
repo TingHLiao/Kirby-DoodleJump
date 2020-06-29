@@ -46,6 +46,9 @@ export default class Stage extends cc.Component {
     @property(cc.Prefab)
     player: cc.Prefab = null;
 
+    @property({type: cc.AudioClip})
+    clickEffect: cc.AudioClip = null;
+
     private show: boolean = false;
     private storeshow: boolean = false;
     private instrshow: boolean = false;
@@ -100,6 +103,11 @@ export default class Stage extends cc.Component {
                 });
             });
         }
+        //@ts-ignore
+        firebase.database().ref(`users/${this.ID}/2P`).set({
+            score: 0,
+            isDie: false
+        });
 
         this.buttons[0] = cc.find("Canvas/store_page/scrollview/view/content/snow_kirby/snow_kirby");
         this.buttons[1] = cc.find("Canvas/store_page/scrollview/view/content/ninja_kirby/ninja_kirby");
@@ -120,20 +128,24 @@ export default class Stage extends cc.Component {
     }
     //write firebase
     playorigin(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         cc.director.loadScene("Play");
         Buy.Global.select = 0;
     }
     playspace(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         cc.director.loadScene("Play_space");
         Buy.Global.select = 1;
         cc.log("in");
     }
     playghost(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         cc.director.loadScene("Play_ghost");
         Buy.Global.select = 2;
     }
 
     showboard(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         if(this.show){
             this.boardPanel.active = false;
             this.storebutton.interactable = true;
@@ -198,6 +210,7 @@ export default class Stage extends cc.Component {
     }
 
     onStoreClick(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         this.updatemoney();
         if(this.storeshow){
             // this.updatemoney();
@@ -326,6 +339,7 @@ export default class Stage extends cc.Component {
     }
 
     onInstrClick(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         if(this.instrshow){
             this.boardPanel_instr.active = false;
             this.leaderbutton.interactable = true;
@@ -363,6 +377,7 @@ export default class Stage extends cc.Component {
     }
 
     private rightclick(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         if(this.level == 0){
             this.spacePanel.active = true;
             this.originPanel.active = false;
@@ -376,6 +391,7 @@ export default class Stage extends cc.Component {
         }
     }
     private leftclick(){
+        cc.audioEngine.playEffect(this.clickEffect, false);
         if(this.level == 2){
             this.spacePanel.active = true;
             this.ghostPanel.active = false;
