@@ -284,7 +284,7 @@ export default class platform extends cc.Component {
     }
     
     update (dt) {
-        if(this.camera.position.y - this.node.position.y > 320 && this.node.isValid) {
+        if(this.camera.position.y - this.node.position.y > 350 && this.node.isValid) {
             this.scheduleOnce(()=>{
                 this.node.destroy();
             }, 2.55)
