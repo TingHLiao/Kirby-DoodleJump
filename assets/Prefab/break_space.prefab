@@ -179,7 +179,7 @@
     },
     "_enabled": true,
     "rocketPrefab": {
-      "__uuid__": "bc82d126-a26f-4384-b337-6496ca83418e"
+      "__uuid__": "7954e4d9-bbc4-4c31-b746-f04ba7c1a1df"
     },
     "virus_red1": {
       "__uuid__": "262e43d5-eb00-426b-85b9-34d8e653dcb1"
@@ -191,10 +191,10 @@
       "__uuid__": "9500bfe8-a5f1-479f-85c3-f64949366ec4"
     },
     "trampoline": {
-      "__uuid__": "7084150a-89cb-4d5d-89d3-35ed500f626e"
+      "__uuid__": "703e2af9-e308-4cdc-b840-2433f339dcd0"
     },
     "shield": {
-      "__uuid__": "512acee5-f123-4a69-93f7-d0659ee4d21d"
+      "__uuid__": "f976e259-62fc-482a-81fe-7eed5eb47a85"
     },
     "NinjaEnemy": {
       "__uuid__": "d302fe73-3358-4953-a2be-5f08610045d0"

@@ -30,13 +30,10 @@
       },
       {
         "__id__": 5
-      },
-      {
-        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -161,7 +158,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10.1
+      "y": 10
     },
     "_size": {
       "__type__": "cc.Size",
@@ -181,19 +178,6 @@
     "soundEffect": {
       "__uuid__": "36d7da7e-f516-4e09-8c74-9e5040f509c1"
     },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_defaultClip": null,
-    "_clips": [],
-    "playOnLoad": false,
     "_id": ""
   },
   {
