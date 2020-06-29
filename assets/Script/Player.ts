@@ -49,9 +49,16 @@ export default class player extends cc.Component {
     //avoid playing effect multiple time
     private suckEffectID = null;
 
+    private jumpvelocity : number = 1000;
+
+    private extralife: cc.Node = null;
+
     // record money
     @property(cc.Node)
     money: cc.Node = null;
+
+    @property(cc.Node)
+    life: cc.Node = null;
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
@@ -101,8 +108,6 @@ export default class player extends cc.Component {
     @property(cc.Prefab)
     magicbomb: cc.Prefab = null;
 
-    private jumpvelocity : number = 1000;
-
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -110,7 +115,12 @@ export default class player extends cc.Component {
         this.platform = cc.find("Canvas/platform");
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
+        this.extralife = cc.find("Canvas/Main Camera/life");
         this.kirby_state = Buy.Global.Buy_Kirby;
+        if(Buy.Global.Extra_life != 0){
+            this.extralife.active = true;
+            this.life.getComponent(cc.Label).string = Buy.Global.Extra_life.toString();
+        }
     }
 
     start () {
@@ -421,12 +431,17 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        if(Buy.Global.Extra_life > 0){    //have extra life!
+        if(Buy.Global.Extra_life > 0 || this.kirby_state !== 0){
             this.isReborn  = true;
-            Buy.Global.Extra_life--;
             this.anim.stop();
             cc.audioEngine.playEffect(this.Loseonelife, false);
 
+            if(Buy.Global.Extra_life > 0){   
+                Buy.Global.Extra_life--;
+                if(Buy.Global.Extra_life == 0) this.extralife.active = false;
+                this.life.getComponent(cc.Label).string = Buy.Global.Extra_life.toString();
+                
+            }
             if(this.kirby_state == 0){
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
                 this.node.runAction(cc.blink(1, 6));
