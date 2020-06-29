@@ -660,7 +660,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        335.363,
+        385.797,
         300,
         0,
         0,
@@ -3227,7 +3227,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        208.412,
+        184.107,
         301.054,
         0,
         0,
@@ -3362,7 +3362,7 @@
     "_useOriginalSize": false,
     "_string": "competitor :",
     "_N$string": "competitor :",
-    "_fontSize": 30,
+    "_fontSize": 25,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
