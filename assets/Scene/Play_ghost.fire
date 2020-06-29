@@ -58,7 +58,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "302835bb-d331-4429-bab1-f9b02dbe1ece"
+    "_id": "cdbdbf41-2960-42f3-a460-75df80634439"
   },
   {
     "__type__": "cc.Node",
@@ -225,7 +225,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "8e4db131-3a56-4fb6-8507-d765d82a93bb"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -371,16 +371,16 @@
     "_enabled": true,
     "platformPrefabs": [
       {
-        "__uuid__": "79b34c42-f3fe-43ec-aede-5d1e44393285"
+        "__uuid__": "db95d98a-a1e4-4a8b-ad02-0551bc705d45"
       },
       {
-        "__uuid__": "2e355cb9-6676-4a66-8981-9c5b7ac9e595"
+        "__uuid__": "d9668cba-19b5-4f43-8092-d01117bf11f2"
       },
       {
-        "__uuid__": "31f2ef84-01a9-45b8-a991-3022c8a814aa"
+        "__uuid__": "dbe53357-d28d-494f-ab0d-f4aea5715d61"
       },
       {
-        "__uuid__": "a6d03b41-ee59-4ae7-8cc8-cda781dbd8c2"
+        "__uuid__": "5db3d797-4970-4d1f-99b2-9171de96d01b"
       }
     ],
     "camera": {
@@ -488,7 +488,7 @@
       "array": [
         0,
         0,
-        354.20439014783545,
+        338.61593287971556,
         0,
         0,
         0,
