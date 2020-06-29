@@ -208,13 +208,13 @@ export default class GameMgr extends cc.Component {
         if(height >= this.count + 550){
             //this.needmoreplatform = true;
             if(height >= 6750){
-                this.generatePlatforms(100, 80);
+                this.generatePlatforms(100, 70);
             }
             else if(height >= 5550){
-                this.generatePlatforms(100, 75);
+                this.generatePlatforms(100, 70);
             }
             else if(height >= 4550){
-                this.generatePlatforms(100, 70);
+                this.generatePlatforms(100, 65);
             }
             else if(height >= 3550){
                 this.generatePlatforms(100, 65);
@@ -242,6 +242,7 @@ export default class GameMgr extends cc.Component {
                 this.EffectOn = true;
                 this.platforms.removeAllChildren();
                 if(this.knife.isValid)this.knife.destroy();
+                this.player.getComponent("Player").isDied = true;
                 this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
                 this.scheduleOnce(()=>{
                     this.gameovershow();
@@ -268,15 +269,18 @@ export default class GameMgr extends cc.Component {
                     //@ts-ignore
                     firebase.database().ref(`users/${this.ID}/2P`).once('value', snapshot => {
                         this.twoPshowscore = snapshot.val().score;
-                        if(snapshot.val().isDie)
+                        if(snapshot.val().isDie){
                             this.read = false;
+                            if(this.player.getComponent("Player").isDied)
+                                this.gameovershow();
+                        }
                     }).then(()=>{
                         this.twoPscore.getChildByName("score").getComponent(cc.Label).string = this.twoPshowscore.toString();
                     });
                 }
 
                 //stop writting if isDie
-                if(!this.player.getComponent("Player").isDie){
+                if(!this.player.getComponent("Player").isDied){
                     //@ts-ignore
                     firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
                         score: s,
