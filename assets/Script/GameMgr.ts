@@ -351,11 +351,9 @@ export default class GameMgr extends cc.Component {
         });
         Buy.Global.coin = this.remaincoin + money;
         this.reset();
-        //cc.log(Buy.Global.coin);
     }
 
     reset(){
-        cc.log("reset");
         Buy.Global.Buy_Kirby = 0;
         Buy.Global.Extra_jump = 0;
         Buy.Global.Extra_life = 0;

@@ -125,12 +125,12 @@ export default class platform extends cc.Component {
         let extraShield = 0.01 * Buy.Global.more_Shield;
         let posy = this.node.position.y;
         
-        if(this.node.name == "normal_space"){
+        if(this.node.name == "normal_ghost"){
             let withrocket = (Math.random() < (0.02 + extraRocket)) ? true : false;
             let withitem = false;
             if(posy >= 3950 && posy <= 4000){
                 withitem = true;
-                var newnode = cc.instantiate(this.greeceMonster); // newnode is america monster
+                var newnode = cc.instantiate(this.spanishMonster); // newnode is america monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -138,7 +138,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 6950 && posy <= 7000){
                 withitem = true;
-                var newnode = cc.instantiate(this.japanMonster); // newnode is baxi monster
+                var newnode = cc.instantiate(this.englishMonster); // newnode is baxi monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -154,7 +154,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 12550 && posy <= 12605){
                 withitem = true;
-                var newnode = cc.instantiate(this.englishMonster); // newnode is russia monster
+                var newnode = cc.instantiate(this.japanMonster); // newnode is russia monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -162,15 +162,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 15000 && posy <= 15060){
                 withitem = true;
-                var newnode = cc.instantiate(this.spanishMonster); // newnode is italy monster
-                this.node.addChild(newnode);
-                newnode.parent.zIndex = 2;
-                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
-            }
-
-            if(posy >= 17650 && posy <= 17710){
-                withitem = true;
-                var newnode = cc.instantiate(this.italyMonster); // newnode is spanish monster
+                var newnode = cc.instantiate(this.greeceMonster); // newnode is italy monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -178,7 +170,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 20000 && posy <= 20060){
                 withitem = true;
-                var newnode = cc.instantiate(this.russiaMonster); // newnode is greece monster
+                var newnode = cc.instantiate(this.baxiMonster); // newnode is greece monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -194,7 +186,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 26550 && posy <= 26620){
                 withitem = true;
-                var newnode = cc.instantiate(this.baxiMonster); // newnode is japan monster
+                var newnode = cc.instantiate(this.russiaMonster); // newnode is japan monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -202,7 +194,7 @@ export default class platform extends cc.Component {
 
             if(posy >= 30500 && posy <= 30570){
                 withitem = true;
-                var newnode = cc.instantiate(this.greeceMonster); // newnode is greece monster
+                var newnode = cc.instantiate(this.italyMonster); // newnode is greece monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -233,7 +225,7 @@ export default class platform extends cc.Component {
             // platform with Bomb_enemy
             if(this.score > 4500 && !withitem && Math.random() > 0.8){
                 withitem = true;
-                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Bomb_enemy
+                let newnode = cc.instantiate(this.NinjaEnemy);  // newnode is the Knight_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 33.5);
@@ -241,7 +233,7 @@ export default class platform extends cc.Component {
             // platform with knight_enemy
             if(this.score > 3500 && !withitem && Math.random() > 0.9){
                 withitem = true;
-                let newnode = cc.instantiate(this.NinjaEnemy);  // newnode is the Knight_enemy
+                let newnode = cc.instantiate(this.SnowmanEnemy);  // newnode is the Bomb_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.5);
@@ -249,7 +241,7 @@ export default class platform extends cc.Component {
             // platform with snowman_enemy
             if(this.score > 2500 && !withitem && Math.random() > 0.85){
                 withitem = true;
-                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Snowman_enemy
+                let newnode = cc.instantiate(this.KnightEnemy); // newnode is the Ninja_enemy
                 this.node.addChild(newnode);
                 newnode.scaleX = (Math.random() > 0.5)? 1.5 : -1.5;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 37.75);
@@ -257,7 +249,7 @@ export default class platform extends cc.Component {
             // platform with ninja_enemy
             if(this.score > 1500 && !withitem && Math.random() > 0.95){
                 withitem = true;
-                let newnode = cc.instantiate(this.KnightEnemy); // newnode is the Ninja_enemy
+                let newnode = cc.instantiate(this.BombEnemy);  // newnode is the Snowman_enemy
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 30.025);
             }
@@ -283,18 +275,18 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
         }
-        else if(this.node.name == "move_space"){
+        else if(this.node.name == "move_ghost"){
             let dir = (Math.random() > 0.5) ? "v" : "h"; // choose to move vertical or horizontal
             if(dir == 'v') this.platformmove_v();
             else this.platformmove_h();
         }
-        else if(this.node.name == "time_space"){
+        else if(this.node.name == "time_ghost"){
 
         }
-        else if(this.node.name == "break_space"){
+        else if(this.node.name == "break_ghost"){
             
         }
-        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_space"){
+        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_ghost"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
@@ -351,24 +343,24 @@ export default class platform extends cc.Component {
             contact.disabled = true;
         }
         else{
-            if(this.node.name == "normal_space" && other.tag == 0) this.cnt_jump++;
-
+            if(this.node.name == "normal_ghost" && other.tag == 0) this.cnt_jump++;
+            
             if(this.cnt_jump == 5 && other.tag == 0){
                 var newnode = cc.instantiate(this.trampoline);
                 this.node.addChild(newnode);
                 newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 13);
             }
-            if(self.node.name == "break_space" && other.tag == 0){
+            if(self.node.name == "break_ghost" && other.tag == 0){
                 contact.disabled = true;
                 var breakid = cc.audioEngine.playEffect(this.soundEffect, false);
                 cc.audioEngine.setVolume(breakid, 0.3);
-                this.anim.play("break_space");
+                this.anim.play("break_ghost");
                 this.scheduleOnce(function(){
                     this.node.destroy();
                   }, 0.3)
             }
-            else if(self.node.name == "time_space" && other.tag == 0){
-                if(this.animState == null || this.animState.name != "time_space") this.animState = this.anim.play("time_space");
+            else if(self.node.name == "time_ghost" && other.tag == 0){
+                if(this.animState == null || this.animState.name != "time_ghost") this.animState = this.anim.play("time_ghost");
                 this.scheduleOnce(function(){
                     var bombid = cc.audioEngine.playEffect(this.soundEffect, false);
                     cc.audioEngine.setVolume(bombid, 0.3);
@@ -377,7 +369,7 @@ export default class platform extends cc.Component {
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);
                 //
             }
-            else if(other.tag == 0 /* player*/ ){
+            else if(other.tag == 0 /* player*/){
                 if(this.player.getComponent("Player").isDied){
                     other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
                     contact.disabled = true;
