@@ -14,6 +14,10 @@ export default class Stage extends cc.Component {
     instrbutton: cc.Button = null;
     @property(cc.Button)
     twoPbutton: cc.Button = null;
+    @property(cc.Button)
+    leftbutton: cc.Button = null;
+    @property(cc.Button)
+    rightbutton: cc.Button = null;
 
     @property(cc.Node)
     cover: cc.Node = null; //stop
@@ -55,12 +59,21 @@ export default class Stage extends cc.Component {
     price: number[] = [];
     limits: number[] = [];
     // 0: jump; 1: range; 2: platform; 3: rocket; 4: shield
+    level: number = 0;
+    originPanel: cc.Node = null;
+    spacePanel: cc.Node = null;
+    ghostPanel: cc.Node = null;
+
 
     onLoad () {
         this.nameText = cc.find("Canvas/cover/username/name").getComponent(cc.Label);
         this.highestText = cc.find("Canvas/cover/highest/score").getComponent(cc.Label);
         this.coinText = cc.find("Canvas/cover/coin/number").getComponent(cc.Label);
         this.init();  //for store
+        this.leftbutton.interactable = false;
+        this.originPanel = cc.find("Canvas/cover/origin");
+        this.spacePanel = cc.find("Canvas/cover/space");
+        this.ghostPanel = cc.find("Canvas/cover/ghost");
         
         if(Buy.Global.username != ""){
             this.nameText.string = Buy.Global.username;
@@ -104,8 +117,14 @@ export default class Stage extends cc.Component {
         cc.director.preloadScene("Play");
     }
     //write firebase
-    play(){
+    playorigin(){
         cc.director.loadScene("Play");
+    }
+    playspace(){
+        //cc.director.loadScene("Play");
+    }
+    playghost(){
+        //cc.director.loadScene("Play");
     }
 
     showboard(){
@@ -114,6 +133,8 @@ export default class Stage extends cc.Component {
             this.storebutton.interactable = true;
             this.instrbutton.interactable = true;
             this.twoPbutton.interactable = true;
+            this.leftbutton.interactable = (this.level == 0)? false : true;
+            this.rightbutton.interactable = (this.level == 2)? false : true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.show = false;
             this.content.removeAllChildren();
@@ -124,6 +145,8 @@ export default class Stage extends cc.Component {
         this.storebutton.interactable = false;
         this.instrbutton.interactable = false;
         this.twoPbutton.interactable = false;
+        this.leftbutton.interactable = false;
+        this.rightbutton.interactable = false;
         this.show = true;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel.active = true;
@@ -176,6 +199,8 @@ export default class Stage extends cc.Component {
             this.leaderbutton.interactable = true;
             this.instrbutton.interactable = true;
             this.twoPbutton.interactable = true;
+            this.leftbutton.interactable = (this.level == 0)? false : true;
+            this.rightbutton.interactable = (this.level == 2)? false : true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.storeshow = false;
             return;
@@ -186,6 +211,8 @@ export default class Stage extends cc.Component {
         this.leaderbutton.interactable = false;
         this.instrbutton.interactable = false;
         this.twoPbutton.interactable = false;
+        this.leftbutton.interactable = false;
+        this.rightbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_store.active = true;
         this.boardPanel_store.runAction(cc.fadeIn(0.2));  
@@ -298,6 +325,8 @@ export default class Stage extends cc.Component {
             this.leaderbutton.interactable = true;
             this.storebutton.interactable = true;
             this.twoPbutton.interactable = true;
+            this.leftbutton.interactable = (this.level == 0)? false : true;
+            this.rightbutton.interactable = (this.level == 2)? false : true;
             this.cover.runAction(cc.fadeTo(0.2, 255));
             this.instrshow = false;
             return;
@@ -306,6 +335,8 @@ export default class Stage extends cc.Component {
         this.leaderbutton.interactable = false;
         this.storebutton.interactable = false;
         this.twoPbutton.interactable = false;
+        this.leftbutton.interactable = false;
+        this.rightbutton.interactable = false;
         this.cover.runAction(cc.fadeTo(0.2, 128));
         this.boardPanel_instr.active = true;
         this.boardPanel_instr.runAction(cc.fadeIn(0.2));
@@ -324,4 +355,32 @@ export default class Stage extends cc.Component {
         this.price = [5, 10, 20, 100, 5, 5, 5, 5, 5, 5];  // can change
         this.limits = [0, 0, 0, 0, 0];
     }
+
+    private rightclick(){
+        if(this.level == 0){
+            this.spacePanel.active = true;
+            this.originPanel.active = false;
+            this.leftbutton.interactable = true;
+            this.level++;
+        } else if(this.level == 1){
+            this.ghostPanel.active = true;
+            this.spacePanel.active = false;
+            this.rightbutton.interactable = false;
+            this.level++;
+        }
+    }
+    private leftclick(){
+        if(this.level == 2){
+            this.spacePanel.active = true;
+            this.ghostPanel.active = false;
+            this.rightbutton.interactable = true;
+            this.level--;
+        } else if(this.level == 1){
+            this.originPanel.active = true;
+            this.spacePanel.active = false;
+            this.leftbutton.interactable = false;
+            this.level--;
+        }
+    }
+
 }

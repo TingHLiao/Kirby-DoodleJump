@@ -246,6 +246,7 @@ export default class GameMgr extends cc.Component {
                 if(this.knife.isValid)this.knife.destroy();
                 this.player.getComponent("Player").isDied = true;
                 this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
+                //if(!Buy.Global.twoP) this.gameoverPanel.runAction(cc.fadeIn(1));
                 this.scheduleOnce(()=>{
                     this.gameovershow();
                 }, 1)
@@ -307,6 +308,7 @@ export default class GameMgr extends cc.Component {
     gameovershow(){
         if(Buy.Global.twoP){
             if(this.remaintime != 0 && this.read) return;
+
             cc.find("Canvas/Main Camera/2PGameOver/otherscore/number").getComponent(cc.Label).string = (Array(6).join("0") + this.twoPshowscore.toString()).slice(-6);
             cc.find("Canvas/Main Camera/2PGameOver/otherscore").getComponent(cc.Label).string = `${Buy.Global.competitorName}'s Score: `;
             //lose
@@ -319,15 +321,17 @@ export default class GameMgr extends cc.Component {
             }
             this.twoPgameoverPanel.active = true;
             Buy.Global.twoP = false;
+            
         } else{
             this.gameoverPanel.active = true;
+            cc.find("Canvas/Main Camera/GameOver/label").runAction(cc.blink(1.5, 7));
         }
     }
 
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
-        cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
-        cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
+        cc.find("Canvas/Main Camera/GameOver/Coin/number").getComponent(cc.Label).string = money.toString() + '$';
+        cc.find("Canvas/Main Camera/GameOver/Score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         cc.find("Canvas/Main Camera/2PGameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
         cc.find("Canvas/Main Camera/2PGameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);    
         if(s > this.highestScore){
