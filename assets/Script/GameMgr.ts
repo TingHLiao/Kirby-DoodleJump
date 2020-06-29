@@ -277,18 +277,23 @@ export default class GameMgr extends cc.Component {
     }
 
     counter(){
-        if(!this.istwoP) return;
+        if(!this.istwoP || !(this.read||this.write)) return;
         let s = parseInt(this.score.getComponent(cc.Label).string);
         if(this.c == 60){
             if(this.remaintime == 0){
-                /*this.player.active = false;
+                if(!this.player.getComponent("Player").isDied) this.player.getComponent("Player").gameover();
+                //@ts-ignore
+                firebase.database().ref(`users/${Buy.Global.competitorID}/2P`).set({
+                    score: s,
+                    isDie: true
+                });
+                //@ts-ignore
+                firebase.database().ref(`users/${this.ID}/2P`).once('value', snapshot => {
+                    this.twoPshowscore = snapshot.val().score;
+                })
+                if(!this.write) this.gameovershow();
                 this.read = false;
                 this.write = false;
-                this.gameover(parseInt(cc.find("Canvas/Main Camera/money").getComponent(cc.Label).string));
-                this.scheduleOnce(()=>{
-                    this.gameovershow();
-                }, 0.5)*/
-                this.player.getComponent("Player").gameover();
                 this.remaintime --;
             } else if(this.remaintime > 0){
                 this.remaintime--;
