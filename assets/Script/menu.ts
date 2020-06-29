@@ -136,7 +136,6 @@ export default class Stage extends cc.Component {
         cc.audioEngine.playEffect(this.clickEffect, false);
         cc.director.loadScene("Play_space");
         Buy.Global.select = 1;
-        cc.log("in");
     }
     playghost(){
         cc.audioEngine.playEffect(this.clickEffect, false);
