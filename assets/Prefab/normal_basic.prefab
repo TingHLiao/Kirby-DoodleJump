@@ -223,6 +223,21 @@
     "germanyMonster": {
       "__uuid__": "768e5c7d-2c34-43b4-9185-28b8e8044b35"
     },
+    "baxiMonster": {
+      "__uuid__": "428afdc7-43cc-4971-83de-d0374f86eabf"
+    },
+    "grapeMonster": {
+      "__uuid__": "e6dd9edf-37fb-4f40-8665-b611afcdd7e7"
+    },
+    "spanishMonster": {
+      "__uuid__": "9771e643-7b20-4498-8a99-97d19341c6f7"
+    },
+    "russiaMonster": {
+      "__uuid__": "64de1e4f-8ffd-468c-9f98-fcb5089d9f20"
+    },
+    "englishMonster": {
+      "__uuid__": "79793f59-30c1-4529-a37f-124df0676864"
+    },
     "soundEffect": null,
     "_id": ""
   },

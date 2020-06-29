@@ -49,9 +49,16 @@ export default class player extends cc.Component {
     //avoid playing effect multiple time
     private suckEffectID = null;
 
+    private jumpvelocity : number = 1000;
+
+    private extralife: cc.Node = null;
+
     // record money
     @property(cc.Node)
     money: cc.Node = null;
+
+    @property(cc.Node)
+    life: cc.Node = null;
 
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
@@ -86,6 +93,9 @@ export default class player extends cc.Component {
     @property({type: cc.AudioClip})
     Loseonelife: cc.AudioClip = null;
 
+    @property({type: cc.AudioClip})
+    beHitEffect: cc.AudioClip = null;
+
     @property(GameMgr)
     gamemanager: GameMgr = null;
 
@@ -98,8 +108,6 @@ export default class player extends cc.Component {
     @property(cc.Prefab)
     magicbomb: cc.Prefab = null;
 
-    private jumpvelocity : number = 1000;
-
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -107,8 +115,12 @@ export default class player extends cc.Component {
         this.platform = cc.find("Canvas/platform");
         this.bulletPool = cc.find("Canvas/bullet");
         this.knife = cc.find("Canvas/knife");
+        this.extralife = cc.find("Canvas/Main Camera/life");
         this.kirby_state = Buy.Global.Buy_Kirby;
-        cc.log(Buy.Global.Extra_life);
+        if(Buy.Global.Extra_life != 0){
+            this.extralife.active = true;
+            this.life.getComponent(cc.Label).string = Buy.Global.Extra_life.toString();
+        }
     }
 
     start () {
@@ -319,6 +331,7 @@ export default class player extends cc.Component {
                 }
                 if(other.tag == 6){     //collide with enemy bullets
                     other.node.destroy();
+                    cc.audioEngine.playEffect(this.beHitEffect, false);    //check again
                     this.gameover();
                 }  
             }
@@ -418,13 +431,17 @@ export default class player extends cc.Component {
     }
 
     private gameover(){
-        cc.log(Buy.Global.Extra_life);
-        if(Buy.Global.Extra_life > 0){    //have extra life!
+        if(Buy.Global.Extra_life > 0 || this.kirby_state !== 0){
             this.isReborn  = true;
-            Buy.Global.Extra_life--;
             this.anim.stop();
             cc.audioEngine.playEffect(this.Loseonelife, false);
 
+            if(Buy.Global.Extra_life > 0){   
+                Buy.Global.Extra_life--;
+                if(Buy.Global.Extra_life == 0) this.extralife.active = false;
+                this.life.getComponent(cc.Label).string = Buy.Global.Extra_life.toString();
+                
+            }
             if(this.kirby_state == 0){
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
                 this.node.runAction(cc.blink(1, 6));
@@ -508,7 +525,7 @@ export default class player extends cc.Component {
                     this.gamemanager.gameovershow();
                 }, 1)
             }, 0.3);
-            this.reset();
+            
         } 
     }
 
@@ -551,7 +568,6 @@ export default class player extends cc.Component {
                     this.bulletPool.addChild(newnode);
                     newnode.position = cc.v2(this.node.position.add(cc.v2(14, 0)));
                     let dir = cc.v2(x,y).sub(playerpos);
-                    cc.log(dir);
                     newnode.runAction(cc.moveBy(0.8, dir.divSelf(dir.mag()).mulSelf(400 + 40 * Buy.Global.Extra_range)));
                     this.scheduleOnce(function(){
                         this.isThrowBack = true;
@@ -585,16 +601,6 @@ export default class player extends cc.Component {
                 break;
             }
         }
-    }
-
-    private reset(){
-        Buy.Global.Buy_Kirby = 0;
-        Buy.Global.Extra_jump = 0;
-        Buy.Global.Extra_life = 0;
-        Buy.Global.Extra_range = 0;
-        Buy.Global.more_Rocket = 0;
-        Buy.Global.more_Shield = 0;
-        Buy.Global.platform = 0;
     }
 
     ninja_bullet_back(){

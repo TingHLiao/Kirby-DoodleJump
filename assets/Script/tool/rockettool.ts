@@ -12,9 +12,9 @@ export default class RocketTool extends cc.Component {
         this.player = cc.find("Canvas/player");
     }
 
-    start () {
+    // start () {
 
-    }
+    // }
 
     onBeginContact(contact, self, other) {
         if(other.tag === 0){

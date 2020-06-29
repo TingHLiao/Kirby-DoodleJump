@@ -74,6 +74,21 @@ export default class platform extends cc.Component {
     @property(cc.Prefab)
     germanyMonster: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    baxiMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    grapeMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    spanishMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    russiaMonster: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    englishMonster: cc.Prefab = null;
+
     @property({ type: cc.AudioClip })
     soundEffect: cc.AudioClip = null;
 
@@ -106,14 +121,14 @@ export default class platform extends cc.Component {
 
     start () {
         this.animState = null;
-        let extraRocket = Math.pow(1.05, Buy.Global.more_Rocket);
-        let extraShield = Math.pow(1.05, Buy.Global.more_Shield);
+        let extraRocket = 0.01 * Buy.Global.more_Rocket;
+        let extraShield = 0.01 * Buy.Global.more_Shield;
         let posy = this.node.position.y;
         
         if(this.node.name == "normal_basic"){
-            let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
+            let withrocket = (Math.random() < (0.02 + extraRocket)) ? true : false;
             let withitem = false;
-            if(posy >= 1950 && posy <= 2000){
+            if(posy >= 3950 && posy <= 4000){
                 withitem = true;
                 var newnode = cc.instantiate(this.americaMonster); // newnode is america monster
                 this.node.addChild(newnode);
@@ -121,15 +136,55 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
-            if(posy >= 3950 && posy <= 4000){
+            if(posy >= 6950 && posy <= 7000){
                 withitem = true;
-                var newnode = cc.instantiate(this.japanMonster); // newnode is japan monster
+                var newnode = cc.instantiate(this.baxiMonster); // newnode is baxi monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
-            if(posy >= 5950 && posy <= 6000){
+            if(posy >= 9950 && posy <= 10000){
+                withitem = true;
+                var newnode = cc.instantiate(this.grapeMonster); // newnode is grape monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 12550 && posy <= 12605){
+                withitem = true;
+                var newnode = cc.instantiate(this.russiaMonster); // newnode is russia monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 15000 && posy <= 15060){
+                withitem = true;
+                var newnode = cc.instantiate(this.italyMonster); // newnode is italy monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 17650 && posy <= 17710){
+                withitem = true;
+                var newnode = cc.instantiate(this.spanishMonster); // newnode is spanish monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 20000 && posy <= 20060){
+                withitem = true;
+                var newnode = cc.instantiate(this.englishMonster); // newnode is greece monster
+                this.node.addChild(newnode);
+                newnode.parent.zIndex = 2;
+                newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
+            }
+
+            if(posy >= 23500 && posy <= 23570){
                 withitem = true;
                 var newnode = cc.instantiate(this.germanyMonster); // newnode is germany monster
                 this.node.addChild(newnode);
@@ -137,17 +192,17 @@ export default class platform extends cc.Component {
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
-            if(posy >= 7550 && posy <= 7605){
+            if(posy >= 26550 && posy <= 26620){
                 withitem = true;
-                var newnode = cc.instantiate(this.greeceMonster); // newnode is greece monster
+                var newnode = cc.instantiate(this.japanMonster); // newnode is japan monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
             }
 
-            if(posy >= 9500 && posy <= 9560){
+            if(posy >= 30500 && posy <= 30570){
                 withitem = true;
-                var newnode = cc.instantiate(this.italyMonster); // newnode is italy monster
+                var newnode = cc.instantiate(this.greeceMonster); // newnode is greece monster
                 this.node.addChild(newnode);
                 newnode.parent.zIndex = 2;
                 newnode.position = cc.v2((Math.random()>0.5)? 55*Math.random() : -55*Math.random(), 54);
@@ -239,7 +294,7 @@ export default class platform extends cc.Component {
         else if(this.node.name == "break_basic"){
             
         }
-        if(Math.random()< (0.01 * extraShield) && this.node.name !== "move_basic"){
+        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_basic"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
@@ -284,7 +339,7 @@ export default class platform extends cc.Component {
     }
     
     update (dt) {
-        if(this.camera.position.y - this.node.position.y > 320 && this.node.isValid) {
+        if(this.camera.position.y - this.node.position.y > 350 && this.node.isValid) {
             this.scheduleOnce(()=>{
                 this.node.destroy();
             }, 2.55)
@@ -314,7 +369,7 @@ export default class platform extends cc.Component {
             else if(self.node.name == "time_basic" && other.tag == 0){
                 if(this.animState == null || this.animState.name != "basic_time") this.animState = this.anim.play("basic_time");
                 this.scheduleOnce(function(){
-                    cc.audioEngine.playEffect(this.soundEffect, false);
+                    if(self.node.position.y > this.camera.position.y - 300) cc.audioEngine.playEffect(this.soundEffect, false);
                     this.node.destroy();
                   }, 1.3)
                 other.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, this.jumpvelocity);

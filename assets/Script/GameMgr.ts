@@ -106,6 +106,7 @@ export default class GameMgr extends cc.Component {
             this.istwoP = true;
             this.timer = cc.find("Canvas/Main Camera/Timer/counter");
             this.twoPscore = cc.find("Canvas/Main Camera/2Pscore");
+            this.twoPscore.active =  true;
             this.timer.getComponent(cc.Label).string = "60";
             this.remaintime = 60;
             cc.find("Canvas/Main Camera/Timer").active = true;
@@ -170,17 +171,17 @@ export default class GameMgr extends cc.Component {
     {
         let rand = Math.random();
         let height = parseInt(this.score.getComponent(cc.Label).string);
-        let extra = Math.pow(1.05, Buy.Global.platform);
+        let extra = 0.02 * Buy.Global.platform;
 
         //0: normal, 1: moveable, 2: time, 3: break
-        let prob1 = [6 * extra , 1, 0.5, 1];
-        let prob2 = [5.5 * extra, 1.5, 0.5, 1];
-        let prob3 = [5 * extra, 1.5, 0.5, 1.5];
-        let prob4 = [4.5 * extra, 1.5, 1.5, 1.5];
-        let prob5 = [4 * extra, 2, 1.5, 1.5];
-        let prob6 = [3.5 * extra, 2, 2, 1.5];
-        let prob7 = [3 * extra, 2, 2.5, 1.5];
-        let prob8 = [2.5 * extra, 2.5, 2.5, 1.5];
+        let prob1 = [6 + extra , 1, 0.5, 1];
+        let prob2 = [5.5 + extra, 1.5, 0.5, 1];
+        let prob3 = [5 + extra, 1.5, 0.5, 1.5];
+        let prob4 = [4.5 + extra, 1.5, 1.5, 1.5];
+        let prob5 = [4 + extra, 2, 1.5, 1.5];
+        let prob6 = [3.5 + extra, 2, 2, 1.5];
+        let prob7 = [3 + extra, 2, 2.5, 1.5];
+        let prob8 = [2.5 + extra, 2.5, 2.5, 1.5];
         let prob = (height >= 1500) ? (height >= 2500) ? (height >= 3500) ? (height > 4500) ? (height>=5500) ? (height >= 6500) ? (height >=7500) ? prob8 : prob7 : prob6: prob5 : prob4 : prob3 : prob2 : prob1;
         let sum = prob.reduce((a,b)=>a+b);
         for(let i = 1; i < prob.length; i++)
@@ -208,13 +209,13 @@ export default class GameMgr extends cc.Component {
         if(height >= this.count + 550){
             //this.needmoreplatform = true;
             if(height >= 6750){
-                this.generatePlatforms(100, 80);
+                this.generatePlatforms(100, 70);
             }
             else if(height >= 5550){
-                this.generatePlatforms(100, 75);
+                this.generatePlatforms(100, 70);
             }
             else if(height >= 4550){
-                this.generatePlatforms(100, 70);
+                this.generatePlatforms(100, 65);
             }
             else if(height >= 3550){
                 this.generatePlatforms(100, 65);
@@ -324,7 +325,6 @@ export default class GameMgr extends cc.Component {
 
     gameover(money: number){
         let s = parseInt(this.score.getComponent(cc.Label).string);
-        cc.log(this.player.position.y);
         cc.find("Canvas/Main Camera/GameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
         cc.find("Canvas/Main Camera/GameOver/score/number").getComponent(cc.Label).string = (Array(6).join("0") + this.score.getComponent(cc.Label).string).slice(-6);
         cc.find("Canvas/Main Camera/2PGameOver/coin/number").getComponent(cc.Label).string = money.toString() + '$';
@@ -345,7 +345,19 @@ export default class GameMgr extends cc.Component {
             number: this.remaincoin + money
         });
         Buy.Global.coin = this.remaincoin + money;
-        cc.log(Buy.Global.coin);
+        this.reset();
+        //cc.log(Buy.Global.coin);
+    }
+
+    reset(){
+        cc.log("reset");
+        Buy.Global.Buy_Kirby = 0;
+        Buy.Global.Extra_jump = 0;
+        Buy.Global.Extra_life = 0;
+        Buy.Global.Extra_range = 0;
+        Buy.Global.more_Rocket = 0;
+        Buy.Global.more_Shield = 0;
+        Buy.Global.platform = 0;
     }
 
     gamePause(){

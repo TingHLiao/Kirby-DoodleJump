@@ -32,6 +32,9 @@ export default class Enemy extends cc.Component {
     @property({ type: cc.AudioClip })
     StepEffect: cc.AudioClip = null;
 
+    @property({ type: cc.AudioClip })
+    DieEffect: cc.AudioClip = null;
+
     @property(cc.Prefab)
     snowball: cc.Prefab = null;
 
@@ -122,9 +125,10 @@ export default class Enemy extends cc.Component {
                 newnode.getComponent(cc.RigidBody).linearVelocity = cc.v2(speed, 0);
             }, 3.4, 2, 5);    //interval, repeat, delay
         }, t);
-            
+        
         for (var i = 0; i < this.node.children.length; ++i) {
             let pos = this.node.children[i].position.x + this.node.position.x;
+            if(!this.node.children[i].isValid) break;
             if( pos > 425 || pos < 425)
                 this.node.children[i].destroy();
         }
@@ -233,6 +237,7 @@ export default class Enemy extends cc.Component {
                 }, 1)
             }
         } else if(other.tag == 8 || other.tag == 10){
+            cc.audioEngine.playEffect(this.DieEffect, false);
             self.node.destroy();
         }
     }
