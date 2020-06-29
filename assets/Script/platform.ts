@@ -121,12 +121,12 @@ export default class platform extends cc.Component {
 
     start () {
         this.animState = null;
-        let extraRocket = Math.pow(1.05, Buy.Global.more_Rocket);
-        let extraShield = Math.pow(1.05, Buy.Global.more_Shield);
+        let extraRocket = 0.01 * Buy.Global.more_Rocket;
+        let extraShield = 0.01 * Buy.Global.more_Shield;
         let posy = this.node.position.y;
         
         if(this.node.name == "normal_basic"){
-            let withrocket = (Math.random()< (0.02 * extraRocket)) ? true : false;
+            let withrocket = (Math.random() < (0.02 + extraRocket)) ? true : false;
             let withitem = false;
             if(posy >= 3950 && posy <= 4000){
                 withitem = true;
@@ -294,7 +294,7 @@ export default class platform extends cc.Component {
         else if(this.node.name == "break_basic"){
             
         }
-        if(Math.random()< (0.01 * extraShield) && this.node.name !== "move_basic"){
+        if(Math.random() < (0.01 + extraShield) && this.node.name !== "move_basic"){
             var newnode = cc.instantiate(this.shield);
             this.node.addChild(newnode);
             newnode.position = cc.v2((Math.random()>0.5)? -37 : 40, 45);
@@ -360,7 +360,7 @@ export default class platform extends cc.Component {
             }
             if(self.node.name == "break_basic" && other.tag == 0){
                 contact.disabled = true;
-                cc.audioEngine.playEffect(this.soundEffect, false);
+                if(self.node.position.y < this.camera.position.y - 300) cc.audioEngine.playEffect(this.soundEffect, false);
                 this.anim.play("basic_break");
                 this.scheduleOnce(function(){
                     this.node.destroy();

@@ -149,6 +149,9 @@
     "StepEffect": {
       "__uuid__": "dfdd1346-7bca-4270-b26c-c60149cb4b7f"
     },
+    "DieEffect": {
+      "__uuid__": "428775fd-4b08-4fb8-b222-da204db0c258"
+    },
     "snowball": {
       "__uuid__": "79e4dcfd-b7e2-47a6-a600-526291e41ec6"
     },
