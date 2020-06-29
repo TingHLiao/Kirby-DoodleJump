@@ -479,38 +479,9 @@ export default class player extends cc.Component {
         }
         else{
             this.isDied = true;
-            switch(this.kirby_state){
-                case 0: {                 // normal
-                    this.anim.stop('jump');
-                    this.animateState = this.anim.play("die");
-                    break;
-                }
-                case 1: {                 // snowman
-                    this.anim.stop('snow_jump');
-                    this.animateState = this.anim.play("snowman_die");
-                    break;
-                }
-                case 2: {                 // ninja
-                    this.anim.stop('ninja_jump');
-                    this.animateState = this.anim.play("ninja_die");
-                    break;
-                }
-                case 3: {                //magic
-                    this.anim.stop('magic_jump');
-                    this.animateState = this.anim.play("magic_die");
-                    break;
-                }
-                case 4:{
-                    this.anim.stop('knight_jump');
-                    this.animateState = this.anim.play("knight_die");
-                    break; 
-                }
-                default: {
-                    this.anim.stop('jump');
-                    this.animateState = this.anim.play("die");
-                    break;
-                }
-            }
+            this.anim.stop('jump');
+            this.animateState = this.anim.play("die");  
+            
             this.node.getComponent(cc.RigidBody).enabledContactListener = false;
             //get money and score to database, handle by GameMgr
             this.gamemanager.gameover(parseInt(this.money.getComponent(cc.Label).string));
@@ -521,11 +492,12 @@ export default class player extends cc.Component {
                 this.bulletPool.removeAllChildren();
                 this.knife.removeAllChildren();
                 this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -150);
+                
+                //if(!Buy.Global.twoP) this.gamemanager.gameoverPanel.runAction(cc.fadeIn(1));
                 this.scheduleOnce(()=>{
-                    this.gamemanager.gameovershow();
+                    this.gamemanager.gameovershow();    
                 }, 1)
-            }, 0.3);
-            
+            }, 0.3);   
         } 
     }
 
